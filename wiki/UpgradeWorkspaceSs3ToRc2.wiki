@@ -2,8 +2,18 @@
 
 This workspace script is more up-to-date than the [UpgradeSs3ToRc2  upgrade script].
 
-The steps up to ConfigurationOfGLASS load (second time) have been tested:
+Segments of the script:
+ * upgrade Metacello _[tested]_
+ * upgrade GLASS _[tested]_
+ * upgrade Seaside30
+ * upgrade tODE
+ * upgrade SqueakSource3
+ * migrate instances (Issue 37) and replace instances (Issue 39)
 
+===Notes===
+Right now the script uses *bulkMigrate:*, but ideally we'll do the whole upgrade in one transaction. This implies that we might want to make changes to GsDeployer to support deferred migration and if we do, we'll want to make these changes in [http://code.google.com/p/glassdb/wiki/GlassReleaseLog#1.0-beta.8.7.2 GLASS 1.0-beta.8.7.2] or [http://code.google.com/p/glassdb/wiki/GlassReleaseLog#1.0-beta.8.8 GLASS 1.0-beta.8.8]
+
+===workspace===
 {{{
 | versionString |
 versionString := '1.0-beta.8.7.1'.
