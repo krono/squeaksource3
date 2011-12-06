@@ -8,4 +8,4 @@
    # Issue 37: SSMember & SSProject shape changed with an instance variable rename
    # Issue 39: SSProject Magritte descriptions changed
    # Issue 41: SSEMailAddress class deleted
- # Finalize the [UpgradeSs3ToRc2  load script]
+ # Issue 44: Finalize the [UpgradeSs3ToRc2  load script]
