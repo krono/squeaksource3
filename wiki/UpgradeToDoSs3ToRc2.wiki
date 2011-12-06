@@ -1,1 +1,11 @@
 #summary To do list for upgrade to 3.0-rc.2
+
+ # Rough out the [UpgradeSs3ToRc2  load script] using the [UpgradeWorkspaceSs3ToRc2 workspace variant of the script]
+ # Issue 36: New site introduction text
+ # Issue 37: SSMember & SSProject shape changed with an instance variable rename
+ # Issue 38: SSModel class>>initialize side effects?
+ # Issue 39: SSProject Magritte descriptions changed
+ # Issue 40: SStorage class>>timestamp ... rounded now
+ # Issue 41: SSEMailAddress class deleted
+ # Issue 42: service vm used for background tasks
+ # Finalize the [UpgradeSs3ToRc2  load script]
