@@ -3,8 +3,8 @@
 This workspace script is more up-to-date than the [UpgradeSs3ToRc2  upgrade script].
 
 Segments of the script:
- * upgrade Metacello _[tested]_
- * upgrade GLASS _[tested]_
+ * upgrade Metacello _(tested)_
+ * upgrade GLASS _(tested)_
  * upgrade Seaside30
  * upgrade tODE
  * upgrade SqueakSource3
