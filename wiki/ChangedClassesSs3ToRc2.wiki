@@ -59,11 +59,14 @@
 =List of classes with Class History after load=
  * [ChangedClassesSs3ToRc2#GRDelayedSend GRDelayedSend]
  * [ChangedClassesSs3ToRc2#SendMail SendMail]
+ * [ChangedClassesSs3ToRc2#SSFeedEntry SSFeedEntry]
  * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
  * [ChangedClassesSs3ToRc2#SSInstanceSideDescribedObject 
  * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
 SSInstanceSideDescribedObject]
 =Class to Migration map=
+===SSFeedEntry===
+[ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===SSInstanceSideDescribedObject===
 [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===!SendMail===
@@ -89,11 +92,42 @@ Classes affected:
 New class instance variable:
   * stringsSatisfyBlocks
 Classes affected:
+  * [ChangedClassesSs3ToRc2#SSFeedEntry SSFeedEntry]
   * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
-  * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
   * [ChangedClassesSs3ToRc2#SSInstanceSideDescribedObject SSInstanceSideDescribedObject]
+  * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
 ===GRDelayedSend migration===
 Renamed instance variable:
   * message renamed to selector
 Classes affected:
   * [ChangedClassesSs3ToRc2#GRDelayedSend GRDelayedSend]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
