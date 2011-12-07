@@ -1,5 +1,6 @@
 #summary List of classes with class history after upgrade. Class Migration candidates.
 
+==List of classes with Class History after load==
 {{{
 
 1	SendMail
