@@ -1,27 +1,6 @@
 #summary List of classes with class history after upgrade. Class Migration candidates.
 
- # [ChangedClassesSs3ToRc2#List_of_classes_with_Class_History_after_load List of classes with Class History after load]
- # [ChangedClassesSs3ToRc2#Class_to_Migration_map Class to Migration map]
- # [ChangedClassesSs3ToRc2#Migration_to_Class_map Migration to Class map]
-
-=List of classes with Class History after load=
- * [ChangedClassesSs3ToRc2#GRDelayedSend GRDelayedSend]
- * [ChangedClassesSs3ToRc2#SendMail SendMail]
- * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
- * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
-=Class to Migration map=
-===!SendMail===
-[ChangedClassesSs3ToRc2#SendMail_migration SendMail migration]
-===SSGemStoneProject===
-[ChangedClassesSs3ToRc2#SSProject_migration SSProject migration]
-
-[ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
-===SSVersion===
-[ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
-===GRDelayedSend===
-[ChangedClassesSs3ToRc2#GRDelayedSend_migration GRDelayedSend migration]
 {{{
-4	GRDelayedSend
 5	SSInstanceSideDescribedObject
 6	SSFeedEntry
 7	SSProject
@@ -74,6 +53,26 @@
 54	SSGemStoneProject
 55	SSIssue
 }}}
+ # [ChangedClassesSs3ToRc2#List_of_classes_with_Class_History_after_load List of classes with Class History after load]
+ # [ChangedClassesSs3ToRc2#Class_to_Migration_map Class to Migration map]
+ # [ChangedClassesSs3ToRc2#Migration_to_Class_map Migration to Class map]
+
+=List of classes with Class History after load=
+ * [ChangedClassesSs3ToRc2#GRDelayedSend GRDelayedSend]
+ * [ChangedClassesSs3ToRc2#SendMail SendMail]
+ * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
+ * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
+=Class to Migration map=
+===!SendMail===
+[ChangedClassesSs3ToRc2#SendMail_migration SendMail migration]
+===SSGemStoneProject===
+[ChangedClassesSs3ToRc2#SSProject_migration SSProject migration]
+
+[ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
+===SSVersion===
+[ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
+===GRDelayedSend===
+[ChangedClassesSs3ToRc2#GRDelayedSend_migration GRDelayedSend migration]
 =Migration to Class map=
 ===!SendMail migration===
 Added instance variables:
