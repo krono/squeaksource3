@@ -1,5 +1,7 @@
 #summary List of classes with class history after upgrade. Class Migration candidates.
 
+ # [http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2?ts=1323299137&updated=ChangedClassesSs3ToRc2#List_of_classes_with_Class_History_after_load List of classes with Class History after load]
+
 ==List of classes with Class History after load==
 {{{
 
