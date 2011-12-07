@@ -3,13 +3,22 @@
 This workspace script is more up-to-date than the [UpgradeSs3ToRc2  upgrade script].
 
 Segments of the script:
- * upgrade Metacello _(tested w/o GsDeployer)_
- * upgrade GLASS _(tested w/o GsDeployer)_
- * upgrade Seaside30
- * upgrade tODE
- * upgrade SqueakSource3
- * migrate instances (Issue 37) and replace instances (Issue 39)
- * clean up
+ * fetch phase
+  * fetch all configurations directly referenced in script
+  * upgrade Metacello
+  * fetch GLASS packages
+  * fetch Seaside30 packages
+  * fetch tODE packages
+  * fetch SqueakSource3 packages
+ * load phase
+  * load GLASS
+  * load Seaside30
+  * load tODE
+  * load SqueakSource3
+ * migration phase
+  * migrate instances (Issue 37) and replace instances (Issue 39)
+ * clean up phase
+  * clean up
    * remove continuations from object log ... or wipe out continuation
    * [http://code.google.com/p/glassdb/wiki/ClearPersistentCaches clear persistent caches]
    * nuke [http://ss3.gemstone.com/ss/ss3.html ss3], [http://ss3.gemstone.com/ss/pharo.html pharo], [http://ss3.gemstone.com/ss/grease.html Grease], [http://ss3.gemstone.com/ss/distroPharo1.html Distro for Pharo 1], [http://ss3.gemstone.com/ss/stash.html stash], [http://ss3.gemstone.com/ss/stash2.html stash2] projects as they were added for alpha testing
@@ -29,35 +38,21 @@ If we shutdown the site, we can go back and use bulk migrate.
 ====Current Choice====
 Since I'd like to use SqueakSource3 as an exemplar site for GLASS, it makes sense to attempt the live update option and then encode the live update steps into GsDeployer, so that the scripts can be simplified ...
 At this point in time Option 2 appears to be the best bet.
-===Notes===
-Right now the script still uses *bulkMigrate:* in places, but ideally we'll do the whole upgrade in one transaction. This implies that we might want to make changes to GsDeployer to support deferred migration and if we do, we'll want to make these changes in [http://code.google.com/p/glassdb/wiki/GlassReleaseLog#1.0-beta.8.7.2 GLASS 1.0-beta.8.7.2] or [http://code.google.com/p/glassdb/wiki/GlassReleaseLog#1.0-beta.8.8 GLASS 1.0-beta.8.8]
 
-The initial upgrade of GLASS no longer uses bulkMigrate ... and the script appears to work fine without autoCommits ... no migration done yet ... in the current test there are no instances of the classes...
-
-If we start running out of memory a good technique would be to pre fetch all of the packages and configurations and do a commit ...
 ===workspace===
 {{{
 | versionString deployBlock |
+"fetch phase"
 versionString := '1.0-beta.8.7.1'.
-deployBlock := [:aBlock |	| oldAutoCommit oldAutoMigrate |
-	oldAutoCommit := MCPlatformSupport autoCommit.
-	oldAutoMigrate := MCPlatformSupport autoMigrate.
-	MCPlatformSupport autoCommit: false.
-	MCPlatformSupport autoMigrate: false.
-	[aBlock 
-		on: (Smalltalk at: #MetacelloSkipDirtyPackageLoad), Warning
-    		do: [:ex | 
-			(ex isKindOf: Warning)
-				ifTrue: [ 
-					Transcript cr; show: ex description.
-					ex resume ]
-				ifFalse: [ ex resume: false ]]]
-		ensure: [
-			MCPlatformSupport autoCommit: oldAutoCommit.
-			MCPlatformSupport autoMigrate: oldAutoMigrate].
-	System commitTransaction ifFalse: [ nil error: 'commit failed' ]].
-ConfigurationOfGLASS project updateProject.
-ConfigurationOfMetacello project updateProject.
+GsDeployer cleanClassHistory.
+System commitTransaction ifFalse: [ nil error: 'commit failed'].
+(MCWorkingCopy allManagers detect: [:each | each packageName = 'ConfigurationOfSeaside30'])
+        repositoryGroup addRepository: (MCHttpRepository 
+                location: 'http://ss3.gemstone.com/ss/tODE'
+                user: ''
+                password: '').
+{ConfigurationOfGLASS. ConfigurationOfMetacello. ConfigurationOftODE. ConfigurationOfSeaside30. ConfigurationOfSqueakSource. } do: [:config | 
+	config project updateProject ].
 ConfigurationOfMetacello project currentVersion versionNumber < '1.0-beta.31.1' asMetacelloVersionNumber
     ifTrue: [
         (Gofer new)
@@ -68,23 +63,47 @@ ConfigurationOfMetacello project currentVersion versionNumber < '1.0-beta.31.1' 
             version: 'Metacello-MC-dkh.531';
             version: 'Metacello-Platform.gemstone-dkh.23';
             load].
+System commitTransaction ifFalse: [ nil error: 'commit failed'].
+(ConfigurationOfGLASS project version: versionString) fetch.
+System commitTransaction ifFalse: [ nil error: 'commit failed'].
+(ConfigurationOfSeaside30 project version: '3.0.6.3') 
+                fetch: #('Base' 'JQuery-UI' 'Seaside-Adaptors-Swazoo' ).
+System commitTransaction ifFalse: [ nil error: 'commit failed'].
+(ConfigurationOftODE project version: '0.1') fetch.
+System commitTransaction ifFalse: [ nil error: 'commit failed'].
+(ConfigurationOfSqueakSource project version: '3.0-rc.1') fetch.
+System commitTransaction ifFalse: [ nil error: 'commit failed'].
+"load phase"
+deployBlock := [:aBlock |       | oldAutoCommit oldAutoMigrate |
+        oldAutoCommit := MCPlatformSupport autoCommit.
+        oldAutoMigrate := MCPlatformSupport autoMigrate.
+        MCPlatformSupport autoCommit: false.
+        MCPlatformSupport autoMigrate: false.
+        [aBlock 
+                on: (Smalltalk at: #MetacelloSkipDirtyPackageLoad), Warning
+                do: [:ex | 
+                        (ex isKindOf: Warning)
+                                ifTrue: [ 
+                                        Transcript cr; show: ex description.
+                                        ex resume ]
+                                ifFalse: [ ex resume: false ]]]
+                ensure: [
+                        MCPlatformSupport autoCommit: oldAutoCommit.
+                        MCPlatformSupport autoMigrate: oldAutoMigrate].
+        System commitTransaction ifFalse: [ nil error: 'commit failed' ]].
 deployBlock 
-	value: [ 
-		(ConfigurationOfGLASS project version: versionString) load: #( 'Core' 'Monticello' ).
-		(ConfigurationOfGLASS project version: versionString) load ].
-
-(MCWorkingCopy allManagers select: [:each | each packageName = 'ConfigurationOfSeaside30'])
-	repositoryGroup addRepository: (MCHttpRepository 
-		location: 'http://ss3.gemstone.com/ss/tODE'
-		user: ''
-		password: '').
-ConfigurationOftODE project updateProject.
-ConfigurationOfSeaside30 project updateProject.
-ConfigurationOfSqueakSource project updateProject.
-GsDeployer bulkMigrate: [
-	(ConfigurationOfSeaside30 project version: '3.0.6.3') 
-		load: #('Base' 'JQuery-UI' 'Seaside-Adaptors-Swazoo' ).
-	(ConfigurationOfSqueakSource project version: '3.0-rc.1') load.
-	(ConfigurationOftODE project version: '0.1') load.
+        value: [ 
+                (ConfigurationOfGLASS project version: versionString) load: #( 'Core' 'Monticello' ).
+                (ConfigurationOfGLASS project version: versionString) load ].
+deployBlock 
+        value: [
+        	(ConfigurationOfSeaside30 project version: '3.0.6.3') 
+                load: #('Base' 'JQuery-UI' 'Seaside-Adaptors-Swazoo' ).
 ].
+deployBlock 
+        value: [ (ConfigurationOftODE project version: '0.1') load ].
+deployBlock 
+        value: [ (ConfigurationOfSqueakSource project version: '3.0-rc.1') load ].
+"migration phase"
+"clean up phase"
 }}}
