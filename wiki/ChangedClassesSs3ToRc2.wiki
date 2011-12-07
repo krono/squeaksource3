@@ -1,7 +1,10 @@
 #summary List of classes with class history after upgrade. Class Migration candidates.
 
+ # [ChangedClassesSs3ToRc2#List_of_classes_with_Class_History_after_load List of classes with Class History after load]
+ # [ChangedClassesSs3ToRc2#Class_to_Migration_map Class to Migration map]
+ # [ChangedClassesSs3ToRc2#Migration_to_Class_map Migration to Class map]
+
 {{{
-6	SSFeedEntry
 7	SSProject
 8	SSGroup
 9	SSMember
@@ -52,9 +55,6 @@
 54	SSGemStoneProject
 55	SSIssue
 }}}
- # [ChangedClassesSs3ToRc2#List_of_classes_with_Class_History_after_load List of classes with Class History after load]
- # [ChangedClassesSs3ToRc2#Class_to_Migration_map Class to Migration map]
- # [ChangedClassesSs3ToRc2#Migration_to_Class_map Migration to Class map]
 
 =List of classes with Class History after load=
  * [ChangedClassesSs3ToRc2#GRDelayedSend GRDelayedSend]
