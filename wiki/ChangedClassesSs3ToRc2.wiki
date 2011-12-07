@@ -5,7 +5,7 @@
 ==List of classes with Class History after load==
 
 ===!SendMail===
-[ChangedClassesSs3ToRc2#migration SendMail migration]
+[ChangedClassesSs3ToRc2#SendMail_migration SendMail migration]
 ===SSGemStoneProject===
 [ChangedClassesSs3ToRc2#SSProject_migration SSProject migration]
 
