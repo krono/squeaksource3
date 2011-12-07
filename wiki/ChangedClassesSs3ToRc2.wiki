@@ -6,10 +6,11 @@
 
 ===!SendMail===
 [ChangedClassesSs3ToRc2#migration SendMail migration]
-===!SSGemStoneProject===
+===SSGemStoneProject===
 [ChangedClassesSs3ToRc2#SSProject_migration SSProject migration]
+
 [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
-===!SSVersion===
+===SSVersion===
 [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 {{{
 4	GRDelayedSend
@@ -75,10 +76,10 @@ Classes affected:
 Renamed instance variable:
   * description renamed to information
 Classes affected:
-  * SSGemStoneProject
+  * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
 ===SSModel migration===
 New class instance variable:
   * stringsSatisfyBlocks
 Classes affected:
-  * SSGemStoneProject
-  * SSVersion
+  * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
+  * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
