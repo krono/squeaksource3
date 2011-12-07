@@ -91,7 +91,7 @@ New class instance variable:
 Classes affected:
   * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
   * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
-===!GRDelayedSend migration===
+===GRDelayedSend migration===
 Renamed instance variable:
   * message renamed to selector
 Classes affected:
