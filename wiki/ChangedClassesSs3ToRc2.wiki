@@ -61,10 +61,12 @@
  * [ChangedClassesSs3ToRc2#SendMail SendMail]
  * [ChangedClassesSs3ToRc2#SSFeedEntry SSFeedEntry]
  * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
- * [ChangedClassesSs3ToRc2#SSInstanceSideDescribedObject 
+ * [ChangedClassesSs3ToRc2#SSInstanceSideDescribedObject SSInstanceSideDescribedObject]
+ * [ChangedClassesSs3ToRc2#SSProject SSProject]
  * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
-SSInstanceSideDescribedObject]
 =Class to Migration map=
+===SSProject===
+[ChangedClassesSs3ToRc2#SSProject_migration SSProject migration]  and [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===SSFeedEntry===
 [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===SSInstanceSideDescribedObject===
