@@ -3,9 +3,9 @@
  # [http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2?ts=1323299137&updated=ChangedClassesSs3ToRc2#List_of_classes_with_Class_History_after_load List of classes with Class History after load]
 
 ==List of classes with Class History after load==
-{{{
 
- * SendMail
+ * [http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2?#class SendMail]
+{{{
 2	SSGemStoneProject
 3	SSVersion
 4	GRDelayedSend
@@ -62,6 +62,6 @@
 55	SSIssue
 }}}
 
-===SendMail class===
+===SendMail===
 Added instance variables:
   * plainMessage, rcptTo, user, password
