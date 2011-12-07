@@ -65,9 +65,16 @@
 ===SendMail migration===
 Added instance variables:
   * plainMessage, rcptTo, user, password
+Classes affected:
+  * SendMail
 ===SSProject migration===
 Renamed instance variable:
   * description renamed to information
+Classes affected:
+  * SSGemStoneProject
 ===SSModel migration===
 New class instance variable:
   * stringsSatisfyBlocks
+Classes affected:
+  * SSGemStoneProject
+  * SSVersion
