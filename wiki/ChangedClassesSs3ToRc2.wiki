@@ -5,7 +5,7 @@
 ==List of classes with Class History after load==
 
  * [http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#migration SendMail]
- * SSGemStoneProject
+ * [http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSProject_migration SSGemStoneProject]
 {{{
 3	SSVersion
 4	GRDelayedSend
@@ -66,3 +66,4 @@
 Added instance variables:
   * plainMessage, rcptTo, user, password
 ===SSProject migration===
+===SSModel migration===
