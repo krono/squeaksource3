@@ -9,7 +9,22 @@ Segments of the script:
  * upgrade tODE
  * upgrade SqueakSource3
  * migrate instances (Issue 37) and replace instances (Issue 39)
+===Instance Migration===
+It is desirable to do the upgrade in one transaction, but allInstances requires a commit...that means we have to:
+ # do the allinstances and commit before doing the upgrade/migrate/replace instances or,
+ # do the upgrade, commit, then do the migrate and replace instances step
+ # shutdown the site while the upgrade is in progress.
+====Option 1====
+If we take option 1, we risk missing some instances that get created while we are doing the upgrade and having to run the allInstances yet again
+====Option 2====
+With option 2 allows us to catch all of the instances after the upgrade (see discussion on [http://forum.world.st/instances-of-old-class-versions-td4100977.html Instances of old class versions]), but that implies that the code that we upgrade to must be durable enough to run before the migration/replace instances step.
 
+In fact to correctly survive either option 1 or option 2 the code has to be durable enough to run without migration/replace instances...
+====Option 3====
+If we shutdown the site, we can go back and use bulk migrate.
+====Current Choice====
+Since I'd like to use SqueakSource3 as an exemplar site for GLASS, it makes sense to attempt the live update option and then encode the live update steps into GsDeployer, so that the scripts can be simplified ...
+At this point in time Option 2 appears to be the best bet.
 ===Notes===
 Right now the script still uses *bulkMigrate:* in places, but ideally we'll do the whole upgrade in one transaction. This implies that we might want to make changes to GsDeployer to support deferred migration and if we do, we'll want to make these changes in [http://code.google.com/p/glassdb/wiki/GlassReleaseLog#1.0-beta.8.7.2 GLASS 1.0-beta.8.7.2] or [http://code.google.com/p/glassdb/wiki/GlassReleaseLog#1.0-beta.8.8 GLASS 1.0-beta.8.8]
 
