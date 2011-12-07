@@ -9,6 +9,9 @@ Segments of the script:
  * upgrade tODE
  * upgrade SqueakSource3
  * migrate instances (Issue 37) and replace instances (Issue 39)
+ * clean up
+   * remove continuations from object log ... or wipe out continuation
+   * 
 ===Instance Migration===
 It is desirable to do the upgrade in one transaction, but allInstances requires a commit...that means we have to:
  # do the allinstances and commit before doing the upgrade/migrate/replace instances or,
