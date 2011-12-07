@@ -6,9 +6,11 @@
 
 ===!SendMail===
 [ChangedClassesSs3ToRc2#migration SendMail migration]
----- 
- * SSGemStoneProject --> [ChangedClassesSs3ToRc2#SSProject_migration SSProject migration] and [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
- * SSVersion  --> [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
+===!SSGemStoneProject===
+[ChangedClassesSs3ToRc2#SSProject_migration SSProject migration]
+[ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
+===!SSVersion===
+[ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 {{{
 4	GRDelayedSend
 5	SSInstanceSideDescribedObject
@@ -64,7 +66,7 @@
 55	SSIssue
 }}}
 
-===SendMail migration===
+===!SendMail migration===
 Added instance variables:
   * plainMessage, rcptTo, user, password
 Classes affected:
