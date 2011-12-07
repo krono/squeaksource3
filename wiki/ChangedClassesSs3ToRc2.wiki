@@ -4,9 +4,9 @@
 
 ==List of classes with Class History after load==
 
- * SendMail --> [http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#migration SendMail migration]
- * SSGemStoneProject --> [http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSProject_migration SSProject migration] and [http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
- * SSVersion  --> [http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
+ * <a title="sendmail">SendMail</a> --> [ChangedClassesSs3ToRc2#migration SendMail migration]
+ * SSGemStoneProject --> [ChangedClassesSs3ToRc2#SSProject_migration SSProject migration] and [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
+ * SSVersion  --> [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 {{{
 4	GRDelayedSend
 5	SSInstanceSideDescribedObject
@@ -66,7 +66,7 @@
 Added instance variables:
   * plainMessage, rcptTo, user, password
 Classes affected:
-  * SendMail
+  * [ChangedClassesSs3ToRc2#sendmail SendMail]
 ===SSProject migration===
 Renamed instance variable:
   * description renamed to information
