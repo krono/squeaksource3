@@ -1,6 +1,7 @@
 #summary List of classes with class history after upgrade. Class Migration candidates.
 
  # [ChangedClassesSs3ToRc2#List_of_classes_with_Class_History_after_load List of classes with Class History after load]
+ # [List of Classes with Unique Change]
  # [ChangedClassesSs3ToRc2#Class_to_Migration_map Class to Migration map]
  # [ChangedClassesSs3ToRc2#Migration_to_Class_map Migration to Class map]
 
@@ -56,6 +57,11 @@
 55	SSIssue
 }}}
 
+=List of Classes with Unique Change=
+ * [ChangedClassesSs3ToRc2#GRDelayedSend_migration GRDelayedSend]
+ * [ChangedClassesSs3ToRc2#SendMail_migration SendMail]
+ * [ChangedClassesSs3ToRc2#SSModel_migration SSModel]
+ * [ChangedClassesSs3ToRc2#SSProject_migration SSProject]
 =List of classes with Class History after load=
  * [ChangedClassesSs3ToRc2#GRDelayedSend GRDelayedSend]
  * [ChangedClassesSs3ToRc2#SendMail SendMail]
