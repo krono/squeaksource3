@@ -66,4 +66,8 @@
 Added instance variables:
   * plainMessage, rcptTo, user, password
 ===SSProject migration===
+Renamed instance variable:
+  * description renamed to information
 ===SSModel migration===
+New class instance variable:
+  * stringsSatisfyBlocks
