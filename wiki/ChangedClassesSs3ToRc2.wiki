@@ -68,7 +68,7 @@
 Added instance variables:
   * plainMessage, rcptTo, user, password
 Classes affected:
-  * [ChangedClassesSs3ToRc2#sendmail SendMail]
+  * [ChangedClassesSs3ToRc2#SendMail SendMail]
 ===SSProject migration===
 Renamed instance variable:
   * description renamed to information
