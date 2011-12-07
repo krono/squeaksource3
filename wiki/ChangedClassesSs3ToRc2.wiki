@@ -62,6 +62,6 @@
 55	SSIssue
 }}}
 
-===SendMail===
+===SendMail migration===
 Added instance variables:
   * plainMessage, rcptTo, user, password
