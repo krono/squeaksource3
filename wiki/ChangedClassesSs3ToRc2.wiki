@@ -5,7 +5,7 @@
 ==List of classes with Class History after load==
 
  * [http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#migration SendMail]
- * [http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSProject_migration SSGemStoneProject]
+ * SSGemStoneProject --> [http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSProject_migration SSProject migration] and [http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSModel_migration SSModel migration
 {{{
 3	SSVersion
 4	GRDelayedSend
