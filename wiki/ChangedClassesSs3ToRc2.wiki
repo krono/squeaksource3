@@ -5,7 +5,7 @@
 ==List of classes with Class History after load==
 {{{
 
-1	SendMail
+ * SendMail
 2	SSGemStoneProject
 3	SSVersion
 4	GRDelayedSend
@@ -61,3 +61,7 @@
 54	SSGemStoneProject
 55	SSIssue
 }}}
+
+===SendMail===
+Added instance variables:
+  * plainMessage, rcptTo, user, password
