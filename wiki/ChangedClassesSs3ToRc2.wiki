@@ -62,13 +62,14 @@
  * [ChangedClassesSs3ToRc2#SendMail SendMail]
  * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
  * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
+ * [ChangedClassesSs3ToRc2#SSInstanceSideDescribedObject SSInstanceSideDescribedObject]
 =Class to Migration map=
+===SSInstanceSideDescribedObject===
+[ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===!SendMail===
 [ChangedClassesSs3ToRc2#SendMail_migration SendMail migration]
 ===SSGemStoneProject===
-[ChangedClassesSs3ToRc2#SSProject_migration SSProject migration]
-
-[ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
+[ChangedClassesSs3ToRc2#SSProject_migration SSProject migration] and [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===SSVersion===
 [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===GRDelayedSend===
@@ -90,6 +91,7 @@ New class instance variable:
 Classes affected:
   * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
   * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
+  * [ChangedClassesSs3ToRc2#SSInstanceSideDescribedObject SSInstanceSideDescribedObject]
 ===GRDelayedSend migration===
 Renamed instance variable:
   * message renamed to selector
