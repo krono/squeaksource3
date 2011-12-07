@@ -11,7 +11,8 @@ Segments of the script:
  * migrate instances (Issue 37) and replace instances (Issue 39)
  * clean up
    * remove continuations from object log ... or wipe out continuation
-   * 
+   * [http://code.google.com/p/glassdb/wiki/ClearPersistentCaches clear persistent caches]
+   * nuke [http://ss3.gemstone.com/ss/ss3.html ss3], [http://ss3.gemstone.com/ss/pharo.html pharo], [http://ss3.gemstone.com/ss/grease.html Grease], [http://ss3.gemstone.com/ss/distroPharo1.html Distro for Pharo 1] projects as they were added for alpha testing
 ===Instance Migration===
 It is desirable to do the upgrade in one transaction, but allInstances requires a commit...that means we have to:
  # do the allinstances and commit before doing the upgrade/migrate/replace instances or,
