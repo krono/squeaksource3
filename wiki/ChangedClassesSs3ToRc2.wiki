@@ -6,8 +6,8 @@
 
  * SendMail --> [http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#migration SendMail migration]
  * SSGemStoneProject --> [http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSProject_migration SSProject migration] and [http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
+ * SSVersion  --> [http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 {{{
-3	SSVersion
 4	GRDelayedSend
 5	SSInstanceSideDescribedObject
 6	SSFeedEntry
