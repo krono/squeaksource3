@@ -1,0 +1,60 @@
+#summary List of classes with class history after upgrade. Class Migration candidates.
+
+{{{
+
+1	SendMail
+2	SSGemStoneProject
+3	SSVersion
+4	GRDelayedSend
+5	SSInstanceSideDescribedObject
+6	SSFeedEntry
+7	SSProject
+8	SSGroup
+9	SSMember
+10	SSPortCondition
+11	SSCondition
+12	SSUniqueGroupIdCondition
+13	SSAccessPolicy
+14	SSUniqueMemberLoginCondition
+15	SSUniqueProjectIdCondition
+16	SSModel
+17	WAIframeTag
+18	SSSizeCondition
+19	SSUrlFilter
+20	SSYouAreMemberCondition
+21	WAUrl
+22	SSTag
+23	SSSizeConditionTest
+24	SSIssueReport
+25	SSIssue
+26	SSProjectNameCondition
+27	SSRepository
+28	SSSubscription
+29	SSEmailSubscription
+30	WAPragmaStubHandler
+31	TOInspectorFieldSpec
+32	TOInspectorKeylessFieldSpec
+33	TOInspectorValuelessFieldSpec
+34	JQButton
+35	TOSession
+36	TOConfiguration
+37	TOArchivedConfiguration
+38	TOInspectorValuelessFieldSpec
+39	SSRepository
+40	SSProject
+41	SSRepository
+42	SSIssueReport
+43	SSGroup
+44	SSGemStoneProject
+45	SSMember
+46	SSIssue
+47	SSEmailSubscription
+48	SSGemStoneProject
+49	SSFeedEntry
+50	SSIssue
+51	SSMember
+52	SSProject
+53	SSGemStoneProject
+54	SSGemStoneProject
+55	SSIssue
+}}}
