@@ -10,18 +10,22 @@ Segments of the script:
   * fetch Seaside30 packages
   * fetch tODE packages
   * fetch SqueakSource3 packages
+  * *COMMIT*
  * load phase
   * load GLASS
   * load Seaside30
   * load tODE
   * load SqueakSource3
+  * *COMMIT*
  * migration phase
   * migrate instances (Issue 37) and replace instances (Issue 39)
+  * *COMMIT*
  * clean up phase
   * clean up
    * remove continuations from object log ... or wipe out continuation
    * [http://code.google.com/p/glassdb/wiki/ClearPersistentCaches clear persistent caches]
    * nuke [http://ss3.gemstone.com/ss/ss3.html ss3], [http://ss3.gemstone.com/ss/pharo.html pharo], [http://ss3.gemstone.com/ss/grease.html Grease], [http://ss3.gemstone.com/ss/distroPharo1.html Distro for Pharo 1], [http://ss3.gemstone.com/ss/stash.html stash], [http://ss3.gemstone.com/ss/stash2.html stash2] projects as they were added for alpha testing
+  * *COMMIT*
 ===Instance Migration===
 It is desirable to do the upgrade in one transaction, but allInstances requires a commit...that means we have to:
  # do the allinstances and commit before doing the upgrade/migrate/replace instances or,
