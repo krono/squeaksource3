@@ -3,6 +3,9 @@
  # [http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2?ts=1323299137&updated=ChangedClassesSs3ToRc2#List_of_classes_with_Class_History_after_load List of classes with Class History after load]
 
 ==List of classes with Class History after load==
+ * [ChangedClassesSs3ToRc2#SendMail SendMail]
+ * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
+ * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
 
 ===!SendMail===
 [ChangedClassesSs3ToRc2#SendMail_migration SendMail migration]
