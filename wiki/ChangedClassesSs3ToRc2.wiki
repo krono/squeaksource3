@@ -57,6 +57,7 @@
 =List of Classes with Unique Change=
  * [ChangedClassesSs3ToRc2#GRDelayedSend_migration GRDelayedSend]
  * [ChangedClassesSs3ToRc2#SendMail_migration SendMail]
+ * [ChangedClassesSs3ToRc2#SSCondition SSCondition]
  * [ChangedClassesSs3ToRc2#SSMember SSMember]
  * [ChangedClassesSs3ToRc2#SSModel_migration SSModel]
  * [ChangedClassesSs3ToRc2#SSProject_migration SSProject]
@@ -100,6 +101,11 @@ Added instance variables:
   * plainMessage, rcptTo, user, password
 Classes affected:
   * [ChangedClassesSs3ToRc2#SendMail SendMail]
+===SSCondition migration===
+Changed superclass:
+  * WAObject superclass changed to MACondition
+Classes affected:
+  * [ChangedClassesSs3ToRc2#SSCondition SSCondition]
 ===SSMember migration===
 Renamed instance variable:
   * description renamed to information
