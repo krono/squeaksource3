@@ -13,7 +13,7 @@
 17	WAIframeTag
 18	
 19	SSUrlFilter
-20	SSYouAreMemberCondition
+20	
 21	WAUrl
 22	SSTag
 23	SSSizeConditionTest
