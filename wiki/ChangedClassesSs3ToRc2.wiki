@@ -6,7 +6,6 @@
  # [ChangedClassesSs3ToRc2#Migration_to_Class_map Migration to Class map]
 
 {{{
-9	SSMember
 10	SSPortCondition
 11	SSCondition
 12	SSUniqueGroupIdCondition
