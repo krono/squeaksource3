@@ -59,6 +59,7 @@
  # [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
  # [ChangedClassesSs3ToRc2#SSGroup SSGroup]
  # [ChangedClassesSs3ToRc2#SSInstanceSideDescribedObject SSInstanceSideDescribedObject]
+ # [ChangedClassesSs3ToRc2#SSIssue SSIssue]
  # [ChangedClassesSs3ToRc2#SSIssueReport SSIssueReport]
  # [ChangedClassesSs3ToRc2#SSMember SSMember]
  # [ChangedClassesSs3ToRc2#SSPortCondition SSPortCondition]
@@ -107,6 +108,8 @@
 [ChangedClassesSs3ToRc2#SSMember_migration SSMember migration]  and [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===SSProject===
 [ChangedClassesSs3ToRc2#SSProject_migration SSProject migration]  and [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
+===SSIssue===
+[ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===SSIssueReport===
 [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===SSTag===
@@ -163,6 +166,7 @@ Classes affected:
  * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
  * [ChangedClassesSs3ToRc2#SSGroup SSGroup]
  * [ChangedClassesSs3ToRc2#SSInstanceSideDescribedObject SSInstanceSideDescribedObject]
+ * [ChangedClassesSs3ToRc2#SSIssue SSIssue]
  * [ChangedClassesSs3ToRc2#SSIssueReport SSIssueReport]
  * [ChangedClassesSs3ToRc2#SSMember SSMember]
  * [ChangedClassesSs3ToRc2#SSProject SSProject]
