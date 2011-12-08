@@ -74,11 +74,14 @@
  # [ChangedClassesSs3ToRc2#SSVersion SSVersion]
  # [ChangedClassesSs3ToRc2#SSYouAreMemberCondition SSYouAreMemberCondition]
  # [ChangedClassesSs3ToRc2#TOInspectorFieldSpec TOInspectorFieldSpec]
+ # [ChangedClassesSs3ToRc2#TOInspectorKeylessFieldSpec TOInspectorKeylessFieldSpec]
  # [ChangedClassesSs3ToRc2#WAIframeTag WAIframeTag]
  # [ChangedClassesSs3ToRc2#WAPragmaStubHandler WAPragmaStubHandler]
  # [ChangedClassesSs3ToRc2#WAUrl WAUrl]
 ----
 =Class to Migration map=
+===TOInspectorKeylessFieldSpec===
+[ChangedClassesSs3ToRc2#TOInspectorFieldSpec_migration TOInspectorFieldSpec migration]
 ===TOInspectorFieldSpec===
 [ChangedClassesSs3ToRc2#TOInspectorFieldSpec_migration TOInspectorFieldSpec migration]
 ===WAPragmaStubHandler===
@@ -207,6 +210,7 @@ Added instance variable:
  * target and helpText
 Classes affected:
  * [ChangedClassesSs3ToRc2#TOInspectorFieldSpec TOInspectorFieldSpec]
+ * [ChangedClassesSs3ToRc2#TOInspectorKeylessFieldSpec TOInspectorKeylessFieldSpec]
 ===WAIframeTag migration===
 Add instance variable:
  * url
