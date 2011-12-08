@@ -6,7 +6,6 @@
  # [ChangedClassesSs3ToRc2#Migration_to_Class_map Migration to Class map]
 ----
 {{{
-19	SSUrlFilter
 21	WAUrl
 22	SSTag
 23	SSSizeConditionTest
