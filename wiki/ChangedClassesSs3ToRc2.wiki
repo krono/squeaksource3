@@ -51,6 +51,7 @@
  * [ChangedClassesSs3ToRc2#SSMember_migration SSMember]
  * [ChangedClassesSs3ToRc2#SSModel_migration SSModel]
  * [ChangedClassesSs3ToRc2#SSProject_migration SSProject]
+ * [ChangedClassesSs3ToRc2#WAIframeTag_migration WAIframeTag]
 ----
 =List of classes with Class History after load=
  * [ChangedClassesSs3ToRc2#GRDelayedSend GRDelayedSend]
@@ -156,6 +157,11 @@ Renamed instance variable:
 Classes affected:
  * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
  * [ChangedClassesSs3ToRc2#SSProject SSProject]
+===WAIframeTag migration===
+Add instance variable:
+ * url
+Classes affected:
+ * [ChangedClassesSs3ToRc2#WAIframeTag WAIframeTag]
 ----
 ----
 
