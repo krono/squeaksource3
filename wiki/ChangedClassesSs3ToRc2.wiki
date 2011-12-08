@@ -114,7 +114,7 @@
 =Migration to Class map=
 ===GRDelayedSend migration===
 Renamed instance variable:
- * message renamed to selector
+ * selector renamed to message
 Classes affected:
  * [ChangedClassesSs3ToRc2#GRDelayedSend GRDelayedSend]
 ===!SendMail migration===
