@@ -1,5 +1,5 @@
 #summary upgrade workspace for 3.0-rc.2
-hjgjhghjgkjhg
+
 This workspace script is more up-to-date than the [UpgradeSs3ToRc2  upgrade script].
 
 Segments of the script:
