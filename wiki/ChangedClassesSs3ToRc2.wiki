@@ -6,7 +6,6 @@
  # [ChangedClassesSs3ToRc2#Migration_to_Class_map Migration to Class map]
 ----
 {{{
-34	JQButton
 35	TOSession
 36	TOConfiguration
 37	TOArchivedConfiguration
