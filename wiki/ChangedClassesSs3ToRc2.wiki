@@ -200,6 +200,8 @@ Renamed instance variable:
  * description renamed to information
 Classes affected:
  * [ChangedClassesSs3ToRc2#SSMember SSMember]
+====Implications====
+Need to arrange to transfer state from description field to information field with DESCRIPTION migration.
 ===SSModel migration===
 New class instance variable:
  * stringsSatisfyBlocks
@@ -219,6 +221,8 @@ Classes affected:
  * [ChangedClassesSs3ToRc2#SSSubscription SSSubscription]
  * [ChangedClassesSs3ToRc2#SSTag SSTag]
  * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
+====Implications====
+There will be instances galore, but class instance variables are involved with no shape change for instances so SIMPLE migration suffices. There are exceptions:
 ===SSProject migration===
 Renamed instance variable:
  * description renamed to information
