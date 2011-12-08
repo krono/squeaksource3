@@ -241,11 +241,15 @@ Added instance variable:
  * sizeCondition
 Classes affected:
  * [ChangedClassesSs3ToRc2#SSSizeConditionTest SSSizeConditionTest]
+====Implications====
+No instances expect to exist, so SIMPLE migration is acceptable.
 ===SSUrlFilter migration===
 Changed superclass:
  * superclass WAPragmaBasedRestfulFilter switched to WARestfulFilter
 Classes affected:
  * [ChangedClassesSs3ToRc2#SSUrlFilter SSUrlFilter]
+====Implications====
+Instances will exist, however, no shape changes for the instances are involved with this superclass swap, so SIMPLE migration is acceptable.
 ===TOConfiguration migration===
 Added instance variable:
  * selectedTab
