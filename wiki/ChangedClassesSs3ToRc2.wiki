@@ -7,13 +7,9 @@
 ----
 {{{
 13	SSAccessPolicy
-14	
-15	
 16	SSModel
 17	WAIframeTag
-18	
 19	SSUrlFilter
-20	
 21	WAUrl
 22	SSTag
 23	SSSizeConditionTest
@@ -159,60 +155,60 @@ Classes affected:
  * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
  * [ChangedClassesSs3ToRc2#SSProject SSProject]
 ----
----- 
+----
 
----- 
+----
 
----- 
+----
 
----- 
-
----- 
-
----- 
-
----- 
-
----- 
-
----- 
-
----- 
-
----- 
-
----- 
-
----- 
-
----- 
-
----- 
-
----- 
+----
 
 ---- 
 
 ----
- 
----- 
 
----- 
+----
 
----- 
+----
 
----- 
+----
 
----- 
+----
 
----- 
+----
+
+----
+
+----
+
+----
+
+----
+
+----
+
+----
 
 ----
  
----- 
+----
 
----- 
+----
 
----- 
+----
 
----- 
+----
+
+----
+
+----
+
+----
+ 
+----
+
+----
+
+----
+
+----
