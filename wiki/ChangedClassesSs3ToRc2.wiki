@@ -172,11 +172,15 @@ Removed instance variable:
  * icons
 Classes affected:
  * [ChangedClassesSs3ToRc2#JQButton JQButton]
+====Implications====
+No instances expect to exist, so SIMPLE migration is acceptable.
 ===!SendMail migration===
 Added instance variables:
  * plainMessage, rcptTo, user, password
 Classes affected:
  * [ChangedClassesSs3ToRc2#SendMail SendMail]
+====Implications====
+No instances expect to exist, so SIMPLE migration is acceptable.
 ===SSCondition migration===
 Changed superclass:
  * WAObject superclass changed to MACondition
@@ -189,6 +193,8 @@ Classes affected:
  * [ChangedClassesSs3ToRc2#SSUniqueGroupIdCondition SSUniqueGroupIdCondition]
  * [ChangedClassesSs3ToRc2#SSUniqueMemberLoginCondition SSUniqueMemberLoginCondition]
  * [ChangedClassesSs3ToRc2#SSYouAreMemberCondition SSYouAreMemberCondition]
+====Implications====
+There will be instances galore, but they are used in MADescription and we will flushing the MADescription cache after SIMPLE migration.
 ===SSMember migration===
 Renamed instance variable:
  * description renamed to information
