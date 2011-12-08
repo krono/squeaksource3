@@ -63,6 +63,7 @@
  # [ChangedClassesSs3ToRc2#SSMember SSMember]
  # [ChangedClassesSs3ToRc2#SSPortCondition SSPortCondition]
  # [ChangedClassesSs3ToRc2#SSProject SSProject]
+ # [ChangedClassesSs3ToRc2#SSRepository SSRepository]
  # [ChangedClassesSs3ToRc2#SSUniqueProjectIdCondition SSUniqueProjectIdCondition]
  # [ChangedClassesSs3ToRc2#SSProjectNameCondition SSProjectNameCondition]
  # [ChangedClassesSs3ToRc2#SSSizeCondition SSSizeCondition]
@@ -108,6 +109,8 @@
 ===SSProject===
 [ChangedClassesSs3ToRc2#SSProject_migration SSProject migration]  and [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===SSIssue===
+[ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
+===SSRepository===
 [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===SSIssueReport===
 [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
@@ -169,6 +172,7 @@ Classes affected:
  * [ChangedClassesSs3ToRc2#SSIssueReport SSIssueReport]
  * [ChangedClassesSs3ToRc2#SSMember SSMember]
  * [ChangedClassesSs3ToRc2#SSProject SSProject]
+ * [ChangedClassesSs3ToRc2#SSRepository SSRepository]
  * [ChangedClassesSs3ToRc2#SSTag SSTag]
  * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
 ===SSProject migration===
