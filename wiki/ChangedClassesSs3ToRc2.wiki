@@ -38,6 +38,7 @@
  # [ChangedClassesSs3ToRc2#SSProject_migration SSProject]
  # [ChangedClassesSs3ToRc2#SSSizeConditionTest_migration SSSizeConditionTest]
  # [ChangedClassesSs3ToRc2#SSUrlFilter_migration SSUrlFilter]
+ # [ChangedClassesSs3ToRc2#TOConfiguration_migration TOConfiguration]
  # [ChangedClassesSs3ToRc2#TOInspectorFieldSpec_migration TOInspectorFieldSpec]
  # [ChangedClassesSs3ToRc2#TOSession_migration TOSession]
  # [ChangedClassesSs3ToRc2#WAIframeTag_migration WAIframeTag]
@@ -72,6 +73,7 @@
  # [ChangedClassesSs3ToRc2#SSUrlFilter SSUrlFilter]
  # [ChangedClassesSs3ToRc2#SSVersion SSVersion]
  # [ChangedClassesSs3ToRc2#SSYouAreMemberCondition SSYouAreMemberCondition]
+ # [ChangedClassesSs3ToRc2#TOConfiguration TOConfiguration]
  # [ChangedClassesSs3ToRc2#TOInspectorFieldSpec TOInspectorFieldSpec]
  # [ChangedClassesSs3ToRc2#TOInspectorKeylessFieldSpec TOInspectorKeylessFieldSpec]
  # [ChangedClassesSs3ToRc2#TOInspectorValuelessFieldSpec TOInspectorValuelessFieldSpec]
@@ -81,6 +83,8 @@
  # [ChangedClassesSs3ToRc2#WAUrl WAUrl]
 ----
 =Class to Migration map=
+===TOConfiguration===
+[ChangedClassesSs3ToRc2#TOConfiguration_migration TOConfiguration migration]
 ===TOSession===
 [ChangedClassesSs3ToRc2#TOSession_migration TOSession migration]
 ===JQButton===
@@ -217,6 +221,11 @@ Changed superclass:
  * superclass WAPragmaBasedRestfulFilter switched to WARestfulFilter
 Classes affected:
  * [ChangedClassesSs3ToRc2#SSUrlFilter SSUrlFilter]
+===TOConfiguration migration===
+Added instance variable:
+ * selectedTab
+Classes affected:
+ * [ChangedClassesSs3ToRc2#TOConfiguration TOConfiguration]
 ===TOInspectorFieldSpec migration===
 Added instance variable:
  * target and helpText
