@@ -57,6 +57,7 @@
 =List of classes with Class History after load=
  * [ChangedClassesSs3ToRc2#GRDelayedSend GRDelayedSend]
  * [ChangedClassesSs3ToRc2#SendMail SendMail]
+ * [ChangedClassesSs3ToRc2#SSAccessPolicy SSAccessPolicy]
  * [ChangedClassesSs3ToRc2#SSCondition SSCondition]
  * [ChangedClassesSs3ToRc2#SSFeedEntry SSFeedEntry]
  * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
@@ -74,6 +75,8 @@
  * [ChangedClassesSs3ToRc2#SSYouAreMemberCondition SSYouAreMemberCondition]
 ----
 =Class to Migration map=
+===SSAccessPolicy===
+[ChangedClassesSs3ToRc2#SSCondition_migration SSCondition migration]
 ===SSYouAreMemberCondition===
 [ChangedClassesSs3ToRc2#SSCondition_migration SSCondition migration]
 ===SSUniqueProjectIdCondition===
@@ -141,6 +144,7 @@ Classes affected:
 New class instance variable:
  * stringsSatisfyBlocks
 Classes affected:
+ * [ChangedClassesSs3ToRc2#SSAccessPolicy SSAccessPolicy]
  * [ChangedClassesSs3ToRc2#SSFeedEntry SSFeedEntry]
  * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
  * [ChangedClassesSs3ToRc2#SSGroup SSGroup]
