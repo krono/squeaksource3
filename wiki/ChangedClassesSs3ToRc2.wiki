@@ -40,6 +40,7 @@
  # [ChangedClassesSs3ToRc2#SSSizeConditionTest_migration SSSizeConditionTest]
  # [ChangedClassesSs3ToRc2#SSUrlFilter_migration SSUrlFilter]
  # [ChangedClassesSs3ToRc2#TOInspectorFieldSpec_migration TOInspectorFieldSpec]
+ # [ChangedClassesSs3ToRc2#TOSession_migration TOSession]
  # [ChangedClassesSs3ToRc2#WAIframeTag_migration WAIframeTag]
  # [ChangedClassesSs3ToRc2#WAPragmaStubHandler_migration WAPragmaStubHandler]
  # [ChangedClassesSs3ToRc2#WAUrl_migration WAUrl]
@@ -75,11 +76,14 @@
  # [ChangedClassesSs3ToRc2#TOInspectorFieldSpec TOInspectorFieldSpec]
  # [ChangedClassesSs3ToRc2#TOInspectorKeylessFieldSpec TOInspectorKeylessFieldSpec]
  # [ChangedClassesSs3ToRc2#TOInspectorValuelessFieldSpec TOInspectorValuelessFieldSpec]
+ # [ChangedClassesSs3ToRc2#TOSession TOSession]
  # [ChangedClassesSs3ToRc2#WAIframeTag WAIframeTag]
  # [ChangedClassesSs3ToRc2#WAPragmaStubHandler WAPragmaStubHandler]
  # [ChangedClassesSs3ToRc2#WAUrl WAUrl]
 ----
 =Class to Migration map=
+===TOSession===
+[ChangedClassesSs3ToRc2#TOSession_migration TOSession migration]
 ===JQButton===
 [ChangedClassesSs3ToRc2#JQButton_migration JQButton migration]
 ===TOInspectorValuelessFieldSpec===
@@ -221,6 +225,11 @@ Classes affected:
  * [ChangedClassesSs3ToRc2#TOInspectorFieldSpec TOInspectorFieldSpec]
  * [ChangedClassesSs3ToRc2#TOInspectorKeylessFieldSpec TOInspectorKeylessFieldSpec]
  * [ChangedClassesSs3ToRc2#TOInspectorValuelessFieldSpec TOInspectorValuelessFieldSpec]
+===TOSession migration===
+Added instance variable:
+ * eastFrame
+Classes affected:
+ * [ChangedClassesSs3ToRc2#TOSession TOSession]
 ===WAIframeTag migration===
 Add instance variable:
  * url
