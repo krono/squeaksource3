@@ -223,6 +223,10 @@ Classes affected:
  * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
 ====Implications====
 There will be instances galore, but class instance variables are involved with no shape change for instances so SIMPLE migration suffices. There are exceptions:
+ * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject] with [ChangedClassesSs3ToRc2#SSProject_migration SSProject migration]
+ * [ChangedClassesSs3ToRc2#SSMember SSMember] with [ChangedClassesSs3ToRc2#SSMember_migration SSMember migration]
+ * [ChangedClassesSs3ToRc2#SSProject SSProject] with [ChangedClassesSs3ToRc2#SSProject_migration SSProject migration]
+In each of the above cases, the DESCRIPTION migration is appropriate. 
 ===SSProject migration===
 Renamed instance variable:
  * description renamed to information
