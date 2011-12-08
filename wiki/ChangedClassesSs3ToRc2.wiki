@@ -5,28 +5,6 @@
  # [ChangedClassesSs3ToRc2#Class_to_Migration_map Class to Migration map]
  # [ChangedClassesSs3ToRc2#Migration_to_Class_map Migration to Class map]
 ----
-{{{
-37	TOArchivedConfiguration
-38	TOInspectorValuelessFieldSpec
-39	SSRepository
-40	SSProject
-41	SSRepository
-42	SSIssueReport
-43	SSGroup
-44	SSGemStoneProject
-45	SSMember
-46	SSIssue
-47	SSEmailSubscription
-48	SSGemStoneProject
-49	SSFeedEntry
-50	SSIssue
-51	SSMember
-52	SSProject
-53	SSGemStoneProject
-54	SSGemStoneProject
-55	SSIssue
-}}}
-
 =List of Classes with Unique Change=
  # [ChangedClassesSs3ToRc2#GRDelayedSend_migration GRDelayedSend]
  # [ChangedClassesSs3ToRc2#JQButton_migration JQButton]
@@ -81,6 +59,27 @@
  # [ChangedClassesSs3ToRc2#WAIframeTag WAIframeTag]
  # [ChangedClassesSs3ToRc2#WAPragmaStubHandler WAPragmaStubHandler]
  # [ChangedClassesSs3ToRc2#WAUrl WAUrl]
+----
+
+=List of Classes with Multiple ClassHistories (more than 2)=
+ # TOInspectorValuelessFieldSpec
+ # SSRepository
+ # SSProject
+ # SSRepository
+ # SSIssueReport
+ # SSGroup
+ # SSGemStoneProject
+ # SSMember
+ # SSIssue
+ # SSEmailSubscription
+ # SSGemStoneProject
+ # SSFeedEntry
+ # SSIssue
+ # SSMember
+ # SSProject
+ # SSGemStoneProject
+ # SSGemStoneProject
+ # SSIssue
 ----
 =Class to Migration map=
 ===TOArchivedConfiguration===
