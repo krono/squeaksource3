@@ -7,7 +7,7 @@
 
 {{{
 13	SSAccessPolicy
-14	SSUniqueMemberLoginCondition
+14	
 15	SSUniqueProjectIdCondition
 16	SSModel
 17	WAIframeTag
@@ -71,8 +71,11 @@
  * [ChangedClassesSs3ToRc2#SSProjectNameCondition SSProjectNameCondition]
  * [ChangedClassesSs3ToRc2#SSSizeCondition SSSizeCondition]
  * [ChangedClassesSs3ToRc2#SSUniqueGroupIdCondition SSUniqueGroupIdCondition]
+ * [ChangedClassesSs3ToRc2#SSUniqueMemberLoginCondition SSUniqueMemberLoginCondition]
  * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
 =Class to Migration map=
+===SSUniqueMemberLoginCondition===
+[ChangedClassesSs3ToRc2#SSCondition_migration SSCondition migration]
 ===SSSizeCondition===
 [ChangedClassesSs3ToRc2#SSCondition_migration SSCondition migration]
 ===SSProjectNameCondition===
@@ -121,6 +124,7 @@ Classes affected:
   * [ChangedClassesSs3ToRc2#SSProjectNameCondition SSProjectNameCondition]
  * [ChangedClassesSs3ToRc2#SSSizeCondition SSSizeCondition]
   * [ChangedClassesSs3ToRc2#SSUniqueGroupIdCondition SSUniqueGroupIdCondition]
+ * [ChangedClassesSs3ToRc2#SSUniqueMemberLoginCondition SSUniqueMemberLoginCondition]
 ===SSMember migration===
 Renamed instance variable:
   * description renamed to information
