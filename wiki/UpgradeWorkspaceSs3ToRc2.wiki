@@ -17,6 +17,7 @@ Segments of the script:
   * load tODE
   * load SqueakSource3
   * *COMMIT*
+ * migration analysis
  * migration phase
   * migrate instances (Issue 37) and replace instances (Issue 39)
   * *COMMIT*
@@ -108,6 +109,9 @@ deployBlock
         value: [ (ConfigurationOftODE project version: '0.1') load ].
 deployBlock 
         value: [ (ConfigurationOfSqueakSource project version: '3.0-rc.1') load ].
+"migration analysis"
+(GsDeployer new classesWithClassHistory collect: [:cl | cl name ]) asSet.
 "migration phase"
 "clean up phase"
+
 }}}
