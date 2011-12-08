@@ -72,8 +72,11 @@
  * [ChangedClassesSs3ToRc2#SSUniqueMemberLoginCondition SSUniqueMemberLoginCondition]
  * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
  * [ChangedClassesSs3ToRc2#SSYouAreMemberCondition SSYouAreMemberCondition]
+ * [ChangedClassesSs3ToRc2#WAIframeTag WAIframeTag]
 ----
 =Class to Migration map=
+===WAIframeTag===
+[ChangedClassesSs3ToRc2#WAIframeTag_migration WAIframeTag migration]
 ===SSAccessPolicy===
 [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===SSYouAreMemberCondition===
