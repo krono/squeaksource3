@@ -2,6 +2,7 @@
 
  # [ChangedClassesSs3ToRc2#List_of_Classes_with_Unique_Change List of Classes with Unique Change]
  # [ChangedClassesSs3ToRc2#List_of_classes_with_Class_History_after_load  List of classes with Class History after load]
+ # [ChangedClassesSs3ToRc2ChangedClassesSs3ToRc2#List_of_Classes_with_Multiple_(more_than_2) List of Classes with Multiple ClassHistories (more than 2)]
  # [ChangedClassesSs3ToRc2#Class_to_Migration_map Class to Migration map]
  # [ChangedClassesSs3ToRc2#Migration_to_Class_map Migration to Class map]
 ----
