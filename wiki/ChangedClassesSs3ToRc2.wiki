@@ -6,7 +6,6 @@
  # [ChangedClassesSs3ToRc2#Migration_to_Class_map Migration to Class map]
 ----
 {{{
-24	SSIssueReport
 25	SSIssue
 27	SSRepository
 28	SSSubscription
