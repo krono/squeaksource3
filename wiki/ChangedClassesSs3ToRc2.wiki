@@ -44,6 +44,7 @@
  # [ChangedClassesSs3ToRc2#SSSizeConditionTest_migration SSSizeConditionTest]
  # [ChangedClassesSs3ToRc2#SSUrlFilter_migration SSUrlFilter]
  # [ChangedClassesSs3ToRc2#WAIframeTag_migration WAIframeTag]
+ # [ChangedClassesSs3ToRc2#WAPragmaStubHandler_migration WAPragmaStubHandler]
  # [ChangedClassesSs3ToRc2#WAUrl_migration WAUrl]
 ----
 =List of classes with Class History after load=
@@ -74,9 +75,12 @@
  # [ChangedClassesSs3ToRc2#SSVersion SSVersion]
  # [ChangedClassesSs3ToRc2#SSYouAreMemberCondition SSYouAreMemberCondition]
  # [ChangedClassesSs3ToRc2#WAIframeTag WAIframeTag]
+ # [ChangedClassesSs3ToRc2#WAPragmaStubHandler WAPragmaStubHandler]
  # [ChangedClassesSs3ToRc2#WAUrl WAUrl]
 ----
 =Class to Migration map=
+===WAPragmaStubHandler===
+[ChangedClassesSs3ToRc2#WAPragmaStubHandler_migration WAPragmaStubHandler migration]
 ===SSSizeConditionTest===
 [ChangedClassesSs3ToRc2#SSSizeConditionTest_migration SSSizeConditionTest migration]
 ===WAUrl===
@@ -191,7 +195,7 @@ Added instance variable:
  * sizeCondition
 Classes affected:
  * [ChangedClassesSs3ToRc2#SSSizeConditionTest SSSizeConditionTest]
-===SSUrlFilter_migration===
+===SSUrlFilter migration===
 Changed superclass:
  * superclass WAPragmaBasedRestfulFilter switched to WARestfulFilter
 Classes affected:
@@ -201,6 +205,11 @@ Add instance variable:
  * url
 Classes affected:
  * [ChangedClassesSs3ToRc2#WAIframeTag WAIframeTag]
+===WAPragmaStubHandler migration===
+Changed superclass:
+ * superclass WAPragmaBasedRestfulFilter switched to WARestfulFilter
+Classes affected:
+ * [ChangedClassesSs3ToRc2#WAPragmaStubHandler WAPragmaStubHandler]
 ===WAUrl migration===
 Add instance variable:
  * pathParameters
