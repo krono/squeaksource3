@@ -6,7 +6,6 @@
  # [ChangedClassesSs3ToRc2#Migration_to_Class_map Migration to Class map]
 ----
 {{{
-23	SSSizeConditionTest
 24	SSIssueReport
 25	SSIssue
 27	SSRepository
@@ -79,7 +78,7 @@
 ----
 =Class to Migration map=
 ===SSSizeConditionTest===
-[ChangedClassesSs3ToRc2#SSSizeConditionTest_migration SSSizeConditionTest]
+[ChangedClassesSs3ToRc2#SSSizeConditionTest_migration SSSizeConditionTest migration]
 ===WAUrl===
 [ChangedClassesSs3ToRc2#WAUrl_migration WAUrl migration]
 ===SSUrlFilter===
