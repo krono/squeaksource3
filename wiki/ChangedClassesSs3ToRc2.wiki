@@ -32,6 +32,7 @@
 
 =List of Classes with Unique Change=
  # [ChangedClassesSs3ToRc2#GRDelayedSend_migration GRDelayedSend]
+ # [ChangedClassesSs3ToRc2#JQButton_migration JQButton]
  # [ChangedClassesSs3ToRc2#SendMail_migration SendMail]
  # [ChangedClassesSs3ToRc2#SSCondition_migration SSCondition]
  # [ChangedClassesSs3ToRc2#SSMember_migration SSMember]
@@ -46,6 +47,7 @@
 ----
 =List of classes with Class History after load=
  # [ChangedClassesSs3ToRc2#GRDelayedSend GRDelayedSend]
+ # [ChangedClassesSs3ToRc2#JQButton JQButton]
  # [ChangedClassesSs3ToRc2#SendMail SendMail]
  # [ChangedClassesSs3ToRc2#SSAccessPolicy SSAccessPolicy]
  # [ChangedClassesSs3ToRc2#SSCondition SSCondition]
@@ -79,6 +81,8 @@
  # [ChangedClassesSs3ToRc2#WAUrl WAUrl]
 ----
 =Class to Migration map=
+===JQButton===
+[ChangedClassesSs3ToRc2#JQButton_migration JQButton migration]
 ===TOInspectorValuelessFieldSpec===
 [ChangedClassesSs3ToRc2#TOInspectorFieldSpec_migration TOInspectorFieldSpec migration]
 ===TOInspectorKeylessFieldSpec===
@@ -150,6 +154,11 @@ Renamed instance variable:
  * selector renamed to message
 Classes affected:
  * [ChangedClassesSs3ToRc2#GRDelayedSend GRDelayedSend]
+===JQButton migration===
+Removed instance variable:
+ * icons
+Classes affected:
+ * [ChangedClassesSs3ToRc2#JQButton JQButton]
 ===!SendMail migration===
 Added instance variables:
  * plainMessage, rcptTo, user, password
