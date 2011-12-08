@@ -46,7 +46,7 @@ At this point in time Option 2 appears to be the best bet.
 
 ===workspace===
 {{{
-| versionString deployBlock |
+| versionString deployBlock classesWithClassHistory changedClassNames |
 "fetch phase"
 versionString := '1.0-beta.8.7.1'.
 GsDeployer cleanClassHistory.
@@ -110,8 +110,8 @@ deployBlock
 deployBlock 
         value: [ (ConfigurationOfSqueakSource project version: '3.0-rc.1') load ].
 "migration analysis"
-(GsDeployer new classesWithClassHistory collect: [:cl | cl name ]) asSet.
+classesWithClassHistory := GsDeployer new classesWithClassHistory.
+changedClassNames := (classesWithClassHistory collect: [:cl | cl name ]) asSet.
 "migration phase"
 "clean up phase"
-
 }}}
