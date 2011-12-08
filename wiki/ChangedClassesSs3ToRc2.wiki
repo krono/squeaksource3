@@ -109,6 +109,7 @@ Changed superclass:
   * WAObject superclass changed to MACondition
 Classes affected:
   * [ChangedClassesSs3ToRc2#SSCondition SSCondition]
+  * [ChangedClassesSs3ToRc2#SSPortCondition SSPortCondition]
 ===SSMember migration===
 Renamed instance variable:
   * description renamed to information
