@@ -6,7 +6,6 @@
  # [ChangedClassesSs3ToRc2#Migration_to_Class_map Migration to Class map]
 
 {{{
-10	SSPortCondition
 11	SSCondition
 12	SSUniqueGroupIdCondition
 13	SSAccessPolicy
@@ -64,6 +63,7 @@
 =List of classes with Class History after load=
  * [ChangedClassesSs3ToRc2#GRDelayedSend GRDelayedSend]
  * [ChangedClassesSs3ToRc2#SendMail SendMail]
+ * [ChangedClassesSs3ToRc2#SSCondition SSCondition]
  * [ChangedClassesSs3ToRc2#SSFeedEntry SSFeedEntry]
  * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
  * [ChangedClassesSs3ToRc2#SSGroup SSGroup]
@@ -73,6 +73,8 @@
  * [ChangedClassesSs3ToRc2#SSProject SSProject]
  * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
 =Class to Migration map=
+===SSCondition===
+[ChangedClassesSs3ToRc2#SSCondition_migration SSCondition migration]
 ===SSPortCondition===
 [ChangedClassesSs3ToRc2#SSCondition_migration SSCondition migration]
 ===SSMember===
