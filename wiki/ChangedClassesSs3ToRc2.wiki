@@ -6,7 +6,6 @@
  # [ChangedClassesSs3ToRc2#Migration_to_Class_map Migration to Class map]
 ----
 {{{
-27	SSRepository
 28	SSSubscription
 29	SSEmailSubscription
 30	WAPragmaStubHandler
