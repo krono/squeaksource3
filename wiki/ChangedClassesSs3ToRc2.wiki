@@ -4,7 +4,7 @@
  # [ChangedClassesSs3ToRc2#List_of_Classes_with_Unique_Change List of Classes with Unique Change]
  # [ChangedClassesSs3ToRc2#Class_to_Migration_map Class to Migration map]
  # [ChangedClassesSs3ToRc2#Migration_to_Class_map Migration to Class map]
-
+----
 {{{
 13	SSAccessPolicy
 14	
@@ -57,6 +57,7 @@
  * [ChangedClassesSs3ToRc2#SSMember_migration SSMember]
  * [ChangedClassesSs3ToRc2#SSModel_migration SSModel]
  * [ChangedClassesSs3ToRc2#SSProject_migration SSProject]
+----
 =List of classes with Class History after load=
  * [ChangedClassesSs3ToRc2#GRDelayedSend GRDelayedSend]
  * [ChangedClassesSs3ToRc2#SendMail SendMail]
@@ -75,6 +76,7 @@
  * [ChangedClassesSs3ToRc2#SSUniqueMemberLoginCondition SSUniqueMemberLoginCondition]
  * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
  * [ChangedClassesSs3ToRc2#SSYouAreMemberCondition SSYouAreMemberCondition]
+----
 =Class to Migration map=
 ===SSYouAreMemberCondition===
 [ChangedClassesSs3ToRc2#SSCondition_migration SSCondition migration]
@@ -110,6 +112,7 @@
 [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===GRDelayedSend===
 [ChangedClassesSs3ToRc2#GRDelayedSend_migration GRDelayedSend migration]
+----
 =Migration to Class map=
 ===GRDelayedSend migration===
 Renamed instance variable:
@@ -155,7 +158,7 @@ Renamed instance variable:
 Classes affected:
  * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
  * [ChangedClassesSs3ToRc2#SSProject SSProject]
-
+----
 ---- 
 
 ---- 
