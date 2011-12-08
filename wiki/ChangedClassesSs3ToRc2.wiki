@@ -6,7 +6,6 @@
  # [ChangedClassesSs3ToRc2#Migration_to_Class_map Migration to Class map]
 
 {{{
-8	SSGroup
 9	SSMember
 10	SSPortCondition
 11	SSCondition
@@ -59,6 +58,7 @@
 =List of Classes with Unique Change=
  * [ChangedClassesSs3ToRc2#GRDelayedSend_migration GRDelayedSend]
  * [ChangedClassesSs3ToRc2#SendMail_migration SendMail]
+ * [ChangedClassesSs3ToRc2#SSMember SSMember]
  * [ChangedClassesSs3ToRc2#SSModel_migration SSModel]
  * [ChangedClassesSs3ToRc2#SSProject_migration SSProject]
 =List of classes with Class History after load=
@@ -71,6 +71,8 @@
  * [ChangedClassesSs3ToRc2#SSProject SSProject]
  * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
 =Class to Migration map=
+===SSMember===
+[ChangedClassesSs3ToRc2#SSProject_migration SSMember migration]  and [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===SSProject===
 [ChangedClassesSs3ToRc2#SSProject_migration SSProject migration]  and [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===SSGroup===
@@ -98,6 +100,11 @@ Added instance variables:
   * plainMessage, rcptTo, user, password
 Classes affected:
   * [ChangedClassesSs3ToRc2#SendMail SendMail]
+===SSMember migration===
+Renamed instance variable:
+  * description renamed to information
+Classes affected:
+  * [ChangedClassesSs3ToRc2#SSMember SSMember]
 ===SSModel migration===
 New class instance variable:
   * stringsSatisfyBlocks
@@ -106,12 +113,15 @@ Classes affected:
   * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
   * [ChangedClassesSs3ToRc2#SSGroup SSGroup]
   * [ChangedClassesSs3ToRc2#SSInstanceSideDescribedObject SSInstanceSideDescribedObject]
+  * [ChangedClassesSs3ToRc2#SSMember SSMember]
+  * [ChangedClassesSs3ToRc2#SSProject SSProject]
   * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
 ===SSProject migration===
 Renamed instance variable:
   * description renamed to information
 Classes affected:
   * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
+  * [ChangedClassesSs3ToRc2#SSProject SSProject]
 
 ---- 
 
