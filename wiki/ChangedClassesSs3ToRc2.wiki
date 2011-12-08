@@ -69,9 +69,12 @@
  * [ChangedClassesSs3ToRc2#SSGroup SSGroup]
  * [ChangedClassesSs3ToRc2#SSInstanceSideDescribedObject SSInstanceSideDescribedObject]
  * [ChangedClassesSs3ToRc2#SSMember SSMember]
+ * [ChangedClassesSs3ToRc2#SSPortCondition SSPortCondition]
  * [ChangedClassesSs3ToRc2#SSProject SSProject]
  * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
 =Class to Migration map=
+===SSPortCondition===
+[ChangedClassesSs3ToRc2#SSCondition_migration SSCondition migration]
 ===SSMember===
 [ChangedClassesSs3ToRc2#SSMember_migration SSMember migration]  and [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===SSProject===
