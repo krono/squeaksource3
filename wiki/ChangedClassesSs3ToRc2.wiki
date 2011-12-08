@@ -42,6 +42,7 @@
  # [ChangedClassesSs3ToRc2#SSProject_migration SSProject]
  # [ChangedClassesSs3ToRc2#SSSizeConditionTest_migration SSSizeConditionTest]
  # [ChangedClassesSs3ToRc2#SSUrlFilter_migration SSUrlFilter]
+ # [ChangedClassesSs3ToRc2#TOInspectorFieldSpec_migration TOInspectorFieldSpec]
  # [ChangedClassesSs3ToRc2#WAIframeTag_migration WAIframeTag]
  # [ChangedClassesSs3ToRc2#WAPragmaStubHandler_migration WAPragmaStubHandler]
  # [ChangedClassesSs3ToRc2#WAUrl_migration WAUrl]
@@ -73,11 +74,14 @@
  # [ChangedClassesSs3ToRc2#SSUrlFilter SSUrlFilter]
  # [ChangedClassesSs3ToRc2#SSVersion SSVersion]
  # [ChangedClassesSs3ToRc2#SSYouAreMemberCondition SSYouAreMemberCondition]
+ # [ChangedClassesSs3ToRc2#TOInspectorFieldSpec TOInspectorFieldSpec]
  # [ChangedClassesSs3ToRc2#WAIframeTag WAIframeTag]
  # [ChangedClassesSs3ToRc2#WAPragmaStubHandler WAPragmaStubHandler]
  # [ChangedClassesSs3ToRc2#WAUrl WAUrl]
 ----
 =Class to Migration map=
+===TOInspectorFieldSpec===
+[ChangedClassesSs3ToRc2#TOInspectorFieldSpec_migration TOInspectorFieldSpec migration]
 ===WAPragmaStubHandler===
 [ChangedClassesSs3ToRc2#WAPragmaStubHandler_migration WAPragmaStubHandler migration]
 ===SSSizeConditionTest===
@@ -199,6 +203,11 @@ Changed superclass:
  * superclass WAPragmaBasedRestfulFilter switched to WARestfulFilter
 Classes affected:
  * [ChangedClassesSs3ToRc2#SSUrlFilter SSUrlFilter]
+===TOInspectorFieldSpec migration===
+Added instance variable:
+ * target and helpText
+Classes affected:
+ * [ChangedClassesSs3ToRc2#TOInspectorFieldSpec TOInspectorFieldSpec]
 ===WAIframeTag migration===
 Add instance variable:
  * url
