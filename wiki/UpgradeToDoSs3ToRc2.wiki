@@ -1,5 +1,5 @@
 #summary To do list for upgrade to 3.0-rc.2
-
+kjkjkjkkj
  # Issue 38: SSModel class>>initialize side effects?
  # Issue 40: SStorage class>>timestamp ... rounded now
  # Issue 42: service vm used for background tasks
