@@ -52,6 +52,7 @@
  # [ChangedClassesSs3ToRc2#SendMail SendMail]
  # [ChangedClassesSs3ToRc2#SSAccessPolicy SSAccessPolicy]
  # [ChangedClassesSs3ToRc2#SSCondition SSCondition]
+ # [ChangedClassesSs3ToRc2#SSEmailSubscription SSEmailSubscription]
  # [ChangedClassesSs3ToRc2#SSFeedEntry SSFeedEntry]
  # [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
  # [ChangedClassesSs3ToRc2#SSGroup SSGroup]
@@ -107,6 +108,8 @@
 [ChangedClassesSs3ToRc2#SSMember_migration SSMember migration]  and [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===SSProject===
 [ChangedClassesSs3ToRc2#SSProject_migration SSProject migration]  and [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
+===SSEmailSubscription===
+[ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===SSSubscription===
 [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===SSIssue===
@@ -165,6 +168,7 @@ New class instance variable:
  * stringsSatisfyBlocks
 Classes affected:
  * [ChangedClassesSs3ToRc2#SSAccessPolicy SSAccessPolicy]
+ * [ChangedClassesSs3ToRc2#SSEmailSubscription SSEmailSubscription]
  * [ChangedClassesSs3ToRc2#SSFeedEntry SSFeedEntry]
  * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
  * [ChangedClassesSs3ToRc2#SSGroup SSGroup]
