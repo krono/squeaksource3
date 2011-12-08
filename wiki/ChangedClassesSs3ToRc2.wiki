@@ -6,7 +6,6 @@
  # [ChangedClassesSs3ToRc2#Migration_to_Class_map Migration to Class map]
 
 {{{
-7	SSProject
 8	SSGroup
 9	SSMember
 10	SSPortCondition
@@ -67,12 +66,15 @@
  * [ChangedClassesSs3ToRc2#SendMail SendMail]
  * [ChangedClassesSs3ToRc2#SSFeedEntry SSFeedEntry]
  * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
+ * [ChangedClassesSs3ToRc2#SSGroup SSGroup]
  * [ChangedClassesSs3ToRc2#SSInstanceSideDescribedObject SSInstanceSideDescribedObject]
  * [ChangedClassesSs3ToRc2#SSProject SSProject]
  * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
 =Class to Migration map=
 ===SSProject===
 [ChangedClassesSs3ToRc2#SSProject_migration SSProject migration]  and [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
+===SSGroup===
+[ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===SSFeedEntry===
 [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===SSInstanceSideDescribedObject===
@@ -86,29 +88,30 @@
 ===GRDelayedSend===
 [ChangedClassesSs3ToRc2#GRDelayedSend_migration GRDelayedSend migration]
 =Migration to Class map=
+===GRDelayedSend migration===
+Renamed instance variable:
+  * message renamed to selector
+Classes affected:
+  * [ChangedClassesSs3ToRc2#GRDelayedSend GRDelayedSend]
 ===!SendMail migration===
 Added instance variables:
   * plainMessage, rcptTo, user, password
 Classes affected:
   * [ChangedClassesSs3ToRc2#SendMail SendMail]
-===SSProject migration===
-Renamed instance variable:
-  * description renamed to information
-Classes affected:
-  * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
 ===SSModel migration===
 New class instance variable:
   * stringsSatisfyBlocks
 Classes affected:
   * [ChangedClassesSs3ToRc2#SSFeedEntry SSFeedEntry]
   * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
+  * [ChangedClassesSs3ToRc2#SSGroup SSGroup]
   * [ChangedClassesSs3ToRc2#SSInstanceSideDescribedObject SSInstanceSideDescribedObject]
   * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
-===GRDelayedSend migration===
+===SSProject migration===
 Renamed instance variable:
-  * message renamed to selector
+  * description renamed to information
 Classes affected:
-  * [ChangedClassesSs3ToRc2#GRDelayedSend GRDelayedSend]
+  * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
 
 ---- 
 
