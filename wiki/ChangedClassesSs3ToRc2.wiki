@@ -51,6 +51,7 @@
  * [ChangedClassesSs3ToRc2#SSProject_migration SSProject]
  * [ChangedClassesSs3ToRc2#SSUrlFilter_migration SSUrlFilter]
  * [ChangedClassesSs3ToRc2#WAIframeTag_migration WAIframeTag]
+ * [ChangedClassesSs3ToRc2#WAUrl_migration WAUrl]
 ----
 =List of classes with Class History after load=
  * [ChangedClassesSs3ToRc2#GRDelayedSend GRDelayedSend]
@@ -73,8 +74,11 @@
  * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
  * [ChangedClassesSs3ToRc2#SSYouAreMemberCondition SSYouAreMemberCondition]
  * [ChangedClassesSs3ToRc2#WAIframeTag WAIframeTag]
+ * [ChangedClassesSs3ToRc2#WAUrl WAUrl]
 ----
 =Class to Migration map=
+===WAUrl===
+[ChangedClassesSs3ToRc2#WAUrl_migration WAUrl migration]
 ===SSUrlFilter===
 [ChangedClassesSs3ToRc2#SSUrlFilter_migration SSUrlFilter migration]
 ===WAIframeTag===
@@ -172,6 +176,11 @@ Add instance variable:
  * url
 Classes affected:
  * [ChangedClassesSs3ToRc2#WAIframeTag WAIframeTag]
+===WAUrl migration===
+Add instance variable:
+ * pathParameters
+Classes affected:
+ * [ChangedClassesSs3ToRc2#WAUrl WAUrl]
 ----
 ----
 
