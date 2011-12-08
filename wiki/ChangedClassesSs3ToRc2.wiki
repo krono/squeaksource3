@@ -6,7 +6,6 @@
  # [ChangedClassesSs3ToRc2#Migration_to_Class_map Migration to Class map]
 
 {{{
-11	SSCondition
 12	SSUniqueGroupIdCondition
 13	SSAccessPolicy
 14	SSUniqueMemberLoginCondition
@@ -71,8 +70,11 @@
  * [ChangedClassesSs3ToRc2#SSMember SSMember]
  * [ChangedClassesSs3ToRc2#SSPortCondition SSPortCondition]
  * [ChangedClassesSs3ToRc2#SSProject SSProject]
+ * [ChangedClassesSs3ToRc2#SSUniqueGroupIdCondition SSUniqueGroupIdCondition]
  * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
 =Class to Migration map=
+===SSUniqueGroupIdCondition===
+[ChangedClassesSs3ToRc2#SSCondition_migration SSCondition migration]
 ===SSCondition===
 [ChangedClassesSs3ToRc2#SSCondition_migration SSCondition migration]
 ===SSPortCondition===
@@ -112,6 +114,7 @@ Changed superclass:
 Classes affected:
   * [ChangedClassesSs3ToRc2#SSCondition SSCondition]
   * [ChangedClassesSs3ToRc2#SSPortCondition SSPortCondition]
+  * [ChangedClassesSs3ToRc2#SSUniqueGroupIdCondition SSUniqueGroupIdCondition]
 ===SSMember migration===
 Renamed instance variable:
   * description renamed to information
