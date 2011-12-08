@@ -67,6 +67,7 @@
  # [ChangedClassesSs3ToRc2#SSProjectNameCondition SSProjectNameCondition]
  # [ChangedClassesSs3ToRc2#SSSizeCondition SSSizeCondition]
  # [ChangedClassesSs3ToRc2#SSSizeConditionTest SSSizeConditionTest]
+ # [ChangedClassesSs3ToRc2#SSSubscription SSSubscription]
  # [ChangedClassesSs3ToRc2#SSTag SSTag]
  # [ChangedClassesSs3ToRc2#SSUniqueGroupIdCondition SSUniqueGroupIdCondition]
  # [ChangedClassesSs3ToRc2#SSUniqueMemberLoginCondition SSUniqueMemberLoginCondition]
@@ -107,6 +108,8 @@
 [ChangedClassesSs3ToRc2#SSMember_migration SSMember migration]  and [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===SSProject===
 [ChangedClassesSs3ToRc2#SSProject_migration SSProject migration]  and [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
+===SSSubscription===
+[ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===SSIssue===
 [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===SSRepository===
@@ -172,6 +175,7 @@ Classes affected:
  * [ChangedClassesSs3ToRc2#SSMember SSMember]
  * [ChangedClassesSs3ToRc2#SSProject SSProject]
  * [ChangedClassesSs3ToRc2#SSRepository SSRepository]
+ * [ChangedClassesSs3ToRc2#SSSubscription SSSubscription]
  * [ChangedClassesSs3ToRc2#SSTag SSTag]
  * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
 ===SSProject migration===
