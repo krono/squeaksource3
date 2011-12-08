@@ -37,6 +37,7 @@
  # [ChangedClassesSs3ToRc2#SSIssue SSIssue]
  # [ChangedClassesSs3ToRc2#SSIssueReport SSIssueReport]
  # [ChangedClassesSs3ToRc2#SSMember SSMember]
+ # [ChangedClassesSs3ToRc2#SSModel SSModel]
  # [ChangedClassesSs3ToRc2#SSPortCondition SSPortCondition]
  # [ChangedClassesSs3ToRc2#SSProject SSProject]
  # [ChangedClassesSs3ToRc2#SSRepository SSRepository]
@@ -151,6 +152,8 @@
 [ChangedClassesSs3ToRc2#SendMail_migration SendMail migration]
 ===SSGemStoneProject===
 [ChangedClassesSs3ToRc2#SSProject_migration SSProject migration] and [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
+===SSModel===
+[ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===SSVersion===
 [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration]
 ===GRDelayedSend===
@@ -202,6 +205,7 @@ Classes affected:
  * [ChangedClassesSs3ToRc2#SSIssue SSIssue]
  * [ChangedClassesSs3ToRc2#SSIssueReport SSIssueReport]
  * [ChangedClassesSs3ToRc2#SSMember SSMember]
+ * [ChangedClassesSs3ToRc2#SSModel SSModel]
  * [ChangedClassesSs3ToRc2#SSProject SSProject]
  * [ChangedClassesSs3ToRc2#SSRepository SSRepository]
  * [ChangedClassesSs3ToRc2#SSSubscription SSSubscription]
