@@ -41,15 +41,15 @@
 }}}
 
 =List of Classes with Unique Change=
- * [ChangedClassesSs3ToRc2#GRDelayedSend_migration GRDelayedSend]
- * [ChangedClassesSs3ToRc2#SendMail_migration SendMail]
- * [ChangedClassesSs3ToRc2#SSCondition_migration SSCondition]
- * [ChangedClassesSs3ToRc2#SSMember_migration SSMember]
- * [ChangedClassesSs3ToRc2#SSModel_migration SSModel]
- * [ChangedClassesSs3ToRc2#SSProject_migration SSProject]
- * [ChangedClassesSs3ToRc2#SSUrlFilter_migration SSUrlFilter]
- * [ChangedClassesSs3ToRc2#WAIframeTag_migration WAIframeTag]
- * [ChangedClassesSs3ToRc2#WAUrl_migration WAUrl]
+ # [ChangedClassesSs3ToRc2#GRDelayedSend_migration GRDelayedSend]
+ # [ChangedClassesSs3ToRc2#SendMail_migration SendMail]
+ # [ChangedClassesSs3ToRc2#SSCondition_migration SSCondition]
+ # [ChangedClassesSs3ToRc2#SSMember_migration SSMember]
+ # [ChangedClassesSs3ToRc2#SSModel_migration SSModel]
+ # [ChangedClassesSs3ToRc2#SSProject_migration SSProject]
+ # [ChangedClassesSs3ToRc2#SSUrlFilter_migration SSUrlFilter]
+ # [ChangedClassesSs3ToRc2#WAIframeTag_migration WAIframeTag]
+ # [ChangedClassesSs3ToRc2#WAUrl_migration WAUrl]
 ----
 =List of classes with Class History after load=
  # [ChangedClassesSs3ToRc2#GRDelayedSend GRDelayedSend]
