@@ -165,6 +165,8 @@ Renamed instance variable:
  * selector renamed to message
 Classes affected:
  * [ChangedClassesSs3ToRc2#GRDelayedSend GRDelayedSend]
+====Implications====
+No instances expect to exist, so SIMPLE migration is acceptable.
 ===JQButton migration===
 Removed instance variable:
  * icons
