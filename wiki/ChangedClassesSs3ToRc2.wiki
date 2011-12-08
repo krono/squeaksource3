@@ -6,7 +6,6 @@
  # [ChangedClassesSs3ToRc2#Migration_to_Class_map Migration to Class map]
 
 {{{
-12	SSUniqueGroupIdCondition
 13	SSAccessPolicy
 14	SSUniqueMemberLoginCondition
 15	SSUniqueProjectIdCondition
@@ -20,7 +19,7 @@
 23	SSSizeConditionTest
 24	SSIssueReport
 25	SSIssue
-26	SSProjectNameCondition
+26	
 27	SSRepository
 28	SSSubscription
 29	SSEmailSubscription
@@ -70,9 +69,12 @@
  * [ChangedClassesSs3ToRc2#SSMember SSMember]
  * [ChangedClassesSs3ToRc2#SSPortCondition SSPortCondition]
  * [ChangedClassesSs3ToRc2#SSProject SSProject]
+ * [ChangedClassesSs3ToRc2#SSProjectNameCondition SSProjectNameCondition]
  * [ChangedClassesSs3ToRc2#SSUniqueGroupIdCondition SSUniqueGroupIdCondition]
  * [ChangedClassesSs3ToRc2#SSVersion SSVersion]
 =Class to Migration map=
+===SSProjectNameCondition===
+[ChangedClassesSs3ToRc2#SSCondition_migration SSCondition migration]
 ===SSUniqueGroupIdCondition===
 [ChangedClassesSs3ToRc2#SSCondition_migration SSCondition migration]
 ===SSCondition===
@@ -114,6 +116,7 @@ Changed superclass:
 Classes affected:
   * [ChangedClassesSs3ToRc2#SSCondition SSCondition]
   * [ChangedClassesSs3ToRc2#SSPortCondition SSPortCondition]
+  * [ChangedClassesSs3ToRc2#SSProjectNameCondition SSProjectNameCondition]
   * [ChangedClassesSs3ToRc2#SSUniqueGroupIdCondition SSUniqueGroupIdCondition]
 ===SSMember migration===
 Renamed instance variable:
