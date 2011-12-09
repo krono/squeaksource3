@@ -256,6 +256,8 @@ Added instance variable:
 Classes affected:
  * [ChangedClassesSs3ToRc2#TOArchivedConfiguration TOArchivedConfiguration]
  * [ChangedClassesSs3ToRc2#TOConfiguration TOConfiguration]
+====Implications====
+Instances may exist. with added instance variables SIMPLE migration is acceptable.
 ===TOInspectorFieldSpec migration===
 Added instance variable:
  * target and helpText
@@ -263,26 +265,36 @@ Classes affected:
  * [ChangedClassesSs3ToRc2#TOInspectorFieldSpec TOInspectorFieldSpec]
  * [ChangedClassesSs3ToRc2#TOInspectorKeylessFieldSpec TOInspectorKeylessFieldSpec]
  * [ChangedClassesSs3ToRc2#TOInspectorValuelessFieldSpec TOInspectorValuelessFieldSpec]
+====Implications====
+Instances may exist. with added instance variables SIMPLE migration is acceptable.
 ===TOSession migration===
 Added instance variable:
  * eastFrame
 Classes affected:
  * [ChangedClassesSs3ToRc2#TOSession TOSession]
+====Implications====
+Instances may exist. with added instance variables SIMPLE migration is acceptable.
 ===WAIframeTag migration===
 Add instance variable:
  * url
 Classes affected:
  * [ChangedClassesSs3ToRc2#WAIframeTag WAIframeTag]
+====Implications====
+Instances may exist. with added instance variables SIMPLE migration is acceptable.
 ===WAPragmaStubHandler migration===
 Changed superclass:
  * superclass WAPragmaBasedRestfulFilter switched to WARestfulFilter
 Classes affected:
  * [ChangedClassesSs3ToRc2#WAPragmaStubHandler WAPragmaStubHandler]
+====Implications====
+Instances will exist, however, no shape changes for the instances are involved with this superclass swap, so SIMPLE migration is acceptable.
 ===WAUrl migration===
 Add instance variable:
  * pathParameters
 Classes affected:
  * [ChangedClassesSs3ToRc2#WAUrl WAUrl]
+====Implications====
+Instances may exist. with added instance variables SIMPLE migration is acceptable.
 ----
 ----
 
