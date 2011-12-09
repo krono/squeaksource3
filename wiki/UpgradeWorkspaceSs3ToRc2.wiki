@@ -47,7 +47,8 @@ At this point in time Option 2 appears to be the best bet.
 
 ===workspace===
 {{{
-| versionString deployBlock classesWithClassHistory changedClassNames simpleMigrationClassNames simpleMigrationClasses instanceLists descriptionToInformationClassNames |
+| versionString deployBlock classesWithClassHistory changedClassNames migrationClassNames 
+ migrationClasses instanceLists symbolList instanceCount array migrationDoBlock |
 "fetch phase"
 versionString := '1.0-beta.8.7.1'.
 GsDeployer cleanClassHistory.
@@ -118,18 +119,96 @@ classesWithClassHistory size = 55 ifFalse: [ nil error: 'incorrect number of cla
 changedClassNames := (classesWithClassHistory collect: [:cl | cl name ]) asSet.
 changedClassNames size = 37 ifFalse: [ nil error: 'incorrect number of changed classes' ].
 "migration phase"
-instanceLists := (self objectNamed: #UserGlobals) 
+symbolList := System myUserProfile symbolList.
+[
+	instanceLists := (symbolList objectNamed: #UserGlobals) 
 						at: #'SS3_MIGRATE_INSTANCE_LISTS' 
 						put: Dictionary new.
-simpleMigrationClassNames := #(GRDelayedSend JQButton SendMail SSCondition SSPortCondition SSUniqueProjectIdCondition SSProjectNameCondition SSSizeCondition SSUniqueGroupIdCondition SSUniqueMemberLoginCondition SSYouAreMemberCondition SSAccessPolicy SSEmailSubscription SSFeedEntry SSGroup SSInstanceSideDescribedObject SSIssue SSIssueReport SSModel SSRepository SSSubscription SSTag SSVersion SSSizeConditionTest SSUrlFilter).
-descriptionToInformationClassNames := #(SSMember SSProject SSGemStoneProject).
-simpleMigrationClasses := classesWithClassHistory 
-							select: [:cl | simpleMigrationClassNames includes cl name].
-System commitTransaction ifFalse: [ nil error: 'commit failed' ].
-instanceLists 
-	at: #simpleMigration
-	put: (SystemRepository listInstances: simpleMigrationClasses).
-System commitTransaction ifFalse: [ nil error: 'commit failed' ].
-"  simpleMigration ... default migration strategy"
+	"simpleMigration instances"
+	migrationClassNames := #(GRDelayedSend JQButton SendMail SSCondition 
+		SSPortCondition SSUniqueProjectIdCondition SSProjectNameCondition 
+		SSSizeCondition SSUniqueGroupIdCondition SSUniqueMemberLoginCondition 
+		SSYouAreMemberCondition SSAccessPolicy SSEmailSubscription SSFeedEntry 
+		SSGroup SSInstanceSideDescribedObject SSIssue SSIssueReport SSModel 
+		SSRepository SSSubscription SSTag SSVersion SSSizeConditionTest SSUrlFilter 
+		TOConfiguration TOArchivedConfiguration TOInspectorFieldSpec 
+		TOInspectorKeylessFieldSpec TOInspectorValuelessFieldSpec TOSession 
+		WAIframeTag WAPragmaStubHandler WAUrl).
+	migrationClasses := classesWithClassHistory 
+							select: [:cl | migrationClassNames includes: cl name].
+	System commitTransaction ifFalse: [ nil error: 'commit failed' ].
+	instanceLists 
+		at: #simpleMigration
+		put: (SystemRepository listInstances: migrationClasses).
+	System commitTransaction ifFalse: [ nil error: 'commit failed' ].
+	"descriptionMigration instances"
+	migrationClassNames := #(SSMember SSProject SSGemStoneProject).
+	migrationClasses := classesWithClassHistory 
+							select: [:cl |migrationClassNames includes: cl name].
+	System commitTransaction ifFalse: [ nil error: 'commit failed' ].
+	instanceLists 
+		at: #descriptionMigration
+		put: (SystemRepository listInstances: migrationClasses).
+	System commitTransaction ifFalse: [ nil error: 'commit failed' ].
+	"instances analysis"
+	((instanceLists at: #simpleMigration) size + (instanceLists at: #descriptionMigration) size) = 55
+		ifFalse: [ nil error: 'incorrect number of classes with instances' ].
+	((symbolList objectNamed: #UserGlobals) at: #'SS3_MIGRATE_INSTANCE_LISTS') explore.
+	instanceLists valuesDo: [:listOfInstancesLists | 
+		 1 to: classesWithClassHistory size do: [:index | | classVersion class history |
+			classVersion := classesWithClassHistory at: index.
+			class := symbolList objectNamed: classVersion name. 
+			history := class classHistory.
+			(classVersion == history first or: [ classVersion == history last]) 
+				ifFalse: [ nil error: 'instances of intermediate class versions' ]]].
+	"#instVarMappingTo: for description migrations"
+	SSMember class compile:  'instVarMappingTo: anotherClass 
+	"The receiver is the class being migrated to and <anotherClass> is the class being migrated from"
+	"For the upgrade of SS3 to SqueakSource3.0-rc.2, the class histories were cleared at the beginning, so 
+	 we can safely assume that `self classHistory first` is the version of the class present before the upgrade
+	 started. We assume that there are no instances of classes _between_ the first and last class bersion, because
+	 there were no commits when the intermediate class versions."
+
+	anotherClass ~~ self classHistory first ifTrue: [  ^super instVarMappingTo: anotherClass ].
+	"slot 5 is currently description and has been renamed to information"
+	(((self allInstVarNames at: 8) = #''information'') and: [
+		(anotherClass allInstVarNames at: 8) = #''description''])
+			ifFalse: [ self error: ''incorrect migration instance variable mapping''].
+	^#( 1 2 3 4 5 6 7 8 9)'.
+	SSProject class compile:  'instVarMappingTo: anotherClass 
+	"The receiver is the class being migrated to and <anotherClass> is the class being migrated from"
+	"For the upgrade of SS3 to SqueakSource3.0-rc.2, the class histories were cleared at the beginning, so 
+	 we can safely assume that `self classHistory first` is the version of the class present before the upgrade
+	 started. We assume that there are no instances of classes _between_ the first and last class bersion, because
+	 there were no commits when the intermediate class versions."
+	
+	anotherClass ~~ self classHistory first ifTrue: [  ^super instVarMappingTo: anotherClass ].
+	"slot 5 is currently description and has been renamed to information"
+	(((self allInstVarNames at: 5) = #''information'') and: [
+		(anotherClass allInstVarNames at: 5) = #''description''])
+			ifFalse: [ self error: ''incorrect migration instance variable mapping''].
+	^#( 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15)'.
+	"migration"
+	instanceCount := 0.
+	array := Array new: 1.
+	migrationDoBlock :=  [ :instancesList | 
+		instancesList
+			do: [ :instances | 
+				instanceCount := instanceCount + instances size.
+				instances
+					do: [ :instance | 
+						array at: 1 put: instance.
+						instance class migrateInstances: array to: instance class classHistory last ]]].
+	(instanceLists at: #simpleMigration) do: migrationDoBlock.
+	(instanceLists at: #descriptionMigration) do: migrationDoBlock.
+	Transcript cr; show: instanceCount printString, ' instances migrated.'.
+	System commitTransaction ifFalse: [ nil error: 'commit failed' ].
+	]
+			ensure: [ 
+				(symbolList objectNamed: #UserGlobals) 
+					removeKey: #'SS3_MIGRATE_INSTANCE_LISTS' 
+					ifAbsent: [  ] ].
 "clean up phase"
+SSMember class removeSelector: #instVarMappingTo:.
+SSProject class removeSelector: #instVarMappingTo:.
 }}}
