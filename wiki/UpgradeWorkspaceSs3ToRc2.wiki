@@ -46,7 +46,7 @@ At this point in time Option 2 appears to be the best bet.
 
 ===workspace===
 {{{
-| versionString deployBlock classesWithClassHistory changedClassNames |
+| versionString deployBlock classesWithClassHistory changedClassNames simpleMigrationClassNames simpleMigrationClasses instanceLists descriptionToInformationClassNames |
 "fetch phase"
 versionString := '1.0-beta.8.7.1'.
 GsDeployer cleanClassHistory.
@@ -108,10 +108,27 @@ deployBlock
 deployBlock 
         value: [ (ConfigurationOftODE project version: '0.1') load ].
 deployBlock 
-        value: [ (ConfigurationOfSqueakSource project version: '3.0-rc.1') load ].
+        value: [
+		MADescriptionBuilder unload. "http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSCondition_migration"
+		(ConfigurationOfSqueakSource project version: '3.0-rc.1') load ].
 "migration analysis"
 classesWithClassHistory := GsDeployer new classesWithClassHistory.
+classesWithClassHistory size = 55 ifFalse: [ nil error: 'incorrect number of class with class history' ].
 changedClassNames := (classesWithClassHistory collect: [:cl | cl name ]) asSet.
+changedClassNames size = 37 ifFalse: [ nil error: 'incorrect number of changed classes' ].
 "migration phase"
+instanceLists := (self objectNamed: #UserGlobals) 
+						at: #'SS3_MIGRATE_INSTANCE_LISTS' 
+						put: Dictionary new.
+simpleMigrationClassNames := #(GRDelayedSend JQButton SendMail SSCondition SSPortCondition SSUniqueProjectIdCondition SSProjectNameCondition SSSizeCondition SSUniqueGroupIdCondition SSUniqueMemberLoginCondition SSYouAreMemberCondition SSAccessPolicy SSEmailSubscription SSFeedEntry SSGroup SSInstanceSideDescribedObject SSIssue SSIssueReport SSModel SSRepository SSSubscription SSTag SSVersion SSSizeConditionTest SSUrlFilter).
+descriptionToInformationClassNames := #(SSMember SSProject SSGemStoneProject).
+simpleMigrationClasses := classesWithClassHistory 
+							select: [:cl | simpleMigrationClassNames includes cl name].
+System commitTransaction ifFalse: [ nil error: 'commit failed' ].
+instanceLists 
+	at: #simpleMigration
+	put: (SystemRepository listInstances: simpleMigrationClasses).
+System commitTransaction ifFalse: [ nil error: 'commit failed' ].
+"  simpleMigration ... default migration strategy"
 "clean up phase"
 }}}
