@@ -10,5 +10,6 @@
      # Issue 39: SSProject Magritte descriptions changed
      # Issue 41: SSEMailAddress class deleted
      # Issue 47: SSUrlFilter routes need to be rebuilt for new version of Seaside-REST
+   # Issue 48:	#stringsSatisfyBlocks in property dictionaries for subclasses of SSModel are obsolete?
  # Issue 44: Finalize the [UpgradeSs3ToRc2  load script]
  # Issue 35: Upgrade site to SqueakSource 3.0-rc.2
