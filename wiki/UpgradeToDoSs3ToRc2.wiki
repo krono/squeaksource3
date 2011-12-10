@@ -1,7 +1,7 @@
 #summary To do list for upgrade to 3.0-rc.2
 
  # Issue 38: SSModel class>>initialize side effects?
- # Logo with beta or release candidate flag ... or just go with standard?
+ # Issue 50: Logo with beta or release candidate flag ... or just go with standard?
  # Issue 40: SStorage class>>timestamp ... rounded now
  # Issue 42: service vm used for background tasks
  # Issue 43: Rough out the [UpgradeSs3ToRc2  load script] using the [UpgradeWorkspaceSs3ToRc2 workspace variant of the script]
