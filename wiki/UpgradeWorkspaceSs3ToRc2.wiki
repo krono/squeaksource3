@@ -118,49 +118,30 @@ classesWithClassHistory := GsDeployer new classesWithClassHistory.
 classesWithClassHistory size = 55 ifFalse: [ nil error: 'incorrect number of class with class history' ].
 changedClassNames := (classesWithClassHistory collect: [:cl | cl name ]) asSet.
 changedClassNames size = 37 ifFalse: [ nil error: 'incorrect number of changed classes' ].
+"migration analysis"
+classesWithClassHistory := GsDeployer new classesWithClassHistory.
+classesWithClassHistory size = 55 ifFalse: [ nil error: 'incorrect number of class with class history' ].
+changedClassNames := (classesWithClassHistory collect: [:cl | cl name ]) asSet.
+changedClassNames size = 37 ifFalse: [ nil error: 'incorrect number of changed classes' ].
 "migration phase"
 symbolList := System myUserProfile symbolList.
 [
-	instanceLists := (symbolList objectNamed: #UserGlobals) 
-						at: #'SS3_MIGRATE_INSTANCE_LISTS' 
-						put: Dictionary new.
-	"simpleMigration instances"
-	migrationClassNames := #(GRDelayedSend JQButton SendMail SSCondition 
-		SSPortCondition SSUniqueProjectIdCondition SSProjectNameCondition 
-		SSSizeCondition SSUniqueGroupIdCondition SSUniqueMemberLoginCondition 
-		SSYouAreMemberCondition SSAccessPolicy SSEmailSubscription SSFeedEntry 
-		SSGroup SSInstanceSideDescribedObject SSIssue SSIssueReport SSModel 
-		SSRepository SSSubscription SSTag SSVersion SSSizeConditionTest SSUrlFilter 
-		TOConfiguration TOArchivedConfiguration TOInspectorFieldSpec 
-		TOInspectorKeylessFieldSpec TOInspectorValuelessFieldSpec TOSession 
-		WAIframeTag WAPragmaStubHandler WAUrl).
-	migrationClasses := classesWithClassHistory 
-							select: [:cl | migrationClassNames includes: cl name].
 	System commitTransaction ifFalse: [ nil error: 'commit failed' ].
-	instanceLists 
-		at: #simpleMigration
-		put: (SystemRepository listInstances: migrationClasses).
-	System commitTransaction ifFalse: [ nil error: 'commit failed' ].
-	"descriptionMigration instances"
-	migrationClassNames := #(SSMember SSProject SSGemStoneProject).
-	migrationClasses := classesWithClassHistory 
-							select: [:cl |migrationClassNames includes: cl name].
-	System commitTransaction ifFalse: [ nil error: 'commit failed' ].
-	instanceLists 
-		at: #descriptionMigration
-		put: (SystemRepository listInstances: migrationClasses).
+	(symbolList objectNamed: #UserGlobals) 
+		at: #'SS3_MIGRATE_INSTANCE_LISTS' 
+		put: (instanceList := SystemRepository listInstances: classesWithClassHistory).
 	System commitTransaction ifFalse: [ nil error: 'commit failed' ].
 	"instances analysis"
-	((instanceLists at: #simpleMigration) size + (instanceLists at: #descriptionMigration) size) = 55
+	instanceList size = 55
 		ifFalse: [ nil error: 'incorrect number of classes with instances' ].
-	((symbolList objectNamed: #UserGlobals) at: #'SS3_MIGRATE_INSTANCE_LISTS') explore.
-	instanceLists valuesDo: [:listOfInstancesLists | 
-		 1 to: classesWithClassHistory size do: [:index | | classVersion class history |
-			classVersion := classesWithClassHistory at: index.
-			class := symbolList objectNamed: classVersion name. 
-			history := class classHistory.
-			(classVersion == history first or: [ classVersion == history last]) 
-				ifFalse: [ nil error: 'instances of intermediate class versions' ]]].
+	1 to: classesWithClassHistory size do: [:index | | classVersion class history |
+		(instanceList at: index) size > 0
+			ifTrue: [ 
+				classVersion := classesWithClassHistory at: index.
+				class := symbolList objectNamed: classVersion name. 
+				history := class classHistory.
+				(classVersion == history first or: [ classVersion == history last]) 
+					ifFalse: [ nil error: 'instances of intermediate class versions' ]]].
 	"#instVarMappingTo: for description migrations"
 	SSMember class compile:  'instVarMappingTo: anotherClass 
 	"The receiver is the class being migrated to and <anotherClass> is the class being migrated from"
@@ -191,16 +172,21 @@ symbolList := System myUserProfile symbolList.
 	"migration"
 	instanceCount := 0.
 	array := Array new: 1.
-	migrationDoBlock :=  [ :instancesList | 
-		instancesList
-			do: [ :instances | 
-				instanceCount := instanceCount + instances size.
-				instances
-					do: [ :instance | 
-						array at: 1 put: instance.
-						instance class migrateInstances: array to: instance class classHistory last ]]].
-	(instanceLists at: #simpleMigration) do: migrationDoBlock.
-	(instanceLists at: #descriptionMigration) do: migrationDoBlock.
+	1 to: instanceList size do: [ :index | | instances | 
+		instances := instanceList at: index.
+		Transcript cr; show: (classesWithClassHistory at: index) name asString, '...'.
+		instances
+			do: [ :instance | 
+				array at: 1 put: instance.
+				instance class migrateInstances: array to: instance class classHistory last ].
+		instanceCount := instanceCount + instances size.
+		Transcript show: instances size printString, ' instances migrated.'.
+		((classesWithClassHistory at: index) name == #SSUrlFilter and: [(classesWithClassHistory at: index) == SSUrlFilter classHistory first])
+			ifTrue: [
+				"http://code.google.com/p/squeaksource3/issues/detail?id=47"
+				instances do: [:instance | 
+					instance instVarNamed: #routes put: nil ].
+				]].
 	Transcript cr; show: instanceCount printString, ' instances migrated.'.
 	System commitTransaction ifFalse: [ nil error: 'commit failed' ].
 	]
