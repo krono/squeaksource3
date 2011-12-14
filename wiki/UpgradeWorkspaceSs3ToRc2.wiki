@@ -114,17 +114,21 @@ deployBlock
         value: [ (ConfigurationOftODE project version: '0.1') load ].
 deployBlock 
         value: [
-                "http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSMember_migration"
-                SSMember compile:'information ^description'.
-                SSMember compile:'information: aString description := aString'.
-                "http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSProject_migration"
-                SSProject compile:'information ^description'.
-                SSProject compile:'information: aString description := aString'.
                 "http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSCondition_migration"
                 MADescriptionBuilder unload.
-                (ConfigurationOfSqueakSource project version: '3.0-rc.1') load.
-                "http://code.google.com/p/squeaksource3/issues/detail?id=47"
-                ((WADispatcher default handlerAt: 'ss') filters select: [:filter | filter isKindOf: SSUrlFilter]) do: [:filter | filter instVarNamed: #routes put: nil ].  ].
+                (ConfigurationOfSqueakSource project version: '3.0-rc.1') load  ].
+"conversion phase"
+"http://code.google.com/p/squeaksource3/issues/detail?id=41"
+SSRepository current projects do: [:project | 
+	#(otherEmailAddresses defaultEmailRecipients) do: [:property |
+		(project propertyIncludes: property)
+			ifTrue: [ 
+				project 
+					propertyAt: property
+					put: ((project propertyAt: property) 
+						collect: [:ssEmailAddress | 
+							WAEmailAddress address: ssEmailAddress address]) ]]].
+System commitTransaction ifFalse: [ nil error: 'commit failed' ].
 "migration analysis"
 classesWithClassHistory := GsDeployer new classesWithClassHistory.
 classesWithClassHistory size = 55 ifFalse: [ nil error: 'incorrect number of class with class history' ].
@@ -138,6 +142,7 @@ changedClassNames size = 37 ifFalse: [ nil error: 'incorrect number of changed c
 "migration phase"
 symbolList := System myUserProfile symbolList.
 [
+        "http://code.google.com/p/squeaksource3/issues/detail?id=37"
         System commitTransaction ifFalse: [ nil error: 'commit failed' ].
         (symbolList objectNamed: #UserGlobals) 
                 at: #'SS3_MIGRATE_INSTANCE_LISTS' 
@@ -194,6 +199,9 @@ symbolList := System myUserProfile symbolList.
                 instanceCount := instanceCount + instances size.
                 Transcript show: instances size printString, ' instances migrated.' ].
         Transcript cr; show: instanceCount printString, ' instances migrated.'.
+         "http://code.google.com/p/squeaksource3/issues/detail?id=47"
+         ((WADispatcher default handlerAt: 'ss') filters select: [:filter | filter isKindOf: SSUrlFilter]) do: [:filter | 
+			filter instVarNamed: #routes put: nil ].
         System commitTransaction ifFalse: [ nil error: 'commit failed' ].
         ]
                         ensure: [ 
