@@ -11,15 +11,12 @@ Segments of the script:
   * fetch tODE packages
   * fetch SqueakSource3 packages
   * *COMMIT*
- * prep phase
-  * collect instances of SSUrlFilter (Issue 47)
-  * *COMMIT*
  * load phase
   * load GLASS
   * load Seaside30
   * load tODE
   * load SqueakSource3
-  * patch instances of SSUrlFilter (Issue 47)
+  * patch instances of SSUrlFilter (Issue 47), by traversing dispatcher tree
   * *COMMIT*
  * migration analysis
  * migration phase
