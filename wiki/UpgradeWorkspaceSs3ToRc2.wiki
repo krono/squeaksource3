@@ -22,7 +22,7 @@ Segments of the script:
   * convert propery lists that refer to collections of SSEmailAddress instances into collections of WAEmailAddress instances (Issue 39)
  * migration analysis
  * migration phase
-  * migrate instances (Issue 37) and replace instances (Issue 39)
+  * migrate instances (Issue 37)
   * *COMMIT*
  * clean up phase
   * clean up
