@@ -60,7 +60,7 @@ System commitTransaction ifFalse: [ nil error: 'commit failed'].
                 user: ''
                 password: '').
 {ConfigurationOfGLASS. ConfigurationOfMetacello. ConfigurationOftODE. ConfigurationOfSeaside30. ConfigurationOfSqueakSource. } do: [:config | 
-	config project updateProject ].
+        config project updateProject ].
 ConfigurationOfMetacello project currentVersion versionNumber < '1.0-beta.31.1' asMetacelloVersionNumber
     ifTrue: [
         (Gofer new)
@@ -105,22 +105,24 @@ deployBlock
                 (ConfigurationOfGLASS project version: versionString) load ].
 deployBlock 
         value: [
-        	(ConfigurationOfSeaside30 project version: '3.0.6.3') 
+                (ConfigurationOfSeaside30 project version: '3.0.6.3') 
                 load: #('Base' 'JQuery-UI' 'Seaside-Adaptors-Swazoo' ).
 ].
 deployBlock 
         value: [ (ConfigurationOftODE project version: '0.1') load ].
 deployBlock 
         value: [
-		"http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSMember_migration"
-		SSMember compile:'information ^description'.
-		"http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSProject_migration"
-		SSProject compile:'information ^description'.
-		"http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSCondition_migration"
-		MADescriptionBuilder unload.
-		(ConfigurationOfSqueakSource project version: '3.0-rc.1') load.
-		"http://code.google.com/p/squeaksource3/issues/detail?id=47"
-		((WADispatcher default handlerAt: 'ss') filters select: [:filter | filter isKindOf: SSUrlFilter]) do: [:filter | filter instVarNamed: #routes put: nil ].  ].
+                "http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSMember_migration"
+                SSMember compile:'information ^description'.
+                SSMember compile:'information: aString description := aString'.
+                "http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSProject_migration"
+                SSProject compile:'information ^description'.
+                SSProject compile:'information: aString description := aString'.
+                "http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSCondition_migration"
+                MADescriptionBuilder unload.
+                (ConfigurationOfSqueakSource project version: '3.0-rc.1') load.
+                "http://code.google.com/p/squeaksource3/issues/detail?id=47"
+                ((WADispatcher default handlerAt: 'ss') filters select: [:filter | filter isKindOf: SSUrlFilter]) do: [:filter | filter instVarNamed: #routes put: nil ].  ].
 "migration analysis"
 classesWithClassHistory := GsDeployer new classesWithClassHistory.
 classesWithClassHistory size = 55 ifFalse: [ nil error: 'incorrect number of class with class history' ].
@@ -134,68 +136,68 @@ changedClassNames size = 37 ifFalse: [ nil error: 'incorrect number of changed c
 "migration phase"
 symbolList := System myUserProfile symbolList.
 [
-	System commitTransaction ifFalse: [ nil error: 'commit failed' ].
-	(symbolList objectNamed: #UserGlobals) 
-		at: #'SS3_MIGRATE_INSTANCE_LISTS' 
-		put: (instanceList := SystemRepository listInstances: classesWithClassHistory).
-	System commitTransaction ifFalse: [ nil error: 'commit failed' ].
-	"instances analysis"
-	instanceList size = 55
-		ifFalse: [ nil error: 'incorrect number of classes with instances' ].
-	1 to: classesWithClassHistory size do: [:index | | classVersion class history |
-		(instanceList at: index) size > 0
-			ifTrue: [ 
-				classVersion := classesWithClassHistory at: index.
-				class := symbolList objectNamed: classVersion name. 
-				history := class classHistory.
-				(classVersion == history first or: [ classVersion == history last]) 
-					ifFalse: [ nil error: 'instances of intermediate class versions' ]]].
-	"#instVarMappingTo: for description migrations"
-	SSMember class compile:  'instVarMappingTo: anotherClass 
-	"The receiver is the class being migrated to and <anotherClass> is the class being migrated from"
-	"For the upgrade of SS3 to SqueakSource3.0-rc.2, the class histories were cleared at the beginning, so 
-	 we can safely assume that `self classHistory first` is the version of the class present before the upgrade
-	 started. We assume that there are no instances of classes _between_ the first and last class bersion, because
-	 there were no commits when the intermediate class versions."
+        System commitTransaction ifFalse: [ nil error: 'commit failed' ].
+        (symbolList objectNamed: #UserGlobals) 
+                at: #'SS3_MIGRATE_INSTANCE_LISTS' 
+                put: (instanceList := SystemRepository listInstances: classesWithClassHistory).
+        System commitTransaction ifFalse: [ nil error: 'commit failed' ].
+        "instances analysis"
+        instanceList size = 55
+                ifFalse: [ nil error: 'incorrect number of classes with instances' ].
+        1 to: classesWithClassHistory size do: [:index | | classVersion class history |
+                (instanceList at: index) size > 0
+                        ifTrue: [ 
+                                classVersion := classesWithClassHistory at: index.
+                                class := symbolList objectNamed: classVersion name. 
+                                history := class classHistory.
+                                (classVersion == history first or: [ classVersion == history last]) 
+                                        ifFalse: [ nil error: 'instances of intermediate class versions' ]]].
+        "#instVarMappingTo: for description migrations"
+        SSMember class compile:  'instVarMappingTo: anotherClass 
+        "The receiver is the class being migrated to and <anotherClass> is the class being migrated from"
+        "For the upgrade of SS3 to SqueakSource3.0-rc.2, the class histories were cleared at the beginning, so 
+         we can safely assume that `self classHistory first` is the version of the class present before the upgrade
+         started. We assume that there are no instances of classes _between_ the first and last class bersion, because
+         there were no commits when the intermediate class versions."
 
-	anotherClass ~~ self classHistory first ifTrue: [  ^super instVarMappingTo: anotherClass ].
-	"slot 5 is currently description and has been renamed to information"
-	(((self allInstVarNames at: 8) = #''information'') and: [
-		(anotherClass allInstVarNames at: 8) = #''description''])
-			ifFalse: [ self error: ''incorrect migration instance variable mapping''].
-	^#( 1 2 3 4 5 6 7 8 9)'.
-	SSProject class compile:  'instVarMappingTo: anotherClass 
-	"The receiver is the class being migrated to and <anotherClass> is the class being migrated from"
-	"For the upgrade of SS3 to SqueakSource3.0-rc.2, the class histories were cleared at the beginning, so 
-	 we can safely assume that `self classHistory first` is the version of the class present before the upgrade
-	 started. We assume that there are no instances of classes _between_ the first and last class bersion, because
-	 there were no commits when the intermediate class versions."
-	
-	anotherClass ~~ self classHistory first ifTrue: [  ^super instVarMappingTo: anotherClass ].
-	"slot 5 is currently description and has been renamed to information"
-	(((self allInstVarNames at: 5) = #''information'') and: [
-		(anotherClass allInstVarNames at: 5) = #''description''])
-			ifFalse: [ self error: ''incorrect migration instance variable mapping''].
-	^#( 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15)'.
-	"migration"
-	instanceCount := 0.
-	array := Array new: 1.
-	1 to: instanceList size do: [ :index | | instances | 
-		instances := instanceList at: index.
-		Transcript cr; show: (classesWithClassHistory at: index) name asString, '...'.
-		instances
-			do: [ :instance | 
-				array at: 1 put: instance.
-				instance class migrateInstances: array to: instance class classHistory last ].
-		instanceCount := instanceCount + instances size.
-		Transcript show: instances size printString, ' instances migrated.' ].
-	Transcript cr; show: instanceCount printString, ' instances migrated.'.
-	System commitTransaction ifFalse: [ nil error: 'commit failed' ].
-	]
-			ensure: [ 
-				(symbolList objectNamed: #UserGlobals) 
-					removeKey: #'SS3_MIGRATE_INSTANCE_LISTS' 
-					ifAbsent: [  ] ].
+        anotherClass ~~ self classHistory first ifTrue: [  ^super instVarMappingTo: anotherClass ].
+        "slot 5 is currently description and has been renamed to information"
+        (((self allInstVarNames at: 8) = #''information'') and: [
+                (anotherClass allInstVarNames at: 8) = #''description''])
+                        ifFalse: [ self error: ''incorrect migration instance variable mapping''].
+        ^#( 1 2 3 4 5 6 7 8 9)'.
+        SSProject class compile:  'instVarMappingTo: anotherClass 
+        "The receiver is the class being migrated to and <anotherClass> is the class being migrated from"
+        "For the upgrade of SS3 to SqueakSource3.0-rc.2, the class histories were cleared at the beginning, so 
+         we can safely assume that `self classHistory first` is the version of the class present before the upgrade
+         started. We assume that there are no instances of classes _between_ the first and last class bersion, because
+         there were no commits when the intermediate class versions."
+        
+        anotherClass ~~ self classHistory first ifTrue: [  ^super instVarMappingTo: anotherClass ].
+        "slot 5 is currently description and has been renamed to information"
+        (((self allInstVarNames at: 5) = #''information'') and: [
+                (anotherClass allInstVarNames at: 5) = #''description''])
+                        ifFalse: [ self error: ''incorrect migration instance variable mapping''].
+        ^#( 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15)'.
+        "migration"
+        instanceCount := 0.
+        array := Array new: 1.
+        1 to: instanceList size do: [ :index | | instances | 
+                instances := instanceList at: index.
+                Transcript cr; show: (classesWithClassHistory at: index) name asString, '...'.
+                instances
+                        do: [ :instance | 
+                                array at: 1 put: instance.
+                                instance class migrateInstances: array to: instance class classHistory last ].
+                instanceCount := instanceCount + instances size.
+                Transcript show: instances size printString, ' instances migrated.' ].
+        Transcript cr; show: instanceCount printString, ' instances migrated.'.
+        System commitTransaction ifFalse: [ nil error: 'commit failed' ].
+        ]
+                        ensure: [ 
+                                (symbolList objectNamed: #UserGlobals) 
+                                        removeKey: #'SS3_MIGRATE_INSTANCE_LISTS' 
+                                        ifAbsent: [  ] ].
 "clean up phase"
 SSMember class removeSelector: #instVarMappingTo:.
 SSProject class removeSelector: #instVarMappingTo:.
