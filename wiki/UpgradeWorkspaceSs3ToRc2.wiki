@@ -119,6 +119,7 @@ deployBlock
                 (ConfigurationOfSqueakSource project version: '3.0-rc.1') load  ].
 "conversion phase"
 "http://code.google.com/p/squeaksource3/issues/detail?id=41"
+"http://code.google.com/p/squeaksource3/wiki/ChangedMagritteDescriptionsSs3ToRc2#Transform_SSEmailAddress_to_WAEmailAddress"
 SSRepository current projects do: [:project | 
 	#(otherEmailAddresses defaultEmailRecipients) do: [:property |
 		(project propertyIncludes: property)
@@ -211,4 +212,5 @@ symbolList := System myUserProfile symbolList.
 "clean up phase"
 SSMember class removeSelector: #instVarMappingTo:.
 SSProject class removeSelector: #instVarMappingTo:.
+System commitTransaction ifFalse: [ nil error: 'commit failed' ].
 }}}
