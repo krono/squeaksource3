@@ -1,7 +1,10 @@
 #summary List of classes and instance variables affected by changed Magritte descriptions
 
-===Class and selector map to description changed===
- # [ChangedMagritteDescriptionsSs3ToRc2#SSGroup_#members SSGroup #members]
+===Changes Requiring Action===
+ # [ChangedMagritteDescriptionsSs3ToRc2#xxx xxx]
+===Benign Changes===
+ # SSGroup>>members
+ # SSInstallWizzard>>storageClass, #wellKnownName, #cacheTimeout, #adminEmail
+ # SSMember>>information
 
-===Descriptions===
-====SSGroup #members====
+===Details===
