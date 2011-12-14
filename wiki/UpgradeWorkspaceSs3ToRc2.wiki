@@ -51,7 +51,7 @@ At this point in time Option 2 appears to be the best bet.
 ===workspace===
 {{{
 | versionString deployBlock classesWithClassHistory changedClassNames migrationClassNames 
- migrationClasses instanceLists symbolList instanceCount array migrationDoBlock |
+ migrationClasses instanceList symbolList instanceCount array migrationDoBlock ssModelSubclasses |
 "fetch phase"
 versionString := '1.0-beta.8.7.1'.
 GsDeployer cleanClassHistory.
@@ -135,22 +135,18 @@ classesWithClassHistory := GsDeployer new classesWithClassHistory.
 classesWithClassHistory size = 55 ifFalse: [ nil error: 'incorrect number of class with class history' ].
 changedClassNames := (classesWithClassHistory collect: [:cl | cl name ]) asSet.
 changedClassNames size = 37 ifFalse: [ nil error: 'incorrect number of changed classes' ].
-"migration analysis"
-classesWithClassHistory := GsDeployer new classesWithClassHistory.
-classesWithClassHistory size = 55 ifFalse: [ nil error: 'incorrect number of class with class history' ].
-changedClassNames := (classesWithClassHistory collect: [:cl | cl name ]) asSet.
-changedClassNames size = 37 ifFalse: [ nil error: 'incorrect number of changed classes' ].
-"migration phase"
+"migration  phase"
 symbolList := System myUserProfile symbolList.
+ssModelSubclasses := SSModel withAllSubclasses .
 [
         "http://code.google.com/p/squeaksource3/issues/detail?id=37"
         System commitTransaction ifFalse: [ nil error: 'commit failed' ].
         (symbolList objectNamed: #UserGlobals) 
                 at: #'SS3_MIGRATE_INSTANCE_LISTS' 
-                put: (instanceList := SystemRepository listInstances: classesWithClassHistory).
+                put: (instanceList := SystemRepository listInstances: classesWithClassHistory, ssModelSubclasses).
         System commitTransaction ifFalse: [ nil error: 'commit failed' ].
         "instances analysis"
-        instanceList size = 55
+        instanceList size = (classesWithClassHistory size + ssModelSubclasses size)
                 ifFalse: [ nil error: 'incorrect number of classes with instances' ].
         1 to: classesWithClassHistory size do: [:index | | classVersion class history |
                 (instanceList at: index) size > 0
@@ -160,7 +156,7 @@ symbolList := System myUserProfile symbolList.
                                 history := class classHistory.
                                 (classVersion == history first or: [ classVersion == history last]) 
                                         ifFalse: [ nil error: 'instances of intermediate class versions' ]]].
-        "#instVarMappingTo: for description migrations"
+       "#instVarMappingTo: for description migrations"
         SSMember class compile:  'instVarMappingTo: anotherClass 
         "The receiver is the class being migrated to and <anotherClass> is the class being migrated from"
         "For the upgrade of SS3 to SqueakSource3.0-rc.2, the class histories were cleared at the beginning, so 
@@ -190,7 +186,7 @@ symbolList := System myUserProfile symbolList.
         "migration"
         instanceCount := 0.
         array := Array new: 1.
-        1 to: instanceList size do: [ :index | | instances | 
+        1 to: classesWithClassHistory size do: [ :index | | instances | 
                 instances := instanceList at: index.
                 Transcript cr; show: (classesWithClassHistory at: index) name asString, '...'.
                 instances
@@ -210,6 +206,10 @@ symbolList := System myUserProfile symbolList.
                                         removeKey: #'SS3_MIGRATE_INSTANCE_LISTS' 
                                         ifAbsent: [  ] ].
 "clean up phase"
+"http://code.google.com/p/squeaksource3/issues/detail?id=48"
+classesWithClassHistory size + 1 to: instanceList size do: [:index |
+	(instanceList at: index) do: [:instance |
+		instance properties removeKey: #stringsSatisfyBlocks ifAbsent: [] ].
 SSMember class removeSelector: #instVarMappingTo:.
 SSProject class removeSelector: #instVarMappingTo:.
 System commitTransaction ifFalse: [ nil error: 'commit failed' ].
