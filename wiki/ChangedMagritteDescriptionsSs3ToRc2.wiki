@@ -14,7 +14,71 @@
 ===Details===
 ====SSProject>>otherEmailAddresses====
 contents class changed from [ChangedMagritteDescriptionsSs3ToRc2#Transform_SSEmailAddress_to_WAEmailAddress SSEmailAddress to WAEmailAddress].
+
+New description:
+{{{
+descriptionOtherEmailAddresses
+
+	^ MAToManyRelationDescription new
+		classes: {WAEmailAddress};
+		default: OrderedCollection new;
+		label: 'Also send Emails to';
+		selectorAccessor: #otherEmailAddresses;
+		priority: 1500;
+		yourself
+}}}
+Old description: 
+{{{
+descriptionOtherEmailAddresses
+
+	^ MAToManyRelationDescription new
+		reference: SSEmailAddress new description;
+		classes: {SSEmailAddress};
+		default: OrderedCollection new;
+		label: 'Also send Emails to';
+		selectorAccessor: #otherEmailAddresses;
+		priority: 1500;
+		yourself
+}}}
 ====SSRepository>>defaultEmailRecipients====
 contents class changed from [ChangedMagritteDescriptionsSs3ToRc2#Transform_SSEmailAddress_to_WAEmailAddress SSEmailAddress to WAEmailAddress].
+
+New description:
+{{{
+descriptionDefaultEmailRecipients
+
+	^ MAToManyRelationDescription new
+		classes: {WAEmailAddress};
+		default: OrderedCollection new;
+		label: 'Default email recipients';
+		selectorAccessor: #defaultEmailRecipients;
+		priority: 1500;
+		yourself
+}}}
+Old description: 
+{{{
+descriptionDefaultEmailRecipients
+
+	^ MAToManyRelationDescription new
+		reference: SSEmailAddress new description;
+		classes: {SSEmailAddress};
+		default: OrderedCollection new;
+		label: 'Default email recipients';
+		selectorAccessor: #defaultEmailRecipients;
+		priority: 1500;
+		yourself
+}}}
 ===Actions===
 ====Transform SSEmailAddress to WAEmailAddress====
+In both cases we are transforming a collection of SSEmailAddresses to a collection of WAEmailAddresses, so the following should do the trick:
+{{{
+
+SSRepository current projects do: [:project | 
+	#(otherEmailAddresses defaultEmailRecipients) do: [:property |
+		(project propertyIncludes: property)
+			ifTrue: [ 
+				project 
+					propertyAt: property
+					put: ((project propertyAt: property) 
+						collect: [:ssEmailAddress | WAEmailAddress address: ssEmailAddress address]) ]]].
+}}}
