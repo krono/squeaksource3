@@ -1,1 +1,7 @@
 #summary List of classes and instance variables affected by changed Magritte descriptions
+
+===Class and selector map to description changed===
+ # [ChangedMagritteDescriptionsSs3ToRc2#SSGroup_#members SSGroup #members]
+
+===Descriptions===
+====SSGroup #members====
