@@ -1,13 +1,18 @@
 #summary List of classes and instance variables affected by changed Magritte descriptions
 
 ===Changes Requiring Action===
- # [ChangedMagritteDescriptionsSs3ToRc2#SSRepository>>superUserEmail SSRepository>>superUserEmail]
+ # [ChangedMagritteDescriptionsSs3ToRc2#SSProject>>otherEmailAddresses SSProject>>otherEmailAddresses]
+ # [ChangedMagritteDescriptionsSs3ToRc2#SSRepository>>defaultEmailRecipients SSRepository>>defaultEmailRecipients]
 ===Benign Changes===
  # SSGroup>>members
  # SSInstallWizzard>>storageClass, #wellKnownName, #cacheTimeout, #adminEmail
  # SSMember>>information, #password
  # SSProject>>parentProject, #developers, #guests, #defaultMoveTarget, #admins
- # SSRepository>>rootUrl
+ # SSRepository>>rootUrl, #superUserEmail, #logo, #defaultCommitWriterClass
+ # WAEmailAddress>>username, #address
 
 ===Details===
-====SSRepository>>superUserEmail====
+====SSProject>>otherEmailAddresses====
+contents class changed from SSEmailAddress to WAEmailAddress
+====SSRepository>>defaultEmailRecipients====
+contents class changed from SSEmailAddress to WAEmailAddress
