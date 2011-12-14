@@ -18,6 +18,7 @@ Segments of the script:
   * load SqueakSource3
   * patch instances of SSUrlFilter (Issue 47), by traversing dispatcher tree
   * *COMMIT*
+  * _*IMPORTANT*_: after this commit, the system is expected to function just fine _without_ running the migration step...
  * conversion phase
   * convert propery lists that refer to collections of SSEmailAddress instances into collections of WAEmailAddress instances (Issue 39 and Issue 41)
  * migration analysis
@@ -27,7 +28,7 @@ Segments of the script:
  * clean up phase
   * clean up
    * remove continuations from object log ... or wipe out continuation
-   * looks like the instances for all subclasses of SSModel may have a #stringsSatisfyBlocks entry in the property dictionary that is no longer valid
+   * looks like the instances for all subclasses of SSModel may have a #stringsSatisfyBlocks entry in the property dictionary that is no longer valid (Issue 48)
    * [http://code.google.com/p/glassdb/wiki/ClearPersistentCaches clear persistent caches]
    * nuke [http://ss3.gemstone.com/ss/ss3.html ss3], [http://ss3.gemstone.com/ss/pharo.html pharo], [http://ss3.gemstone.com/ss/grease.html Grease], [http://ss3.gemstone.com/ss/distroPharo1.html Distro for Pharo 1], [http://ss3.gemstone.com/ss/stash.html stash], [http://ss3.gemstone.com/ss/stash2.html stash2] projects as they were added for alpha testing
   * *COMMIT*
