@@ -1,9 +1,9 @@
 #summary List of classes and instance variables affected by changed Magritte descriptions
 
-===Changes Requiring Action===
+===Magritte Description Changes Requiring Action===
  # [ChangedMagritteDescriptionsSs3ToRc2#SSProject>>otherEmailAddresses SSProject>>otherEmailAddresses]
  # [ChangedMagritteDescriptionsSs3ToRc2#SSRepository>>defaultEmailRecipients SSRepository>>defaultEmailRecipients]
-===Benign Changes===
+===Benign Magritte Description Changes===
  # SSGroup>>members
  # SSInstallWizzard>>storageClass, #wellKnownName, #cacheTimeout, #adminEmail
  # SSMember>>information, #password
