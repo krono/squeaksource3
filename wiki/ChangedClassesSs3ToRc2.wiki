@@ -194,7 +194,7 @@ Classes affected:
  * [ChangedClassesSs3ToRc2#SSUniqueMemberLoginCondition SSUniqueMemberLoginCondition]
  * [ChangedClassesSs3ToRc2#SSYouAreMemberCondition SSYouAreMemberCondition]
 ====Implications====
-There will be instances galore, but they are used in MADescription and we will flushing the MADescription cache after SIMPLE migration.
+There will be instances galore, but they are used in MADescription and we will flushing the MADescription cache after load. SIMPLE migration will be fine although we'll be migrating garbage instances ... still okay.
 ===SSMember migration===
 Renamed instance variable:
  * description renamed to information
