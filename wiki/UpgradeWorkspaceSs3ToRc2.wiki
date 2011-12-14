@@ -19,7 +19,7 @@ Segments of the script:
   * patch instances of SSUrlFilter (Issue 47), by traversing dispatcher tree
   * *COMMIT*
  * conversion phase
-  * convert propery lists that refer to collections of SSEmailAddress instances into collections of WAEmailAddress instances (Issue 39)
+  * convert propery lists that refer to collections of SSEmailAddress instances into collections of WAEmailAddress instances (Issue 39 and Issue 41)
  * migration analysis
  * migration phase
   * migrate instances (Issue 37)
