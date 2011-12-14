@@ -112,7 +112,11 @@ deployBlock
         value: [ (ConfigurationOftODE project version: '0.1') load ].
 deployBlock 
         value: [
-		 "http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSCondition_migration"
+		"http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSMember_migration"
+		SSMember compile:'information ^description'.
+		"http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSProject_migration"
+		SSProject compile:'information ^description'.
+		"http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSCondition_migration"
 		MADescriptionBuilder unload.
 		(ConfigurationOfSqueakSource project version: '3.0-rc.1') load.
 		"http://code.google.com/p/squeaksource3/issues/detail?id=47"
