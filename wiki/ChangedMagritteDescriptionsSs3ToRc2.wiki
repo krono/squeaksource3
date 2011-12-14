@@ -1,0 +1,1 @@
+#summary List of classes and instance variables affected by changed Magritte descriptions
