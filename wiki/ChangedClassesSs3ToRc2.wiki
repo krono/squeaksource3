@@ -201,7 +201,10 @@ Renamed instance variable:
 Classes affected:
  * [ChangedClassesSs3ToRc2#SSMember SSMember]
 ====Implications====
-Need to arrange to transfer state from description field to information field with DESCRIPTION migration. See also [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration].
+Need to arrange to transfer state from description field to information field with DESCRIPTION migration (Issue 37). 
+
+See also [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration].
+
 ===SSModel migration===
 New class instance variable:
  * stringsSatisfyBlocks
@@ -235,7 +238,9 @@ Classes affected:
  * [ChangedClassesSs3ToRc2#SSGemStoneProject SSGemStoneProject]
  * [ChangedClassesSs3ToRc2#SSProject SSProject]
 ====Implications====
-Need to arrange to transfer state from description field to information field with DESCRIPTION migration. See also [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration].
+Need to arrange to transfer state from description field to information field with DESCRIPTION migration (Issue 37). 
+
+See also [ChangedClassesSs3ToRc2#SSModel_migration SSModel migration].
 ===SSSizeConditionTest migration===
 Added instance variable:
  * sizeCondition
