@@ -112,8 +112,11 @@ deployBlock
         value: [ (ConfigurationOftODE project version: '0.1') load ].
 deployBlock 
         value: [
-		MADescriptionBuilder unload. "http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSCondition_migration"
-		(ConfigurationOfSqueakSource project version: '3.0-rc.1') load ].
+		 "http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSCondition_migration"
+		MADescriptionBuilder unload.
+		(ConfigurationOfSqueakSource project version: '3.0-rc.1') load.
+		"http://code.google.com/p/squeaksource3/issues/detail?id=47"
+		((WADispatcher default handlerAt: 'ss') filters select: [:filter | filter isKindOf: SSUrlFilter]) do: [:filter | filter instVarNamed: #routes put: nil ].  ].
 "migration analysis"
 classesWithClassHistory := GsDeployer new classesWithClassHistory.
 classesWithClassHistory size = 55 ifFalse: [ nil error: 'incorrect number of class with class history' ].
@@ -181,13 +184,7 @@ symbolList := System myUserProfile symbolList.
 				array at: 1 put: instance.
 				instance class migrateInstances: array to: instance class classHistory last ].
 		instanceCount := instanceCount + instances size.
-		Transcript show: instances size printString, ' instances migrated.'.
-		((classesWithClassHistory at: index) name == #SSUrlFilter and: [(classesWithClassHistory at: index) == SSUrlFilter classHistory first])
-			ifTrue: [
-				"http://code.google.com/p/squeaksource3/issues/detail?id=47"
-				instances do: [:instance | 
-					instance instVarNamed: #routes put: nil ].
-				]].
+		Transcript show: instances size printString, ' instances migrated.' ].
 	Transcript cr; show: instanceCount printString, ' instances migrated.'.
 	System commitTransaction ifFalse: [ nil error: 'commit failed' ].
 	]
