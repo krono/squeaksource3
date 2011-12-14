@@ -13,6 +13,8 @@
 
 ===Details===
 ====SSProject>>otherEmailAddresses====
-contents class changed from SSEmailAddress to WAEmailAddress
+contents class changed from [ChangedMagritteDescriptionsSs3ToRc2#Transform_SSEmailAddress_to_WAEmailAddress SSEmailAddress to WAEmailAddress].
 ====SSRepository>>defaultEmailRecipients====
-contents class changed from SSEmailAddress to WAEmailAddress
+contents class changed from [ChangedMagritteDescriptionsSs3ToRc2#Transform_SSEmailAddress_to_WAEmailAddress SSEmailAddress to WAEmailAddress].
+===Actions===
+====Transform SSEmailAddress to WAEmailAddress====
