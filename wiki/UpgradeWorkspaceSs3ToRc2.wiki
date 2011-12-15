@@ -115,7 +115,9 @@ SSRepository current projects do: [:project |
 					propertyAt: property
 					put: ((project propertyAt: property) 
 						collect: [:ssEmailAddress | 
-							WAEmailAddress address: ssEmailAddress address]) ]]].
+							WAEmailAddress 
+								address: ssEmailAddress address
+								username: ssEmailAddress username]) ]]].
 System commitTransaction ifFalse: [ nil error: 'commit failed' ].
 "migration analysis"
 classesWithClassHistory := GsDeployer new classesWithClassHistory.
