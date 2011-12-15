@@ -83,5 +83,4 @@ SSRepository current projects do: [:project |
 							WAEmailAddress 
 								address: ssEmailAddress address
 								username:: ssEmailAddress username]) ]]].
-]) ]]].
 }}}
