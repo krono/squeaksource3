@@ -82,5 +82,5 @@ SSRepository current projects do: [:project |
 						collect: [:ssEmailAddress | 
 							WAEmailAddress 
 								address: ssEmailAddress address
-								username:: ssEmailAddress username]) ]]].
+								username: ssEmailAddress username]) ]]].
 }}}
