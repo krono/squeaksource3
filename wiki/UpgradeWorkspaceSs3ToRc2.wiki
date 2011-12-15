@@ -3,7 +3,7 @@
 This workspace script is more up-to-date than the [UpgradeSs3ToRc2  upgrade script].
 
 Prefetch:
- * fetch all packages into a local directory that is used by the prefetch phase to load packages into memory
+ * [UpgradePrefetchWorkspaceSs3ToRc2 fetch all packages into a local directory] that is used by the prefetch phase to load packages into memory
 
 Segments of the script:
  * fetch phase
