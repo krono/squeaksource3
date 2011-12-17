@@ -20,7 +20,7 @@ true ifTrue: [
             version: 'Gofer-Core.gemstone-dkh.135';
             version: 'Metacello-Base-DaleHenrichs.19';
             version: 'Metacello-Core-dkh.468';
-            version: 'Metacello-MC-dkh.531';
+            version: 'Metacello-MC-dkh.534';
             version: 'Metacello-Platform.gemstone-dkh.23';
             load]].
 cacheRepository := MCDirectoryRepository new directory: (ServerFileDirectory on: '/export/foos1/users/dhenrich/2.0/squeaksource3/monticello').
@@ -33,6 +33,7 @@ true ifTrue: [
 	version cacheRepository: cacheRepository.
 	version fetch: #('Base' 'JQuery-UI' 'Seaside-Adaptors-Swazoo' ) ].
 true ifTrue: [
+	System signalAlmostOutOfMemoryThreshold: 75.
 	version := ConfigurationOftODE project version: '0.1'.
 	version cacheRepository: cacheRepository.
 	version fetch ].
