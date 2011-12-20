@@ -36,17 +36,17 @@ fetchConfigurationsBlock := [:configVersion :recordList | | fetched |
 						ignoreImage: true;
 						yourself.
 					p := versionDirective spec project.
-					(fetched includes: p name) 
+					(fetched includes: p configuration class) 
 						ifFalse: [ 
 							"fetch top-level configuration"
 							p fetchProject: policy.
-							fetched add: p name.
+							fetched add: p configuration class.
 							versionDirective packagesDo: [ :packageDirective | 
 								(packageDirective spec name beginsWith: 'ConfigurationOf')
 									ifTrue: [ 
 										"fetch nested configurations"
 										packageDirective spec fetchPackage: policy.
-										fetched add: packageDirective spec name. ] ] ] ] ] ].
+										fetched add: packageDirective spec project configuration class. ] ] ] ] ] ].
 true ifTrue: [
 	version := ConfigurationOfGLASS project version: versionString.
 	version cacheRepository: cacheRepository.
@@ -65,6 +65,6 @@ true ifTrue: [
 true ifTrue: [
 	version := ConfigurationOfSqueakSource project version: '3.0-rc.1'.
 	version cacheRepository: cacheRepository.
-	version fetch.
-	fetchConfigurationsBlock value: version value: 'default' ].
+	version fetch: 'Full'.
+	fetchConfigurationsBlock value: version value: 'Full' ].
 }}}
