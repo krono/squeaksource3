@@ -20,7 +20,7 @@ true ifTrue: [
             version: 'Gofer-Core.gemstone-dkh.135';
             version: 'Metacello-Base-DaleHenrichs.19';
             version: 'Metacello-Core-dkh.468';
-            version: 'Metacello-MC-dkh.536';
+            version: 'Metacello-MC-dkh.537';
             version: 'Metacello-Platform.gemstone-dkh.23';
             load]].
 
