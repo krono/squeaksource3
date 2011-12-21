@@ -14,18 +14,17 @@ Segments of the script:
   * fetch tODE packages
   * fetch SqueakSource3 packages
   * *COMMIT*
- * load phase
+ * load phase (Issue 56)
   * load GLASS
-  * load Seaside30
+  * load Seaside30 (Issue 47)
   * load tODE
-  * load SqueakSource3
-  * patch instances of SSUrlFilter (Issue 47), by traversing dispatcher tree
+  * load SqueakSource3 (Issue 55)
   * *COMMIT*
   * _*IMPORTANT*_: after this commit, the system is expected to function just fine _without_ running the migration step...
  * conversion phase
   * convert propery lists that refer to collections of SSEmailAddress instances into collections of WAEmailAddress instances (Issue 39 and Issue 41)
  * migration analysis
- * migration phase
+ * migration phase (Issue 46)
   * migrate instances (Issue 37)
   * *COMMIT*
  * clean up phase
