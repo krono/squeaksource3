@@ -111,6 +111,8 @@ deployBlock
         value: [ | version |
                 "http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSCondition_migration"
                 MADescriptionBuilder unload.
+                "http://code.google.com/p/squeaksource3/issues/detail?id=55"
+                SSRepository removeSelector: #rootUrl.
                 version := ConfigurationOfSqueakSource project version: '3.0-rc.1'.
                 version repositoryOverrides:  { cacheRepository }.
                 version load: 'All'  ].
