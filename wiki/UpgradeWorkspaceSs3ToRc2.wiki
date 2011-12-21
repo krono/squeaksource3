@@ -96,7 +96,10 @@ deployBlock
                 version := ConfigurationOfSeaside30 project version: '3.0.6.3'.
                 version repositoryOverrides:  { cacheRepository }.
                 version load: #('Base' 'JQuery-UI' 'Seaside-Adaptors-Swazoo' ).
-].
+         "http://code.google.com/p/squeaksource3/issues/detail?id=47"
+         ((WADispatcher default handlerAt: 'ss') filters select: [:filter | filter isKindOf: SSUrlFilter]) do: [:filter | 
+			filter instVarNamed: #routes put: nil ].
+ ].
 deployBlock 
         value: [ | version |
                 version := ConfigurationOftODE project version: '0.1'.
@@ -190,10 +193,7 @@ ssModelSubclasses := SSModel withAllSubclasses .
                 instanceCount := instanceCount + instances size.
                 Transcript show: instances size printString, ' instances migrated.' ].
         Transcript cr; show: instanceCount printString, ' instances migrated.'.
-         "http://code.google.com/p/squeaksource3/issues/detail?id=47"
-         ((WADispatcher default handlerAt: 'ss') filters select: [:filter | filter isKindOf: SSUrlFilter]) do: [:filter | 
-			filter instVarNamed: #routes put: nil ].
-        System commitTransaction ifFalse: [ nil error: 'commit failed' ].
+       System commitTransaction ifFalse: [ nil error: 'commit failed' ].
         ]
                         ensure: [ 
                                 (symbolList objectNamed: #UserGlobals) 
