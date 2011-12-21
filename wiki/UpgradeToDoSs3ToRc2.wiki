@@ -6,7 +6,9 @@
  # Issue 42: service vm used for background tasks
  # Issue 43: Rough out the [UpgradeSs3ToRc2  load script] using the [UpgradeWorkspaceSs3ToRc2 workspace variant of the script]
    # Issue 36: New site introduction text
-   # Issue 47: SSUrlFilter routes need to be rebuilt for new version of Seaside-REST
+   # Issue 56: Code upgrade step
+     # Issue 47: SSUrlFilter routes need to be rebuilt for new version of Seaside-REST
+     # Issue 55: Unmigrated SSRepository returns #wrong rootUrl
    # Issue 46: Single step for instance migration and instance replacement
      # Issue 37: Migrate changed classes
      # Issue 39: SSProject Magritte descriptions changed
