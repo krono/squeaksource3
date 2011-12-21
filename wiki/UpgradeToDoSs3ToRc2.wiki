@@ -13,7 +13,8 @@
      # Issue 37: Migrate changed classes
      # Issue 39: SSProject Magritte descriptions changed
      # Issue 41: SSEmailAddress class deleted
-   # Issue 48:	#stringsSatisfyBlocks in property dictionaries for subclasses of SSModel are obsolete?
+   # Issue 48: #stringsSatisfyBlocks in property dictionaries for subclasses of SSModel are obsolete?
+   # Issue 57: #rootUrl property in SSReposiroty no longer valid?
    # Issue 49: Validate bugfixes ([http://code.google.com/p/squeaksource3/issues/list?can=1&q=Verified%3D3.0-rc1 list of verified bugs],[http://code.google.com/p/squeaksource3/issues/list?can=2&q=Type%3DDefect+Milestone%3D3.0-rc2+%27 list of open bugs for 3.0-rc.1] )
      # Issue 9: Sorting of projects can be confusing
      # Issue 11: News must link to the package version
