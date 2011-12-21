@@ -18,7 +18,7 @@ Segments of the script:
   * load GLASS
   * load Seaside30 (Issue 47)
   * load tODE
-  * load SqueakSource3 (Issue 55)
+  * load SqueakSource3 (Issue 55 and [http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSCondition_migration SSCondition migration])
   * *COMMIT*
   * _*IMPORTANT*_: after this commit, the system is expected to function just fine _without_ running the migration step...
  * conversion phase
