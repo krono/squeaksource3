@@ -65,6 +65,6 @@ true ifTrue: [
 true ifTrue: [
 	version := ConfigurationOfSqueakSource project version: '3.0-rc.1'.
 	version cacheRepository: cacheRepository.
-	version fetch: 'Full'.
-	fetchConfigurationsBlock value: version value: 'Full' ].
+	version fetch: 'All'.
+	fetchConfigurationsBlock value: version value: 'All' ].
 }}}
