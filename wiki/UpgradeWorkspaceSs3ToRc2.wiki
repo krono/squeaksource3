@@ -38,15 +38,17 @@ Segments of the script:
 {{{
 | versionString deployBlock classesWithClassHistory changedClassNames migrationClassNames 
  migrationClasses instanceList symbolList instanceCount array migrationDoBlock ssModelSubclasses cacheRepository cacheDirectory |
-"fetch phase"
 versionString := '1.0-beta.8.7.1'.
 cacheDirectory := '/export/foos1/users/dhenrich/2.0/squeaksource3/monticello'.
 cacheRepository := (MCDirectoryRepository new) 
 	directory: (ServerFileDirectory on: cacheDirectory);
 	yourself.
-GsDeployer cleanClassHistory.
-System commitTransaction ifFalse: [ nil error: 'commit failed'].
 true ifTrue: [ | gofer |
+	"fetch phase"
+	GsDeployer cleanClassHistory.
+	MBConfigurationRoot reset.
+	TORoot reset.
+	System commitTransaction ifFalse: [ nil error: 'commit failed'].
 	(MCWorkingCopy allManagers detect: [:each | each packageName = 'ConfigurationOftODE'])
         repositoryGroup addRepository: (MCHttpRepository 
                 location: 'http://ss3.gemstone.com/ss/tODE'
@@ -67,6 +69,7 @@ true ifTrue: [ | gofer |
             version: 'Metacello-Platform.gemstone-dkh.23';
             load]].
 System commitTransaction ifFalse: [ nil error: 'commit failed'].
+true ifTrue: [ 
 "load phase"
 deployBlock := [:aBlock |       | oldAutoCommit oldAutoMigrate |
         oldAutoCommit := MCPlatformSupport autoCommit.
@@ -100,11 +103,6 @@ deployBlock
          ((WADispatcher default handlerAt: 'ss') filters select: [:filter | filter isKindOf: SSUrlFilter]) do: [:filter | 
 			filter instVarNamed: #routes put: nil ].
  ].
-deployBlock 
-        value: [ | version |
-                version := ConfigurationOftODE project version: '0.1'.
-                version repositoryOverrides:  { cacheRepository }.
-                version load ].
 "http://code.google.com/p/glassdb/issues/detail?id=325"
 Object compile:  'finalize'. 
 deployBlock 
@@ -116,6 +114,11 @@ deployBlock
                 version := ConfigurationOfSqueakSource project version: '3.0-rc.1'.
                 version repositoryOverrides:  { cacheRepository }.
                 version load: 'All'  ].
+GsDeployer deploy: [ | version |
+                version := ConfigurationOftODE project version: '0.1'.
+                version repositoryOverrides:  { cacheRepository }.
+                version load ].
+System commitTransaction ifFalse: [ nil error: 'commit failed' ]].
 "conversion phase"
 "http://code.google.com/p/squeaksource3/issues/detail?id=41"
 "http://code.google.com/p/squeaksource3/wiki/ChangedMagritteDescriptionsSs3ToRc2#Transform_SSEmailAddress_to_WAEmailAddress"
