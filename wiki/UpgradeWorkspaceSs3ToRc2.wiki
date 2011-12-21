@@ -43,7 +43,7 @@ cacheDirectory := '/export/foos1/users/dhenrich/2.0/squeaksource3/monticello'.
 cacheRepository := (MCDirectoryRepository new) 
 	directory: (ServerFileDirectory on: cacheDirectory);
 	yourself.
-true ifTrue: [ | gofer |
+false ifTrue: [ | gofer |
 	"fetch phase"
 	GsDeployer cleanClassHistory.
 	MBConfigurationRoot reset.
@@ -69,14 +69,17 @@ true ifTrue: [ | gofer |
             version: 'Metacello-Platform.gemstone-dkh.23';
             load]].
 System commitTransaction ifFalse: [ nil error: 'commit failed'].
-true ifTrue: [ 
+false ifTrue: [ 
 "load phase"
-deployBlock := [:aBlock |       | oldAutoCommit oldAutoMigrate |
+deployBlock := [:aBlock :autoCommit |       | oldAutoCommit oldAutoMigrate |
         oldAutoCommit := MCPlatformSupport autoCommit.
         oldAutoMigrate := MCPlatformSupport autoMigrate.
         MCPlatformSupport autoCommit: false.
         MCPlatformSupport autoMigrate: false.
-        [aBlock 
+        [
+	[ autoCommit
+		ifTrue: [ MCPlatformSupport commitOnAlmostOutOfMemoryDuring: aBlock ]
+		ifFalse: [  aBlock value ]]
                 on: (Smalltalk at: #MetacelloSkipDirtyPackageLoad), Warning
                 do: [:ex | 
                         (ex isKindOf: Warning)
@@ -93,16 +96,17 @@ deployBlock
                 version := ConfigurationOfGLASS project version: versionString.
                 version repositoryOverrides:  { cacheRepository }.
                 version load: #( 'Core' 'Monticello' ).
-                version load ].
+                version load ]
+        value: false.
 deployBlock 
         value: [ | version |
                 version := ConfigurationOfSeaside30 project version: '3.0.6.3'.
                 version repositoryOverrides:  { cacheRepository }.
                 version load: #('Base' 'JQuery-UI' 'Seaside-Adaptors-Swazoo' ).
-         "http://code.google.com/p/squeaksource3/issues/detail?id=47"
-         ((WADispatcher default handlerAt: 'ss') filters select: [:filter | filter isKindOf: SSUrlFilter]) do: [:filter | 
-			filter instVarNamed: #routes put: nil ].
- ].
+                "http://code.google.com/p/squeaksource3/issues/detail?id=47"
+                ((WADispatcher default handlerAt: 'ss') filters select: [:filter | filter isKindOf: SSUrlFilter]) do: [:filter | 
+				filter instVarNamed: #routes put: nil ]]
+        value: false.
 "http://code.google.com/p/glassdb/issues/detail?id=325"
 Object compile:  'finalize'. 
 deployBlock 
@@ -113,12 +117,14 @@ deployBlock
                 SSRepository removeSelector: #rootUrl.
                 version := ConfigurationOfSqueakSource project version: '3.0-rc.1'.
                 version repositoryOverrides:  { cacheRepository }.
-                version load: 'All'  ].
-GsDeployer deploy: [ | version |
+                version load: 'All'  ]
+        value: false.
+deployBlock 
+        value: [ | version |
                 version := ConfigurationOftODE project version: '0.1'.
                 version repositoryOverrides:  { cacheRepository }.
-                version load ].
-System commitTransaction ifFalse: [ nil error: 'commit failed' ]].
+                version load ]
+        value: true ].
 "conversion phase"
 "http://code.google.com/p/squeaksource3/issues/detail?id=41"
 "http://code.google.com/p/squeaksource3/wiki/ChangedMagritteDescriptionsSs3ToRc2#Transform_SSEmailAddress_to_WAEmailAddress"
