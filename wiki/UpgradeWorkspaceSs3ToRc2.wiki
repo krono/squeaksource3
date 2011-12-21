@@ -103,13 +103,15 @@ deployBlock
                 version := ConfigurationOftODE project version: '0.1'.
                 version repositoryOverrides:  { cacheRepository }.
                 version load ].
+"http://code.google.com/p/glassdb/issues/detail?id=325"
+Object compile:  'finalize'. 
 deployBlock 
         value: [ | version |
                 "http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSCondition_migration"
                 MADescriptionBuilder unload.
                 version := ConfigurationOfSqueakSource project version: '3.0-rc.1'.
                 version repositoryOverrides:  { cacheRepository }.
-                version load  ].
+                version load: 'All'  ].
 "conversion phase"
 "http://code.google.com/p/squeaksource3/issues/detail?id=41"
 "http://code.google.com/p/squeaksource3/wiki/ChangedMagritteDescriptionsSs3ToRc2#Transform_SSEmailAddress_to_WAEmailAddress"
