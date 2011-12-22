@@ -19,6 +19,7 @@
    # Issue 46: Single step for instance migration and instance replacement
      # Issue 37: Migrate changed classes
      # Issue 41: SSEmailAddress class deleted
+     # Issue 68: What should SSRepository>>wellKnownName be for an upgraded repository?
    # Issue 63:Upgrade cleanup
      # Issue 48: #stringsSatisfyBlocks in property dictionaries for subclasses of SSModel are obsolete?
      # Issue 57: #rootUrl property in SSReposiroty no longer valid?
