@@ -14,6 +14,7 @@
      # Issue 60: MNU selecting ConfigurationOfGofer-DaleHenrichs.10 in SS3 project AFTER load BEFORE migrate
      # Issue 61: SSProject>>fullDirectoryUrl wants old-style rootUrl
    # Issue 62: Upgrade tODE
+   # Issue 65: Run jcrawler against repository during upgrade ...
    # Issue 46: Single step for instance migration and instance replacement
      # Issue 37: Migrate changed classes
      # Issue 41: SSEmailAddress class deleted
