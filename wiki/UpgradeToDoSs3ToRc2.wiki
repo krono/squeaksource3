@@ -9,9 +9,10 @@
    # Issue 56: Upgrade GLASS and Seaside (no migrate)
      # Issue 47: SSUrlFilter routes need to be rebuilt for new version of Seaside-REST
    # Issue 64: Upgrade SqueakSource
+     # Issue 39: SSProject Magritte descriptions changed
      # Issue 55: Unmigrated SSRepository returns #wrong rootUrl
      # Issue 60: MNU selecting ConfigurationOfGofer-DaleHenrichs.10 in SS3 project AFTER load BEFORE migrate
-     # Issue 39: SSProject Magritte descriptions changed
+     # Issue 61: SSProject>>fullDirectoryUrl wants old-style rootUrl
    # Issue 62: Upgrade tODE
    # Issue 46: Single step for instance migration and instance replacement
      # Issue 37: Migrate changed classes
