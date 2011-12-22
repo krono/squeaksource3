@@ -13,6 +13,7 @@
      # Issue 55: Unmigrated SSRepository returns #wrong rootUrl
      # Issue 60: MNU selecting ConfigurationOfGofer-DaleHenrichs.10 in SS3 project AFTER load BEFORE migrate
      # Issue 61: SSProject>>fullDirectoryUrl wants old-style rootUrl
+     # Issue 66: MNU #'wellKnownName' when sent to an SSRepository
    # Issue 62: Upgrade tODE
    # Issue 65: Run jcrawler and unit tests against repository during upgrade ...
    # Issue 46: Single step for instance migration and instance replacement
