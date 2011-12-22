@@ -37,13 +37,13 @@ Segments of the script:
 ===workspace===
 {{{
 | versionString deployBlock classesWithClassHistory changedClassNames migrationClassNames 
- migrationClasses instanceList symbolList instanceCount array migrationDoBlock ssModelSubclasses cacheRepository cacheDirectory |
+ migrationClasses instanceList symbolList instanceCount array migrationDoBlock ssModelSubclasses cacheRepository cacheDirectory sourceMap |
 versionString := '1.0-beta.8.7.1'.
 cacheDirectory := '/export/foos1/users/dhenrich/2.0/squeaksource3/monticello'.
 cacheRepository := (MCDirectoryRepository new) 
         directory: (ServerFileDirectory on: cacheDirectory);
         yourself.
-false ifTrue: [ | gofer |
+true ifTrue: [ | gofer |
         "fetch phase"
         GsDeployer cleanClassHistory.
         MBConfigurationRoot reset.
@@ -69,7 +69,7 @@ false ifTrue: [ | gofer |
             version: 'Metacello-Platform.gemstone-dkh.23';
             load]].
 System commitTransaction ifFalse: [ nil error: 'commit failed'].
-false ifTrue: [ 
+true ifTrue: [ 
 "load phase"
 deployBlock := [:aBlock :autoCommit |       | oldAutoCommit oldAutoMigrate |
         oldAutoCommit := MCPlatformSupport autoCommit.
@@ -109,6 +109,34 @@ deployBlock
         value: false.
 "http://code.google.com/p/glassdb/issues/detail?id=325"
 Object compile:  'finalize'. 
+"http://code.google.com/p/squeaksource3/issues/detail?id=61"
+sourceMap := {
+	{ SSGenericFrame. 'updateRoot: html
+
+	| repository |
+	super updateRoot: html.
+	repository := self repository.
+	html link beAlternate; beRss; title: repository title; url: self feedUrl.
+	html link beShortcutIcon; 
+		type: repository faviconMimeType;
+		url: (repository rootUrl asString, repository faviconFilename).
+'. }.
+	{ SSProject. 'fullDirectoryUrl
+	"http://www.squeaksource.com/Seaside"
+	^self repository rootUrl asString, self id'.}.
+	{ SSSendPassword. 'sendMailWithUrl: aUrl toMember: aMember
+
+	| messageText email message |
+	messageText := self class messageTemplate 
+		format: { aMember fullname .  aUrl . self repository rootUrl asString}.
+	email := self repository superUserEmail first.
+	message := WAEmailMessage
+		from: email
+		toAll: (Array with: aMember fullEmailAddress with: email)
+		subject: self repository title ,'' -- Forgot Password''.
+	message setStringBody: messageText wrap: true.
+	message send.'.}.
+}.
 deployBlock 
         value: [ | version |
                 "http://code.google.com/p/squeaksource3/issues/detail?id=39"
@@ -118,7 +146,10 @@ deployBlock
                 SSRepository removeSelector: #rootUrl.
                 version := ConfigurationOfSqueakSource project version: '3.0-rc.1'.
                 version repositoryOverrides:  { cacheRepository }.
-                version load: 'All'  ]
+                version load: 'All'.
+                "http://code.google.com/p/squeaksource3/issues/detail?id=61"
+                "compile method in the original class version"
+                sourceMap do: [:ar | (ar at: 1) compile: (ar at: 2) ]. ]
         value: false.
 deployBlock 
         value: [ | version |
