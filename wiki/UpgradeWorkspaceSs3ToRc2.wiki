@@ -41,25 +41,25 @@ Segments of the script:
 versionString := '1.0-beta.8.7.1'.
 cacheDirectory := '/export/foos1/users/dhenrich/2.0/squeaksource3/monticello'.
 cacheRepository := (MCDirectoryRepository new) 
-	directory: (ServerFileDirectory on: cacheDirectory);
-	yourself.
+        directory: (ServerFileDirectory on: cacheDirectory);
+        yourself.
 false ifTrue: [ | gofer |
-	"fetch phase"
-	GsDeployer cleanClassHistory.
-	MBConfigurationRoot reset.
-	TORoot reset.
-	System commitTransaction ifFalse: [ nil error: 'commit failed'].
-	(MCWorkingCopy allManagers detect: [:each | each packageName = 'ConfigurationOftODE'])
+        "fetch phase"
+        GsDeployer cleanClassHistory.
+        MBConfigurationRoot reset.
+        TORoot reset.
+        System commitTransaction ifFalse: [ nil error: 'commit failed'].
+        (MCWorkingCopy allManagers detect: [:each | each packageName = 'ConfigurationOftODE'])
         repositoryGroup addRepository: (MCHttpRepository 
                 location: 'http://ss3.gemstone.com/ss/tODE'
                 user: ''
                 password: '').
-	gofer := (Gofer new)
-		repository: cacheRepository;
-		yourself.
-	#('ConfigurationOfGLASS' 'ConfigurationOfMetacello' 'ConfigurationOftODE' 'ConfigurationOfSeaside30' 'ConfigurationOfSqueakSource' ) do: [:configName | gofer package: configName ].
-	gofer load.
-	ConfigurationOfMetacello project currentVersion versionNumber < '1.0-beta.31.2' asMetacelloVersionNumber ifTrue: [
+        gofer := (Gofer new)
+                repository: cacheRepository;
+                yourself.
+        #('ConfigurationOfGLASS' 'ConfigurationOfMetacello' 'ConfigurationOftODE' 'ConfigurationOfSeaside30' 'ConfigurationOfSqueakSource' ) do: [:configName | gofer package: configName ].
+        gofer load.
+        ConfigurationOfMetacello project currentVersion versionNumber < '1.0-beta.31.2' asMetacelloVersionNumber ifTrue: [
         (Gofer new)
             gemsource: 'metacello';
             version: 'Gofer-Core.gemstone-dkh.135';
@@ -77,9 +77,9 @@ deployBlock := [:aBlock :autoCommit |       | oldAutoCommit oldAutoMigrate |
         MCPlatformSupport autoCommit: false.
         MCPlatformSupport autoMigrate: false.
         [
-	[ autoCommit
-		ifTrue: [ MCPlatformSupport commitOnAlmostOutOfMemoryDuring: aBlock ]
-		ifFalse: [  aBlock value ]]
+        [ autoCommit
+                ifTrue: [ MCPlatformSupport commitOnAlmostOutOfMemoryDuring: aBlock ]
+                ifFalse: [  aBlock value ]]
                 on: (Smalltalk at: #MetacelloSkipDirtyPackageLoad), Warning
                 do: [:ex | 
                         (ex isKindOf: Warning)
@@ -105,12 +105,13 @@ deployBlock
                 version load: #('Base' 'JQuery-UI' 'Seaside-Adaptors-Swazoo' ).
                 "http://code.google.com/p/squeaksource3/issues/detail?id=47"
                 ((WADispatcher default handlerAt: 'ss') filters select: [:filter | filter isKindOf: SSUrlFilter]) do: [:filter | 
-				filter instVarNamed: #routes put: nil ]]
+                                filter instVarNamed: #routes put: nil ]]
         value: false.
 "http://code.google.com/p/glassdb/issues/detail?id=325"
 Object compile:  'finalize'. 
 deployBlock 
         value: [ | version |
+                "http://code.google.com/p/squeaksource3/issues/detail?id=39"
                 "http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSCondition_migration"
                 MADescriptionBuilder unload.
                 "http://code.google.com/p/squeaksource3/issues/detail?id=55"
@@ -129,14 +130,14 @@ deployBlock
 "http://code.google.com/p/squeaksource3/issues/detail?id=41"
 "http://code.google.com/p/squeaksource3/wiki/ChangedMagritteDescriptionsSs3ToRc2#Transform_SSEmailAddress_to_WAEmailAddress"
 SSRepository current projects do: [:project | 
-	#(otherEmailAddresses defaultEmailRecipients) do: [:property |
-		(project propertyIncludes: property)
-			ifTrue: [ 
-				project 
-					propertyAt: property
-					put: ((project propertyAt: property) 
-						collect: [:ssEmailAddress | 
-							WAEmailAddress address: ssEmailAddress address]) ]]].
+        #(otherEmailAddresses defaultEmailRecipients) do: [:property |
+                (project propertyIncludes: property)
+                        ifTrue: [ 
+                                project 
+                                        propertyAt: property
+                                        put: ((project propertyAt: property) 
+                                                collect: [:ssEmailAddress | 
+                                                        WAEmailAddress address: ssEmailAddress address]) ]]].
 System commitTransaction ifFalse: [ nil error: 'commit failed' ].
 "migration analysis"
 classesWithClassHistory := GsDeployer new classesWithClassHistory.
@@ -147,7 +148,6 @@ changedClassNames size = 37 ifFalse: [ nil error: 'incorrect number of changed c
 symbolList := System myUserProfile symbolList.
 ssModelSubclasses := SSModel withAllSubclasses .
 [
-        "http://code.google.com/p/squeaksource3/issues/detail?id=37"
         System commitTransaction ifFalse: [ nil error: 'commit failed' ].
         (symbolList objectNamed: #UserGlobals) 
                 at: #'SS3_MIGRATE_INSTANCE_LISTS' 
@@ -164,6 +164,7 @@ ssModelSubclasses := SSModel withAllSubclasses .
                                 history := class classHistory.
                                 (classVersion == history first or: [ classVersion == history last]) 
                                         ifFalse: [ nil error: 'instances of intermediate class versions' ]]].
+        "http://code.google.com/p/squeaksource3/issues/detail?id=37"
        "#instVarMappingTo: for description migrations"
         SSMember class compile:  'instVarMappingTo: anotherClass 
         "The receiver is the class being migrated to and <anotherClass> is the class being migrated from"
@@ -213,8 +214,8 @@ ssModelSubclasses := SSModel withAllSubclasses .
 "clean up phase"
 "http://code.google.com/p/squeaksource3/issues/detail?id=48"
 classesWithClassHistory size + 1 to: instanceList size do: [:index |
-	(instanceList at: index) do: [:instance |
-		instance properties removeKey: #stringsSatisfyBlocks ifAbsent: [] ]].
+        (instanceList at: index) do: [:instance |
+                instance properties removeKey: #stringsSatisfyBlocks ifAbsent: [] ]].
 SSMember class removeSelector: #instVarMappingTo:.
 SSProject class removeSelector: #instVarMappingTo:.
 System commitTransaction ifFalse: [ nil error: 'commit failed' ].
