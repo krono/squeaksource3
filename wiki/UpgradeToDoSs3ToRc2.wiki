@@ -17,6 +17,7 @@
      # Issue 61: SSProject>>fullDirectoryUrl wants old-style rootUrl
      # Issue 66: MNU #'wellKnownName' when sent to an SSRepository
      # Issue 69: RESTful links are empty noops
+     # Issue 73: unmigrated SSProject>>emailRecipients errors out ...
    # Issue 62: Upgrade tODE
    # Issue 65: Run jcrawler and unit tests against repository during upgrade ...
    # Issue 46: Single step for instance migration and instance replacement
