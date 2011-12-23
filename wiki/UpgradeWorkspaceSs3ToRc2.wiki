@@ -1,7 +1,7 @@
 #summary upgrade workspace for 3.0-rc.2
 
 ===Prefetch===
-[UpgradePrefetchWorkspaceSs3ToRc2 fetch all packages into a local directory] that is used by the prefetch phase to load packages into memory. Only needs to be run when one of the configurations is changed...
+[UpgradePrefetchWorkspaceSs3ToRc2 Fetch all packages into a local directory] that is used by the prefetch phase to load packages into memory. Only needs to be run when one of the configurations is changed...
 
 ===Workspace===
 This workspace script is more up-to-date than the [UpgradeSs3ToRc2  upgrade script].
