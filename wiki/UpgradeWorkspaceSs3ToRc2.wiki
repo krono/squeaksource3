@@ -1,40 +1,11 @@
 #summary upgrade workspace for 3.0-rc.2
 
+===Prefetch===
+ * [UpgradePrefetchWorkspaceSs3ToRc2 fetch all packages into a local directory] that is used by the prefetch phase to load packages into memory. Only needs to be run when one of the configurations is changed...
+
+===Workspace===
 This workspace script is more up-to-date than the [UpgradeSs3ToRc2  upgrade script].
 
-Prefetch:
- * [UpgradePrefetchWorkspaceSs3ToRc2 fetch all packages into a local directory] that is used by the prefetch phase to load packages into memory
-
-Segments of the script:
- * fetch phase
-  * fetch all configurations directly referenced in script
-  * upgrade Metacello
-  * fetch GLASS packages
-  * fetch Seaside30 packages
-  * fetch tODE packages
-  * fetch SqueakSource3 packages
-  * *COMMIT*
- * load phase (Issue 56)
-  * load GLASS
-  * load Seaside30 (Issue 47)
-  * load tODE
-  * load SqueakSource3 (Issue 55 and [http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSCondition_migration SSCondition migration])
-  * *COMMIT*
-  * _*IMPORTANT*_: after this commit, the system is expected to function just fine _without_ running the migration step...
- * conversion phase
-  * convert propery lists that refer to collections of SSEmailAddress instances into collections of WAEmailAddress instances (Issue 39 and Issue 41)
- * migration analysis
- * migration phase (Issue 46)
-  * migrate instances (Issue 37)
-  * *COMMIT*
- * clean up phase
-  * clean up
-   * remove continuations from object log ... or wipe out continuation
-   * looks like the instances for all subclasses of SSModel may have a #stringsSatisfyBlocks entry in the property dictionary that is no longer valid (Issue 48)
-   * [http://code.google.com/p/glassdb/wiki/ClearPersistentCaches clear persistent caches]
-   * nuke [http://ss3.gemstone.com/ss/ss3.html ss3], [http://ss3.gemstone.com/ss/pharo.html pharo], [http://ss3.gemstone.com/ss/grease.html Grease], [http://ss3.gemstone.com/ss/distroPharo1.html Distro for Pharo 1], [http://ss3.gemstone.com/ss/stash.html stash], [http://ss3.gemstone.com/ss/stash2.html stash2] projects as they were added for alpha testing
-  * *COMMIT*
-===workspace===
 {{{
 | versionString deployBlock classesWithClassHistory changedClassNames migrationClassNames 
  migrationClasses instanceList symbolList instanceCount array migrationDoBlock ssModelSubclasses cacheRepository cacheDirectory sourceMap |
