@@ -72,73 +72,70 @@ deployBlock
         value: [ | version |
                 version := ConfigurationOfSeaside30 project version: '3.0.6.3'.
                 version repositoryOverrides:  { cacheRepository }.
-                version load: #('Base' 'JQuery-UI' 'Seaside-Adaptors-Swazoo' ).
-                "http://code.google.com/p/squeaksource3/issues/detail?id=47"
-                ((WADispatcher default handlerAt: 'ss') filters select: [:filter | filter isKindOf: SSUrlFilter]) do: [:filter | 
-                                filter instVarNamed: #routes put: nil ]]
+                version load: #('Base' 'JQuery-UI' 'Seaside-Adaptors-Swazoo' ) ]
         value: false.
 "http://code.google.com/p/glassdb/issues/detail?id=325"
 Object compile:  'finalize'. 
 "http://code.google.com/p/squeaksource3/issues/detail?id=61"
 sourceMap := {
-	{ SSGenericFrame. 'updateRoot: html
+        { SSGenericFrame. 'updateRoot: html
 
-	| repository |
-	super updateRoot: html.
-	repository := self repository.
-	html link beAlternate; beRss; title: repository title; url: self feedUrl.
-	html link beShortcutIcon; 
-		type: repository faviconMimeType;
-		url: (repository rootUrl asString, repository faviconFilename).
+        | repository |
+        super updateRoot: html.
+        repository := self repository.
+        html link beAlternate; beRss; title: repository title; url: self feedUrl.
+        html link beShortcutIcon; 
+                type: repository faviconMimeType;
+                url: (repository rootUrl asString, repository faviconFilename).
 '. }.
-	{ SSProject. 'fullDirectoryUrl
-	"http://www.squeaksource.com/Seaside"
-	^self repository rootUrl asString, ''/'', self id'.}.
-	{ SSSendPassword. 'sendMailWithUrl: aUrl toMember: aMember
+        { SSProject. 'fullDirectoryUrl
+        "http://www.squeaksource.com/Seaside"
+        ^self repository rootUrl asString, ''/'', self id'.}.
+        { SSSendPassword. 'sendMailWithUrl: aUrl toMember: aMember
 
-	| messageText email message |
-	messageText := self class messageTemplate 
-		format: { aMember fullname .  aUrl . self repository rootUrl asString}.
-	email := self repository superUserEmail first.
-	message := WAEmailMessage
-		from: email
-		toAll: (Array with: aMember fullEmailAddress with: email)
-		subject: self repository title ,'' -- Forgot Password''.
-	message setStringBody: messageText wrap: true.
-	message send.'.}.
-	"http://code.google.com/p/squeaksource3/issues/detail?id=60"
-	{ SSVersion. 'changesUrl: aProject
-	| ancestorAndProject diffName |
-	ancestorAndProject := (self versionInfo latestAncestorAndProject: aProject)
-		ifNil: [(self reader: aProject) info latestAncestorAndProject: aProject].
-	(ancestorAndProject isNil or: [ancestorAndProject second ~= aProject])
-		ifTrue: [^nil].
-	diffName := MCDiffyVersion
-		nameForVer: self versionInfo name
-		base: ancestorAndProject first versionInfo name.
-	^WAUrl absolute: (String streamContents: [ :stream |
-		stream nextPutAll: aProject fullDirectoryUrl.
-		stream nextPutAll: ''/changes/''.
-		stream nextPutAll: diffName.
-		stream nextPutAll: ''.cs'' ])'.}.
-	{ SSVersion. 'diffyUrl: aProject ^nil'.}.
-	{ SSVersion. 'diffUrl: aProject
-	^WAUrl absolute: (String streamContents: [ :stream |
-		stream nextPutAll: aProject fullDirectoryUrl.
-		stream nextPutAll: ''/''.
-		stream nextPutAll: self versionInfo name.
-		stream nextPutAll: ''.diff'' ])'.}.
-	"http://code.google.com/p/squeaksource3/issues/detail?id=66"
-	{SSRepository. 'wellKnownName ^'''''.}.
-	"http://code.google.com/p/squeaksource3/issues/detail?id=73"
-	{ SSProject. 'emailRecipients
-	| recipients |
-	recipients := Array streamContents: [:stream |
-		self emailToGroups do: [:groupSymbol |
-			(self perform: groupSymbol) do: [:member |
-				member email ifNotEmpty: [stream nextPut: member fullEmailAddress]]].
-		stream nextPutAll: self otherEmailAddresses].
-	^ recipients ifEmpty: [SSRepository current defaultEmailRecipients]'.}.
+        | messageText email message |
+        messageText := self class messageTemplate 
+                format: { aMember fullname .  aUrl . self repository rootUrl asString}.
+        email := self repository superUserEmail first.
+        message := WAEmailMessage
+                from: email
+                toAll: (Array with: aMember fullEmailAddress with: email)
+                subject: self repository title ,'' -- Forgot Password''.
+        message setStringBody: messageText wrap: true.
+        message send.'.}.
+        "http://code.google.com/p/squeaksource3/issues/detail?id=60"
+        { SSVersion. 'changesUrl: aProject
+        | ancestorAndProject diffName |
+        ancestorAndProject := (self versionInfo latestAncestorAndProject: aProject)
+                ifNil: [(self reader: aProject) info latestAncestorAndProject: aProject].
+        (ancestorAndProject isNil or: [ancestorAndProject second ~= aProject])
+                ifTrue: [^nil].
+        diffName := MCDiffyVersion
+                nameForVer: self versionInfo name
+                base: ancestorAndProject first versionInfo name.
+        ^WAUrl absolute: (String streamContents: [ :stream |
+                stream nextPutAll: aProject fullDirectoryUrl.
+                stream nextPutAll: ''/changes/''.
+                stream nextPutAll: diffName.
+                stream nextPutAll: ''.cs'' ])'.}.
+        { SSVersion. 'diffyUrl: aProject ^nil'.}.
+        { SSVersion. 'diffUrl: aProject
+        ^WAUrl absolute: (String streamContents: [ :stream |
+                stream nextPutAll: aProject fullDirectoryUrl.
+                stream nextPutAll: ''/''.
+                stream nextPutAll: self versionInfo name.
+                stream nextPutAll: ''.diff'' ])'.}.
+        "http://code.google.com/p/squeaksource3/issues/detail?id=66"
+        {SSRepository. 'wellKnownName ^'''''.}.
+        "http://code.google.com/p/squeaksource3/issues/detail?id=73"
+        { SSProject. 'emailRecipients
+        | recipients |
+        recipients := Array streamContents: [:stream |
+                self emailToGroups do: [:groupSymbol |
+                        (self perform: groupSymbol) do: [:member |
+                                member email ifNotEmpty: [stream nextPut: member fullEmailAddress]]].
+                stream nextPutAll: self otherEmailAddresses].
+        ^ recipients ifEmpty: [SSRepository current defaultEmailRecipients]'.}.
 }.
 deployBlock 
         value: [ | version app urlFilter previous current newFilter replaced |
@@ -151,6 +148,7 @@ deployBlock
                 "http://code.google.com/p/squeaksource3/issues/detail?id=61"
                 "compile method in the original class version"
                 sourceMap do: [:ar | (ar at: 1) compile: (ar at: 2) ]. 
+                "http://code.google.com/p/squeaksource3/issues/detail?id=47"
                 "http://code.google.com/p/squeaksource3/issues/detail?id=55"
                 "http://code.google.com/p/squeaksource3/issues/detail?id=69"
                 "Replace current urlFilter with a new one"
