@@ -40,7 +40,6 @@ true ifTrue: [ | gofer |
             version: 'Metacello-Platform.gemstone-dkh.23';
             load]].
 System commitTransaction ifFalse: [ nil error: 'commit failed'].
-true ifTrue: [ 
 "load phase"
 deployBlock := [:aBlock :autoCommit |       | oldAutoCommit oldAutoMigrate |
         oldAutoCommit := MCPlatformSupport autoCommit.
@@ -131,6 +130,15 @@ sourceMap := {
 		stream nextPutAll: ''.diff'' ])'.}.
 	"http://code.google.com/p/squeaksource3/issues/detail?id=66"
 	{SSRepository. 'wellKnownName ^'''''.}.
+	"http://code.google.com/p/squeaksource3/issues/detail?id=73"
+	{ SSProject. 'emailRecipients
+	| recipients |
+	recipients := Array streamContents: [:stream |
+		self emailToGroups do: [:groupSymbol |
+			(self perform: groupSymbol) do: [:member |
+				member email ifNotEmpty: [stream nextPut: member fullEmailAddress]]].
+		stream nextPutAll: self otherEmailAddresses].
+	^ recipients ifEmpty: [SSRepository current defaultEmailRecipients]'.}.
 }.
 deployBlock 
         value: [ | version app urlFilter previous current newFilter replaced |
@@ -180,7 +188,7 @@ deployBlock
                 version := ConfigurationOftODE project version: '0.1'.
                 version repositoryOverrides:  { cacheRepository }.
                 version load ]
-        value: true ].
+        value: true.
 "migration analysis"
 classesWithClassHistory := GsDeployer new classesWithClassHistory.
 classesWithClassHistory size = 55 ifFalse: [ nil error: 'incorrect number of class with class history' ].
