@@ -7,11 +7,11 @@
  # Issue 43: Rough out the [UpgradeSs3ToRc2  load script] using the [UpgradeWorkspaceSs3ToRc2 workspace variant of the script]
    # Issue 74:	Backup repository, then Clear continuations from Object log
    # Issue 56: Upgrade GLASS and Seaside (no migrate)
-     # Issue 47: SSUrlFilter routes need to be rebuilt for new version of Seaside-REST
      # Issue 70: SSUrlFilter may be broken after Seaside upgrade
    # Issue 64: Upgrade SqueakSource
      # Issue 39: SSProject Magritte descriptions changed
      # Issue 41: SSEmailAddress class deleted
+     # Issue 47: SSUrlFilter routes need to be rebuilt for new version of Seaside-REST
      # Issue 55: Unmigrated SSRepository returns #wrong rootUrl
      # Issue 60: MNU selecting ConfigurationOfGofer-DaleHenrichs.10 in SS3 project AFTER load BEFORE migrate
      # Issue 61: SSProject>>fullDirectoryUrl wants old-style rootUrl
