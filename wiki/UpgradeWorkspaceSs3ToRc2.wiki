@@ -123,7 +123,7 @@ sourceMap := {
 '. }.
 	{ SSProject. 'fullDirectoryUrl
 	"http://www.squeaksource.com/Seaside"
-	^self repository rootUrl asString, self id'.}.
+	^self repository rootUrl asString, ''/'', self id'.}.
 	{ SSSendPassword. 'sendMailWithUrl: aUrl toMember: aMember
 
 	| messageText email message |
@@ -136,6 +136,30 @@ sourceMap := {
 		subject: self repository title ,'' -- Forgot Password''.
 	message setStringBody: messageText wrap: true.
 	message send.'.}.
+	"http://code.google.com/p/squeaksource3/issues/detail?id=60"
+	{ SSVersion. 'changesUrl: aProject
+	| ancestorAndProject diffName |
+	ancestorAndProject := (self versionInfo latestAncestorAndProject: aProject)
+		ifNil: [(self reader: aProject) info latestAncestorAndProject: aProject].
+	(ancestorAndProject isNil or: [ancestorAndProject second ~= aProject])
+		ifTrue: [^nil].
+	diffName := MCDiffyVersion
+		nameForVer: self versionInfo name
+		base: ancestorAndProject first versionInfo name.
+	^WAUrl absolute: (String streamContents: [ :stream |
+		stream nextPutAll: aProject fullDirectoryUrl.
+		stream nextPutAll: ''/changes/''.
+		stream nextPutAll: diffName.
+		stream nextPutAll: ''.cs'' ])'.}.
+	{ SSVersion. 'diffyUrl: aProject ^nil'.}.
+	{ SSVersion. 'diffUrl: aProject
+	^WAUrl absolute: (String streamContents: [ :stream |
+		stream nextPutAll: aProject fullDirectoryUrl.
+		stream nextPutAll: ''/''.
+		stream nextPutAll: self versionInfo name.
+		stream nextPutAll: ''.diff'' ])'.}.
+	"http://code.google.com/p/squeaksource3/issues/detail?id=66"
+	{SSRepository. 'wellKnownName ^'''''.}.
 }.
 deployBlock 
         value: [ | version |
