@@ -8,7 +8,7 @@
    # Issue 36: New site introduction text
    # Issue 56: Upgrade GLASS and Seaside (no migrate)
      # Issue 47: SSUrlFilter routes need to be rebuilt for new version of Seaside-REST
-   # Issue 65: Run jcrawler and unit tests against repository during upgrade ...
+     # Issue 70: SSUrlFilter may be broken after Seaside upgrade
    # Issue 64: Upgrade SqueakSource
      # Issue 39: SSProject Magritte descriptions changed
      # Issue 41: SSEmailAddress class deleted
