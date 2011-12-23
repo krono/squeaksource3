@@ -10,16 +10,16 @@
      # Issue 47: SSUrlFilter routes need to be rebuilt for new version of Seaside-REST
    # Issue 64: Upgrade SqueakSource
      # Issue 39: SSProject Magritte descriptions changed
+     # Issue 41: SSEmailAddress class deleted
      # Issue 55: Unmigrated SSRepository returns #wrong rootUrl
      # Issue 60: MNU selecting ConfigurationOfGofer-DaleHenrichs.10 in SS3 project AFTER load BEFORE migrate
      # Issue 61: SSProject>>fullDirectoryUrl wants old-style rootUrl
      # Issue 66: MNU #'wellKnownName' when sent to an SSRepository
-     #  Issue 69: RESTful links are empty noops
+     # Issue 69: RESTful links are empty noops
    # Issue 62: Upgrade tODE
    # Issue 65: Run jcrawler and unit tests against repository during upgrade ...
    # Issue 46: Single step for instance migration and instance replacement
      # Issue 37: Migrate changed classes
-     # Issue 41: SSEmailAddress class deleted
      # Issue 68: What should SSRepository>>wellKnownName be for an upgraded repository?
    # Issue 63:Upgrade cleanup
      # Issue 48: #stringsSatisfyBlocks in property dictionaries for subclasses of SSModel are obsolete?
