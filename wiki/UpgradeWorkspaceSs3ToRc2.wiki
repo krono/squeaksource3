@@ -162,18 +162,35 @@ sourceMap := {
 	{SSRepository. 'wellKnownName ^'''''.}.
 }.
 deployBlock 
-        value: [ | version |
+        value: [ | version app urlFilter previous current newFilter |
                 "http://code.google.com/p/squeaksource3/issues/detail?id=39"
                 "http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSCondition_migration"
                 MADescriptionBuilder unload.
-                "http://code.google.com/p/squeaksource3/issues/detail?id=55"
-                SSRepository removeSelector: #rootUrl.
-                version := ConfigurationOfSqueakSource project version: '3.0-rc.1'.
+               version := ConfigurationOfSqueakSource project version: '3.0-rc.1'.
                 version repositoryOverrides:  { cacheRepository }.
                 version load: 'All'.
                 "http://code.google.com/p/squeaksource3/issues/detail?id=61"
                 "compile method in the original class version"
-                sourceMap do: [:ar | (ar at: 1) compile: (ar at: 2) ]. ]
+                sourceMap do: [:ar | (ar at: 1) compile: (ar at: 2) ]. 
+	"http://code.google.com/p/squeaksource3/issues/detail?id=55"
+	"http://code.google.com/p/squeaksource3/issues/detail?id=69"
+	"Replace current urlFilter with a new one"
+	app := WADispatcher default handlerAt: 'ss'.
+	urlFilter := app filters detect: [:each | each isKindOf: (Smalltalk at: #SSUrlFilter) ] ifNone: [ nil error: 'did not find url filter' ].
+	newFilter := (Smalltalk at: #SSUrlFilter) new.
+	previous := nil.
+	current := app filter.
+	[ current = app ] whileFalse: [
+		current = urlFilter ifTrue: [
+			newFilter setNext: current next.
+			previous isNil
+				ifTrue: [ app setFilter: newFilter ]
+				ifFalse: [ previous setNext: newFilter ].
+			^ newFilter ].
+		previous := current.
+		current := current next ].
+	nil error: 'Did not replace url filter'
+]
         value: false.
 deployBlock 
         value: [ | version |
