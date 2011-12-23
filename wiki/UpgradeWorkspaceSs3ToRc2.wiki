@@ -162,7 +162,7 @@ sourceMap := {
 	{SSRepository. 'wellKnownName ^'''''.}.
 }.
 deployBlock 
-        value: [ | version app urlFilter previous current newFilter |
+        value: [ | version app urlFilter previous current newFilter replaced |
                 "http://code.google.com/p/squeaksource3/issues/detail?id=39"
                 "http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSCondition_migration"
                 MADescriptionBuilder unload.
@@ -172,25 +172,37 @@ deployBlock
                 "http://code.google.com/p/squeaksource3/issues/detail?id=61"
                 "compile method in the original class version"
                 sourceMap do: [:ar | (ar at: 1) compile: (ar at: 2) ]. 
-	"http://code.google.com/p/squeaksource3/issues/detail?id=55"
-	"http://code.google.com/p/squeaksource3/issues/detail?id=69"
-	"Replace current urlFilter with a new one"
-	app := WADispatcher default handlerAt: 'ss'.
-	urlFilter := app filters detect: [:each | each isKindOf: (Smalltalk at: #SSUrlFilter) ] ifNone: [ nil error: 'did not find url filter' ].
-	newFilter := (Smalltalk at: #SSUrlFilter) new.
-	previous := nil.
-	current := app filter.
-	[ current = app ] whileFalse: [
-		current = urlFilter ifTrue: [
-			newFilter setNext: current next.
-			previous isNil
-				ifTrue: [ app setFilter: newFilter ]
-				ifFalse: [ previous setNext: newFilter ].
-			^ newFilter ].
-		previous := current.
-		current := current next ].
-	nil error: 'Did not replace url filter'
-]
+                "http://code.google.com/p/squeaksource3/issues/detail?id=55"
+                "http://code.google.com/p/squeaksource3/issues/detail?id=69"
+                "Replace current urlFilter with a new one"
+                app := WADispatcher default handlerAt: 'ss'.
+                urlFilter := app filters detect: [:each | each isKindOf: (Smalltalk at: #SSUrlFilter) ] ifNone: [ nil error: 'did not find url filter' ].
+                newFilter := (Smalltalk at: #SSUrlFilter) new.
+                replaced := false.
+                previous := nil.
+                current := app filter.
+                [ current = app ] whileFalse: [
+                        current = urlFilter ifTrue: [
+                                newFilter setNext: current next.
+                                previous isNil
+                                     ifTrue: [ app setFilter: newFilter ]
+                                     ifFalse: [ previous setNext: newFilter ].
+                                replaced := true ].
+                        previous := current.
+                        current := current next ].
+                replaced ifFalse: [ nil error: 'Did not replace url filter']. 
+                "http://code.google.com/p/squeaksource3/issues/detail?id=41"
+                "http://code.google.com/p/squeaksource3/wiki/ChangedMagritteDescriptionsSs3ToRc2#Transform_SSEmailAddress_to_WAEmailAddress"
+                SSRepository current projects do: [:project | 
+                      #(otherEmailAddresses defaultEmailRecipients) do: [:property |
+                  (project propertyIncludes: property)
+                        ifTrue: [ 
+                                project 
+                                        propertyAt: property
+                                        put: ((project propertyAt: property) 
+                                                collect: [:ssEmailAddress | 
+                                                        WAEmailAddress address: ssEmailAddress address]) ]]].
+               System commitTransaction ifFalse: [ nil error: 'commit failed' ]]
         value: false.
 deployBlock 
         value: [ | version |
@@ -198,19 +210,6 @@ deployBlock
                 version repositoryOverrides:  { cacheRepository }.
                 version load ]
         value: true ].
-"conversion phase"
-"http://code.google.com/p/squeaksource3/issues/detail?id=41"
-"http://code.google.com/p/squeaksource3/wiki/ChangedMagritteDescriptionsSs3ToRc2#Transform_SSEmailAddress_to_WAEmailAddress"
-SSRepository current projects do: [:project | 
-        #(otherEmailAddresses defaultEmailRecipients) do: [:property |
-                (project propertyIncludes: property)
-                        ifTrue: [ 
-                                project 
-                                        propertyAt: property
-                                        put: ((project propertyAt: property) 
-                                                collect: [:ssEmailAddress | 
-                                                        WAEmailAddress address: ssEmailAddress address]) ]]].
-System commitTransaction ifFalse: [ nil error: 'commit failed' ].
 "migration analysis"
 classesWithClassHistory := GsDeployer new classesWithClassHistory.
 classesWithClassHistory size = 55 ifFalse: [ nil error: 'incorrect number of class with class history' ].
