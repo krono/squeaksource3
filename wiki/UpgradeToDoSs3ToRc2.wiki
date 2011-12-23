@@ -5,7 +5,7 @@
  # Issue 40: SStorage class>>timestamp ... rounded now
  # Issue 42: service vm used for background tasks
  # Issue 43: Rough out the [UpgradeSs3ToRc2  load script] using the [UpgradeWorkspaceSs3ToRc2 workspace variant of the script]
-   # Issue 36: New site introduction text
+   # Issue 74:	Backup repository, then Clear continuations from Object log
    # Issue 56: Upgrade GLASS and Seaside (no migrate)
      # Issue 47: SSUrlFilter routes need to be rebuilt for new version of Seaside-REST
      # Issue 70: SSUrlFilter may be broken after Seaside upgrade
@@ -29,5 +29,6 @@
      # Issue 49: Validate bugfixes ([http://code.google.com/p/squeaksource3/issues/list?can=1&q=Verified%3D3.0-rc1 list of verified bugs],[http://code.google.com/p/squeaksource3/issues/list?can=2&q=Type%3DDefect+Milestone%3D3.0-rc2+%27 list of open bugs for 3.0-rc.1] )
        # Issue 9: Sorting of projects can be confusing
        # Issue 11: News must link to the package version
+   # Issue 36: New site introduction text
  # Issue 44: Finalize the [UpgradeSs3ToRc2  load script]
  # Issue 35: Upgrade site to SqueakSource 3.0-rc.2
