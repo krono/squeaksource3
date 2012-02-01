@@ -1,0 +1,249 @@
+_With many thanks to Robert Lehman_
+_Note this is still to be completed_
+= Writing a !SqueakSource3 plugin… =
+
+The purpose of this document is two-fold:  first, to explain the basic Plugin API of !SqueakSource3 and help you understand how to write your own extension.  We will do so by writing an exemplary !SqueakSource3 plugin which, say, can *transmogrify* a project.  The deeper you dig into this text the more obscure the findings will become, culminating in a run-down of our very own {{{SqueakSource-Build}}} plugin.
+
+_NB._ The following are random findings and ramblings I made while reverse engineering the system.  I am certainly mistaken in a couple of points and would love to learn better!
+
+
+== Adding an action ==
+
+In {{{SSProjectView}}}, add a method with the following pragma:
+
+{{{<actionNamed: 'Transmogrify now' priority: 99 condition: #transmogrificationEnabled>}}}
+
+Categorize the method in {{{*SqueakSource-Transmogrify}}} to export it with your {{{SqueakSource-Transmogrify}}} Monticello package.  It thereby becomes an [http://wiki.squeak.org/squeak/3636 extension method].
+
+The priority influences the position of an item, where 0 means _first item in collection_ and the highest value among the default actions is about 100.
+When a user clicks _Transmogrify now_ in the _Actions_ menu the method body is executed.  It is often sensible to forward this action to your model.
+
+{{{condition:}}} is an optional parameter which determines when the action should be shown (it's thus called a _conditionally shown action_).  It is a selector looked up on the instance you declared the action on.  Not supplying it at all will always show the action (rendering it a _simple action_).  It can also be replaced with {{{access:}}}, which is a shorthand for {{{self isMember: self user allowedTo: …}}} (and makes it a _restricted action_).
+Which action pragmas are available is described in {{{SSComponent>>actionPragmas}}}.
+
+> XXX List common conditions.
+
+== Adding a tab ==
+
+In {{{SSProjectView}}}, add a method (commonly called {{{project}}}_{{{PLUGIN}}}_, eg. {{{projectTransmogrify}}}) with the following pragma:
+
+{{{<tabNamed: 'Transmogrification' priority: 99 condition: #showTransmogrifications>}}}
+
+For priority and method category, the same disclaimer as for actions apply.  For your reference:  the priorities of the standard tabs range from 0 to 70.
+
+The method itself shall return an {{{SSComponent}}}, f.ex:
+
+{{{^ SSProjectTransmogrification model: self model}}}
+
+If inheriting from {{{SSFilteringComponent}}}, use {{{self instantiate: SSProjectTransmogrification}}}.  This is useful if you have a dataset just like the _Versions_ tab and want to make them indexable.
+
+{{{condition:}}} is a selector looked up on on {{{SSProjectView}}}.  You usually want to implement it as a proxy for your model:
+
+{{{
+SSProjectView>>showTransmogrifications
+    ^ self showAllTabs and: [self model showTransmogrifications]
+}}}
+
+It normally suffices to fetch it as a property from your model with a sensible default value, say true:
+
+{{{
+SSProject>>showTransmogrifications
+    ^ self
+        propertyAt: #showTransmogrifications
+        ifAbsent: [true]
+}}}
+
+> XXX Describe categories.
+
+== Configuring projects ==
+
+The per-project settings dialog is easily augmented with a {{{description}}}_{{{KEY}}}_ method in {{{SSProject}}}.  It should return a {{{Magritte-Model-Description}}}:
+
+{{{
+descriptionTransmogrificationEnabled
+    ^ MABooleanDescription new
+        label: 'Show Transmogrification';
+        comment: 'Transmogrification is good for the economy';
+        propertyAccessor: #showTransmogrifications;
+        default: true;
+        priority: 600;
+        yourself
+}}}
+
+Categorize it in {{{*SqueakSource-Build-descriptions}}}.
+
+> XXX Explain this.  List other classes.
+
+== Writing a tab ==
+
+The previous chapter involved a class called {{{SSProjectTransmogrification}}}.  It is a normal {{{SSComponent}}} and only needs to implement the {{{renderContentOn:}}} interface.
+
+== Understanding the Monticello server ==
+
+When digging into the source you might be tempted to assume that the whole Monticello serving business is implemented in the {{{Monticello}}} package and !SqueakSource is just a Web interface on top of it.  Oh boy, are you mistaken.
+
+!SqueakSource, as I have to admit is openly communicated by its curators, is both:  a Web interface and a REST-like, WebDAV-capable Monticello server.  Both are implemented in the same package, and by using the same Seaside application and its supplied HTTP server.  The single one central class that dispatches these two gargantuan but distinct interfaces is {{{SSUrlFilter}}}.  It has a few RESTful methods à la {{{putVersion:ofProject:}}} which implement intricate HTTP verbs and status codes.
+
+_Note:_  I gather the !SqueakSource3 folks are interested in fixing this problem with the {{{SqueakSource-Monticello}}} package.
+
+== Collecting statistics ==
+
+If you thought there was some push model involved in how statistics are implemented I have to tell you:  you're out of luck.  Most-- if not all --operations are event-based.
+
+The global RSS feed, sneakily implemented in {{{SSRssListing}}}, is _actively pulling_ data out of the repository every time you retrieve it.  (There is also {{{SSFrame>>feedUrl}}} which invokes some serious black magic.)  Please, go ahead and take a minute to consider the implications of that.  There is no way in hell to put enough caching on that process to make it efficient.  Its URL is {{{/feed.rss}}} if you are curious.
+
+Another fun story are the statistics displayed on the Home screen {{{SSHome}}}.  They are implemented in {{{SSStatistics}}} and also have the _worst. possible. runtime characteristics. ever._  Granted, there is a fair portion of caching baked on top of it which makes it at least bearable but all of it is ad-hoc, manual and rather contrived.
+
+There _is_ some kind of notification system built into Monticello, see {{{MCRepository>>sendNotificationsForVersion:}}}, {{{MCVersionNotification}}} et al.  It is so obscurely hard-coded that it lures you to think, _hey, that looks like a hook, I'll bite! _ but is instead a whole can of worms which you'd rather not open.  On a more serious note it does implement extendable notifications but only on a per-repository type basis, eg. {{{MCFileBasedRepository}}} reads its notifiees from a file called {{{notify}}} but always sends them out by email.  Without implementing a new {{{MCRepository}}} there is no way to utilize that mechanism.
+
+_It's a sad day._  (You will understand that one once you play around with the RSS feed for a little bit.)
+
+=== Don't call us, we'll call you ===
+
+Now there is a good part to the story:  there _is_ an extension to !SqueakSource which implements sane notifications.  It's called {{{SqueakSource-Subscriptions}}} and is quite the fancy.  It allows you to subscribe to a number of Monticello events.  It's sufficient to hook commits from the Monticello API to the Web interface.
+
+||*{{{SSSubscription}}} API*||*parameters*||*{{{SSUrlFilter}}} request*||
+||{{{configAdded:to:}}}||{{{MCConfiguration}}}, {{{SSProject}}}||{{{putMap:ofProject:}}}||
+||{{{versionAdded:to:}}}||{{{SSVersion}}}, {{{SSProject}}}||{{{putVersion:ofProject:}}}||
+
+All subclasses of {{{SSSubscription}}} are automatically offered in the _Edit project_ dialog but disabled by default.  We can modify the subscriptions of a {{{SSProject}}} with a snippet like the following:
+
+{{{self subscriptions: (self subscriptions copyWith: SSTransmogrifySubscription).}}}
+
+_NB._ the {{{SSUrlFilter}}} requests triggering those hooks are only meant to be indicative of their behaviour, not of their full scope.  There are other ways the API can be triggered.  A {{{SSUrlFilter>>putBlessedVersion:ofProject:}}} can well activate a {{{versionAdded:to:}}}, too.
+
+The API also designates events for removal of those items ({{{configRemoved:to:}}} and {{{versionRemoved:to}}} respectively) but does not implement them yet.
+
+== The Making of !SqueakSource-Build ==
+
+!SqueakSource-Build aims to connect the well-established landscape of Continuous Integration servers and Monticello repositories.  It does so by using workflows already in place for dozens of other repository types:  *HTTP Pings*.
+
+In such a scenario the repository server pushes information about commits to a build server.
+
+{{{
+  Web interface
+       | (read-only)
+       v
++--------------+  ping  +-----------+
+| SqueakSource |------->| CI server |
++--------------+        +-----------+
+       ^
+       |
+   Monticello
+  (ie. WebDAV)
+}}}
+
+There are several occasions when a !SqueakSource installation might ping a CI server:
+
+ * an administrator actively schedules a build, probably after he changed the settings
+ * a developer commits new code
+   # …and there have not been builds for the last X revisions, to reduce load
+   # …and a certain class/method has been touched, say {{{ConfigurationOfBogus}}}
+
+In the simplest sense this is an explicitly triggered action for a single project, ie. a method in {{{SSProjectView}}} with an action pragma.  The beef of the ping process should be stored in {{{SSProject}}} (which is this view's model) to permit other actors to reach and trigger it.
+
+As !SqueakSource is commonly deployed on !GemStone, using [http://www.squeaksource.com/WebClient.html WebClient] is not feasible.  We resort to a {{{SocketStream}}} (which exposes us to all drawbacks of ad-hoc, error-prone socket implementations, but hell!).
+
+=== You're waiting for a train ===
+
+In order to trigger a job on the build server we need to command it to do so, but --as always-- the devil's in the details.
+
+A very primitive solution to the problem would be instructing the build server to poll the Monticello interface periodically for new commits (*reverse polling*).  This causes a high load on both sides and is, frankly, quite backwards.
+
+We can clearly do better than that on the !SqueakSource side of things, as we know exactly when a new commit arrives.  The scenario turns into an event-based then, which is an order of magnitude better.  So the next best naïve solution is initiating an HTTP connection from the repository server to the build server (known as *long polling*):
+
+{{{
+GET /job/sokoban/build HTTP/1.1
+Connection: keep-alive
+
+...
+
+200 OK
+}}}
+
+_NB._  We evaluated the common protocols used to communicate with CI servers and most of them offer an HTTP gateway one way or another.  The HTTP communications displayed herein are for illustratory purposes only and are probably a tad more complex in the wild.
+
+For those not too adept with HTTP's subtleties, this basically says something to the following effect:  _please, build the {{{Sokoban}}} package and keep the connection alive while you're doing so._  When the connection tears down (ie. we receive the HTTP reply) we can be certain the job has completed.  This is good enough if your repository and build server are always running on the same machine.  For distributed setups, [http://blogs.oracle.com/jag/resource/Fallacies.html this assumption] will inevitably crash down on you:
+
+  The network is reliable.
+
+(Because it isn't.  D'oh.)
+
+Trying to extract any useful information from your network or socket health is futile and inconsistent at best.  When we reduce the lifetime of any given communication we can alleviate the risk of intermittent network failure.  Instead, we use a scheme (called *polling*) similar to that:
+
+{{{
+GET /job/sokoban/build HTTP/1.1
+Connection: close
+
+302 Found
+Location: /jobs/1
+}}}
+
+Informally, this is close to: _hey, could you build the {{{Sokoban}}} package?_ — _of course, your job ID is !#1! _  We can then ask back, as often as we please, if the server finished the job yet:
+
+{{{
+GET /jobs/1 HTTP/1.1
+
+404 Not Found
+}}}
+(_how's job !#1 doing?_ — _meh, still working.._)
+
+And when it finished, we'll get a successful reply:
+
+{{{
+GET /jobs/1 HTTP/1.1
+
+200 OK
+}}}
+(_how's job !#1 doing?_ — _all done._)
+
+This is fair enough already but still causes unnecessary load and involves an inherent delay between the actual job termination and when !SqueakSource finds out about it.  By just using that same scheme we just invented on the repository server back on the build server we can get the best possible scenario (via *callbacks*).  A typical communique then looks like that:
+
+{{{
+POST /job/sokoban/build HTTP/1.1
+
+callback=http://squeaksource.com/finished/1
+
+200 OK
+}}}
+
+Meaning: _hey, could you build the {{{Sokoban}}} package?  when you're done, call me back on the callback URL._ — _sure, hang on…_ which eventually results in a request to the !SqueakSource server:
+
+{{{
+POST /finished/1 HTTP/1.1
+
+200 OK
+}}}
+(_man, I'm totally done building your package! _ ­— _wow, thanks :)_, where the acknowledgement is a mere technicality)
+
+_Note:_  in all these scenarios there's probably not only a confirmation that our job finished but also a payload describing if the build succeeded or failed.
+
+Callbacks have one obvious, considerable downside:  they need explicit support in the build server.  While most _repository_ services have already taken up on callbacks, build servers usually shy away of incorporating them into their core business (because, well, Continuous Integration is hard enough already even without HTTP capabilities).  Hudson, for instance, provides [http://wiki.hudson-ci.org/display/HUDSON/Notification+Plugin a plugin] for notifications.  Servers which do not offer such mechanisms should be easily augmentable to do so, by invoking {{{curl}}} as part of their build job.
+
+These different approaches are not entirely exclusive.  While long polling sufficiently solves the problem and requires no other means of communication, polling and callbacks can go hand in hand and complement each other.  If the build server supports callbacks we're set;  if it doesn't (and we cannot be quite sure it does) we can still manually poll it for status updates.
+
+> XXX Illustrate which scheme we picked, why, and how.
+
+=== They see me building, they hating… ===
+
+> XXX Add details on configuration.
+
+=== My precious! ===
+
+To update the !SqueakSource installation in !GemStone, run the following code snippet in an SSH session (it's basically importing the Seaside settings, connecting to the console, logging in and running the update in a !GemStone transaction):
+
+{{{
+$ . /opt/gemstone/product/seaside/defSeaside
+$ topaz
+topaz 1> set user DataCurator password swordfish gems seaside
+topaz 1> login
+topaz 1> run
+MCPlatformSupport commitOnAlmostOutOfMemoryDuring:[
+    Gofer project load: 'SqueakSource' version: #easterEgg group: #('All')
+]
+%
+}}}
+
+Now, in {{{/config}}} ([http://localhost:8888/config/ss]) delete the {{{ss}}} entry point and run the {{{installSS}}} entry point ([http://localhost:8888/installSS], the default settings are fine).
+
+> XXX !GemStone details.
