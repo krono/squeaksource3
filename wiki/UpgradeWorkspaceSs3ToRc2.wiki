@@ -7,12 +7,15 @@
 This workspace script is more up-to-date than the [UpgradeSs3ToRc2  upgrade script].
 
 {{{
-| versionString deployBlock classesWithClassHistory changedClassNames migrationClassNames 
- migrationClasses instanceList symbolList instanceCount array migrationDoBlock ssModelSubclasses cacheRepository cacheDirectory sourceMap |
-versionString := '1.0-beta.8.7.1'.
-cacheDirectory := '/export/foos1/users/dhenrich/2.0/squeaksource3/monticello'.
-cacheRepository := (MCDirectoryRepository new) 
-        directory: (ServerFileDirectory on: cacheDirectory);
+|  deployBlock classesWithClassHistory changedClassNames migrationClassNames  localPath sqsVersion  sVersion glassVersion
+ migrationClasses instanceList symbolList instanceCount array migrationDoBlock ssModelSubclasses cacheRepository sourceMap |
+ localPath := '/path/to/cache'.
+ glassVersion := '1.0-beta.8.7.2'.
+ sqsVersion := '3.0-rc.2'.
+  sVersion := '3.0.6.4'.
+
+cacheRepository := (MCServerDirectoryRepository new) 
+        directory: (ServerFileDirectory on: localPath);
         yourself.
 true ifTrue: [ | gofer |
         "fetch phase"
@@ -63,14 +66,14 @@ deployBlock := [:aBlock :autoCommit |       | oldAutoCommit oldAutoMigrate |
         System commitTransaction ifFalse: [ nil error: 'commit failed' ]].
 deployBlock 
         value: [ | version |
-                version := ConfigurationOfGLASS project version: versionString.
+                version := ConfigurationOfGLASS project version: glassVersion.
                 version repositoryOverrides:  { cacheRepository }.
                 version load: #( 'Core' 'Monticello' ).
                 version load ]
         value: false.
 deployBlock 
         value: [ | version |
-                version := ConfigurationOfSeaside30 project version: '3.0.6.3'.
+                version := ConfigurationOfSeaside30 project version: sVersion.
                 version repositoryOverrides:  { cacheRepository }.
                 version load: #('Base' 'JQuery-UI' 'Seaside-Adaptors-Swazoo' ) ]
         value: false.
@@ -87,7 +90,8 @@ sourceMap := {
         html link beShortcutIcon; 
                 type: repository faviconMimeType;
                 url: (repository rootUrl asString, repository faviconFilename).
-'. }.
+'. 
+}.
         { SSProject. 'fullDirectoryUrl
         "http://www.squeaksource.com/Seaside"
         ^self repository rootUrl asString, ''/'', self id'.}.
@@ -142,7 +146,7 @@ deployBlock
                 "http://code.google.com/p/squeaksource3/issues/detail?id=39"
                 "http://code.google.com/p/squeaksource3/wiki/ChangedClassesSs3ToRc2#SSCondition_migration"
                 MADescriptionBuilder unload.
-               version := ConfigurationOfSqueakSource project version: '3.0-rc.1'.
+               version := ConfigurationOfSqueakSource project version: sqsVersion.
                 version repositoryOverrides:  { cacheRepository }.
                 version load: 'All'.
                 "http://code.google.com/p/squeaksource3/issues/detail?id=61"
@@ -266,5 +270,4 @@ classesWithClassHistory size + 1 to: instanceList size do: [:index |
                 instance properties removeKey: #stringsSatisfyBlocks ifAbsent: [] ]].
 SSMember class removeSelector: #instVarMappingTo:.
 SSProject class removeSelector: #instVarMappingTo:.
-System commitTransaction ifFalse: [ nil error: 'commit failed' ].
-}}}
+System commitTransaction ifFalse: [ nil error: 'commit failed' ].}}}
