@@ -3,18 +3,22 @@
 To be run once early on to load up the disk-based repository will all of the configs and mcz files needed for upgrade ... Avoid network delays and flakey repositories...
 
 {{{
-| versionString version cacheRepository fetchConfigurationsBlock |
+| versionString version cacheRepository fetchConfigurationsBlock localPath sqsVersion  sVersion glassVersion |
 "prefetch phase"
-versionString := '1.0-beta.8.7.1'.
+localPath := '/home/krono/squeaksource3/monticello'.
+glassVersion := '1.0-beta.8.7.2'.
+sqsVersion := '3.0-rc.2'.
+ sVersion := '3.0.6.4'.
+ 
 true ifTrue: [
-	(MCWorkingCopy allManagers detect: [:each | each packageName = 'ConfigurationOftODE'])
+        (MCWorkingCopy allManagers detect: [:each | each packageName = 'ConfigurationOftODE'])
         repositoryGroup addRepository: (MCHttpRepository 
                 location: 'http://ss3.gemstone.com/ss/tODE'
                 user: ''
                 password: '').
-	{ConfigurationOfGLASS. ConfigurationOfMetacello. ConfigurationOftODE. ConfigurationOfSeaside30. ConfigurationOfSqueakSource.} do: [:config | 
+        {ConfigurationOfGLASS. ConfigurationOfMetacello. ConfigurationOftODE. ConfigurationOfSeaside30. ConfigurationOfSqueakSource.} do: [:config | 
         config project updateProject ].
-	ConfigurationOfMetacello project currentVersion versionNumber < '1.0-beta.31.2' asMetacelloVersionNumber ifTrue: [
+        ConfigurationOfMetacello project currentVersion versionNumber < '1.0-beta.31.2' asMetacelloVersionNumber ifTrue: [
         (Gofer new)
             gemsource: 'metacello';
             version: 'Gofer-Core.gemstone-dkh.135';
@@ -23,48 +27,48 @@ true ifTrue: [
             version: 'Metacello-MC-dkh.537';
             version: 'Metacello-Platform.gemstone-dkh.23';
             load]].
-cacheRepository := MCDirectoryRepository new directory: (ServerFileDirectory on: '/export/foos1/users/dhenrich/2.0/squeaksource3/monticello').
+cacheRepository := (MCServerDirectoryRepository new) directory: (ServerFileDirectory on: localPath); yourself.
 fetchConfigurationsBlock := [:configVersion :recordList | | fetched |
-	configVersion ignoreImage: true.
-	fetched := Set new.
-	(configVersion record: recordList) loadDirective
-		versionDirectivesDo: [ :versionDirective | 
-			versionDirective spec ~~ nil
-				ifTrue: [ | policy p |
-					policy := (MetacelloLoaderPolicy new)
-						cacheRepository: cacheRepository;
-						ignoreImage: true;
-						yourself.
-					p := versionDirective spec project.
-					(fetched includes: p configuration class) 
-						ifFalse: [ 
-							"fetch top-level configuration"
-							p fetchProject: policy.
-							fetched add: p configuration class.
-							versionDirective packagesDo: [ :packageDirective | 
-								(packageDirective spec name beginsWith: 'ConfigurationOf')
-									ifTrue: [ 
-										"fetch nested configurations"
-										packageDirective spec fetchPackage: policy.
-										fetched add: packageDirective spec project configuration class. ] ] ] ] ] ].
+        configVersion ignoreImage: true.
+        fetched := Set new.
+        (configVersion record: recordList) loadDirective
+                versionDirectivesDo: [ :versionDirective | 
+                        versionDirective spec ~~ nil
+                                ifTrue: [ | policy p |
+                                        policy := (MetacelloLoaderPolicy new)
+                                                cacheRepository: cacheRepository;
+                                                ignoreImage: true;
+                                                yourself.
+                                        p := versionDirective spec project.
+                                        (fetched includes: p configuration class) 
+                                                ifFalse: [ 
+                                                        "fetch top-level configuration"
+                                                        p fetchProject: policy.
+                                                        fetched add: p configuration class.
+                                                        versionDirective packagesDo: [ :packageDirective | 
+                                                                (packageDirective spec name beginsWith: 'ConfigurationOf')
+                                                                        ifTrue: [ 
+                                                                                "fetch nested configurations"
+                                                                                packageDirective spec fetchPackage: policy.
+                                                                                fetched add: packageDirective spec project configuration class. ] ] ] ] ] ].
 true ifTrue: [
-	version := ConfigurationOfGLASS project version: versionString.
-	version cacheRepository: cacheRepository.
-	version fetch.
-	fetchConfigurationsBlock value: version value: 'default' ].
+        version := ConfigurationOfGLASS project version: glassVersion.
+        version cacheRepository: cacheRepository.
+        version fetch.
+        fetchConfigurationsBlock value: version value: 'default' ].
 true ifTrue: [
-	version := ConfigurationOfSeaside30 project version: '3.0.6.3'.
-	version cacheRepository: cacheRepository.
-	version fetch: #('Base' 'JQuery-UI' 'Seaside-Adaptors-Swazoo' ).
-	fetchConfigurationsBlock value: version value: #('Base' 'JQuery-UI' 'Seaside-Adaptors-Swazoo' )].
+        version := ConfigurationOfSeaside30 project version: sVersion.
+        version cacheRepository: cacheRepository.
+        version fetch: #('Base' 'JQuery-UI' 'Seaside-Adaptors-Swazoo' ).
+        fetchConfigurationsBlock value: version value: #('Base' 'JQuery-UI' 'Seaside-Adaptors-Swazoo' )].
 true ifTrue: [
-	version := ConfigurationOftODE project version: '0.1'.
-	version cacheRepository: cacheRepository.
-	version fetch.
-	fetchConfigurationsBlock value: version value: 'default'].
+        version := ConfigurationOftODE project version: '0.1'.
+        version cacheRepository: cacheRepository.
+        version fetch.
+        fetchConfigurationsBlock value: version value: 'default'].
 true ifTrue: [
-	version := ConfigurationOfSqueakSource project version: '3.0-rc.1'.
-	version cacheRepository: cacheRepository.
-	version fetch: 'All'.
-	fetchConfigurationsBlock value: version value: 'All' ].
+        version := ConfigurationOfSqueakSource project version: sqsVersion.
+        version cacheRepository: cacheRepository.
+        version fetch: 'All'.
+        fetchConfigurationsBlock value: version value: 'All' ].
 }}}
