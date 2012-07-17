@@ -11,7 +11,7 @@ This workspace script is more up-to-date than the [UpgradeSs3ToRc2  upgrade scri
  migrationClasses instanceList symbolList instanceCount array migrationDoBlock ssModelSubclasses cacheRepository sourceMap |
  localPath := '/path/to/cache'.
  glassVersion := '1.0-beta.8.7.1'.
- sqsVersion := '3.0-rc.2'.
+ sqsVersion := '3.0-rc.1'.
   sVersion := '3.0.6.3'.
 
 cacheRepository := (MCServerDirectoryRepository new) 
