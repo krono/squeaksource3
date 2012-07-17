@@ -10,7 +10,7 @@ This workspace script is more up-to-date than the [UpgradeSs3ToRc2  upgrade scri
 |  deployBlock classesWithClassHistory changedClassNames migrationClassNames  localPath sqsVersion  sVersion glassVersion
  migrationClasses instanceList symbolList instanceCount array migrationDoBlock ssModelSubclasses cacheRepository sourceMap |
  localPath := '/path/to/cache'.
- glassVersion := '1.0-beta.8.7.2'.
+ glassVersion := '1.0-beta.8.7.1'.
  sqsVersion := '3.0-rc.2'.
   sVersion := '3.0.6.4'.
 
