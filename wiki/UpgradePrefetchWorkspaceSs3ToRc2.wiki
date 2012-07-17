@@ -8,7 +8,7 @@ To be run once early on to load up the disk-based repository will all of the con
 localPath := '/path/to/cache'.
 glassVersion := '1.0-beta.8.7.1'.
 sqsVersion := '3.0-rc.2'.
- sVersion := '3.0.6.4'.
+ sVersion := '3.0.6.3.
  
 true ifTrue: [
         (MCWorkingCopy allManagers detect: [:each | each packageName = 'ConfigurationOftODE'])
