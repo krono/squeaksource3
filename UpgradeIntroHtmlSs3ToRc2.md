@@ -1,0 +1,19 @@
+Current intro:
+```
+<p>Welcome to the public Alpha for SqueakSource3, the smart Monticello code-repository for 
+GemStone, Pharo and Squeak</p><p><strong>Important Announcement (September 7, 2011):
+<ul>The contents of this repository <em>WILL</em> survive beyond the lifetime of the public 
+Alpha.
+<p>From this point onward, all packages stored in the repository will be preserved.</p>
+<p>As of today, the site is backed up on a daily basis.</p>
+</ul></strong></p>
+<p>To get started register your personal account and create any number of projects to host on our server. You'll immediately get all the necessary permissions to create and manage your account, projects and versions. Detailed instructions can be found on the <a href="/ss?_s=VwAXQ0rWKtIcd-Ti&amp;_k=U2gPC7MrBW3DUEor&amp;9">Help</a> page.</p>
+<p>Please report  issues and feature requests to the <a href="http://code.google.com/p/squeaksource3/issues/list">SqueakSource3 project</a>. For general questions or comments about SqueakSource3, send mail to one of the following groups:
+<ul><a href="http://seaside.gemstone.com/mailman/listinfo/beta">GLASS beta mailing list</a>
+<br/>
+<a href="http://lists.gforge.inria.fr/mailman/listinfo/pharo-project">Pharo mailing list</a>
+<br/>
+<a href="http://lists.squeakfoundation.org/mailman/listinfo/squeak-dev">Squeak-dev list</a>
+</ul></p>
+<p>Enjoy!</p>
+```
